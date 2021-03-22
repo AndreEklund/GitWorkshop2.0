@@ -9,4 +9,10 @@ public class Player {
         this.Name=name;
         this.Score=score;
     }
+
+
+    @Override
+    public String toString() {
+        return String.format("%s. &f2" ,Name,Score );
+    }
 }
