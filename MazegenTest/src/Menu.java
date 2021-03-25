@@ -1,0 +1,45 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+public class Menu {
+
+    JFrame frame = new JFrame();
+    JPanel panel = new JPanel();
+    JButton startBtn = new JButton("Start");
+    JTextField textRow = new JTextField("Row");
+    JTextField textCol = new JTextField("Col");
+
+    public Menu() {
+        frame.setLocation(700,300);
+        frame.setSize(400, 200);
+        startBtn.setPreferredSize(new Dimension(100, 50));
+        startBtn.addActionListener(new Listener());
+        textRow.setPreferredSize(new Dimension(30, 20));
+        textCol.setPreferredSize(new Dimension(30, 20));
+        panel.add(startBtn);
+        panel.add(textRow);
+        panel.add(textCol);
+        frame.add(panel);
+        frame.setVisible(true);
+
+    }
+    public class Listener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            frame.dispose();
+            try {
+                new MainFrame(Integer.parseInt(textRow.getText()) * Integer.parseInt(textCol.getText()), Integer.parseInt(textRow.getText()), Integer.parseInt(textCol.getText()));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Menu menu = new Menu();
+    }
+}
