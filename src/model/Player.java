@@ -3,9 +3,9 @@ package model;
 public class Player {
 
     String Name;
-    double Score;
+    String Score;
 
-    public  Player(String name, double score){
+    public  Player(String name, String score){
         this.Name=name;
         this.Score=score;
     }
@@ -18,17 +18,17 @@ public class Player {
         this.Name = name;
     }
 
-    public double getScore() {
+    public String getScore() {
         return Score;
     }
 
-    public void setScore(int score) {
+    public void setScore(String score) {
         this.Score = score;
     }
 
     @Override
     public String toString() {
-        return String.format("%s. &f2 points" ,Name,Score );
+        return String.format("%s %s", Name,Score );
     }
 }
 

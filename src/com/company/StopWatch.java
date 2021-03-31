@@ -19,6 +19,7 @@ public class StopWatch implements ActionListener{
     String minutes_string = String.format("%02d", minutes);
 
 
+
     Timer timer = new Timer(1000, new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
@@ -111,5 +112,13 @@ public class StopWatch implements ActionListener{
 
     public int getElapsedTime() {
         return elapsedTime;
+    }
+
+    public String getSeconds_string() {
+        return seconds_string;
+    }
+
+    public String getMinutes_string() {
+        return minutes_string;
     }
 }

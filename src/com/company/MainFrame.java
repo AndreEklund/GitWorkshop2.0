@@ -1,6 +1,7 @@
 package com.company;
 
 import com.sun.tools.javac.Main;
+import controller.Controller;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -27,8 +28,10 @@ public class MainFrame {
     private JPanel panel = new JPanel();
     MouseListener m1 = null;
     private StopWatch timer;
+    private Controller controller = new Controller();
 
     public MainFrame(int nbrOfBtns, int x, int y) throws IOException {
+
         this.nbrOfBtns = nbrOfBtns;
         this.x = x;
         this.y = y;
@@ -138,8 +141,10 @@ public class MainFrame {
         @Override
         public void mouseEntered(MouseEvent e) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You won!");
-            System.out.println(timer.getElapsedTime());
+            String winner = JOptionPane.showInputDialog("You won!!! Print your name");
+            String time = timer.getMinutes_string() + ":" + timer.getSeconds_string();
+            controller.HighScoreList(time, winner);
+
             frame.dispose();
             new Menu();
         }
