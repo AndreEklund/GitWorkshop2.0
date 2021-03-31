@@ -26,6 +26,7 @@ public class MainFrame {
     private JButton lastBtnPressed;
     private JPanel panel = new JPanel();
     MouseListener m1 = null;
+    private StopWatch timer;
 
     public MainFrame(int nbrOfBtns, int x, int y) throws IOException {
         this.nbrOfBtns = nbrOfBtns;
@@ -42,6 +43,11 @@ public class MainFrame {
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                if (e.getSource()==startGame){
+                    timer = new StopWatch();
+                    timer.start();
+                }
 
                 m1 = new MouseHandler();
 
@@ -113,6 +119,8 @@ public class MainFrame {
         @Override
         public void mouseEntered(MouseEvent e) {
             JOptionPane.showMessageDialog(null, "You lost!");
+            timer.stop();
+            System.out.println(timer.getElapsedTime());
             frame.dispose();
             new Menu();
         }
@@ -130,6 +138,8 @@ public class MainFrame {
         @Override
         public void mouseEntered(MouseEvent e) {
             JOptionPane.showMessageDialog(null, "You won!");
+            timer.stop();
+            System.out.println(timer.getElapsedTime());
             frame.dispose();
             new Menu();
         }

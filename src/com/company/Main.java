@@ -8,5 +8,6 @@ public class Main {
             System.out.println("Hallå");
         }
         System.out.println("Good");
+        StopWatch timer = new StopWatch();
     }
 }
