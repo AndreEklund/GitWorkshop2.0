@@ -118,8 +118,8 @@ public class MainFrame {
         public void mouseReleased(MouseEvent e) {}
         @Override
         public void mouseEntered(MouseEvent e) {
-            JOptionPane.showMessageDialog(null, "You lost!");
             timer.stop();
+            JOptionPane.showMessageDialog(null, "You lost!");
             System.out.println(timer.getElapsedTime());
             frame.dispose();
             new Menu();
@@ -137,8 +137,8 @@ public class MainFrame {
         public void mouseReleased(MouseEvent e) {}
         @Override
         public void mouseEntered(MouseEvent e) {
-            JOptionPane.showMessageDialog(null, "You won!");
             timer.stop();
+            JOptionPane.showMessageDialog(null, "You won!");
             System.out.println(timer.getElapsedTime());
             frame.dispose();
             new Menu();
