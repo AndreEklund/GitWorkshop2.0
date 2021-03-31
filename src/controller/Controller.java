@@ -18,7 +18,7 @@ public class Controller {
 
         String winner = JOptionPane.showInputDialog("You won!!! Print your name"); // ta in namn på vinnaren
 
-        players.add(new Player(winner, countTotalGuess)); // addera spelarens namn med string och dens antal gissningar(poäng) till array av vinnare.
+      //  players.add(new Player(winner, countTotalGuess)); // addera spelarens namn med string och dens antal gissningar(poäng) till array av vinnare.
         numWinners++;// incrementera antalet vinnare.
 
 
@@ -32,7 +32,9 @@ public class Controller {
         if (numWinners > 10) {// Om fler än 10 spelare efter sortering. Ta bort sista spelaren ur listan.
             players.remove(10);
         }
-        view.updateArray();// updatera listan som syns på vinnare i JList.
+        //view.updateArray();// updatera listan som syns på vinnare i JList.
+
+        //Spelet ska starta om eller avslutas.
     }
 }
 
