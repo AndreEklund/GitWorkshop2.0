@@ -1,3 +1,5 @@
+package com.company;
+
 import com.sun.tools.javac.Main;
 
 import javax.imageio.ImageIO;
