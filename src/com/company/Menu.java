@@ -34,7 +34,9 @@ public class Menu {
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
             try {
-                new MainFrame(Integer.parseInt(textRow.getText()) * Integer.parseInt(textCol.getText()), Integer.parseInt(textRow.getText()), Integer.parseInt(textCol.getText()));
+                if(Integer.parseInt(textCol.getText())<15 || Integer.parseInt(textRow.getText()) <15 ) {
+                    new MainFrame(Integer.parseInt(textRow.getText()) * Integer.parseInt(textCol.getText()), Integer.parseInt(textRow.getText()), Integer.parseInt(textCol.getText()));
+                } else JOptionPane.showMessageDialog(null, "Put less than 15 as numbers");
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
