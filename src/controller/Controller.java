@@ -4,6 +4,7 @@ import com.company.StopWatch;
 import model.*;
 
 import javax.swing.*;
+import java.io.*;
 import java.util.*;
 
 public class Controller {
@@ -12,7 +13,7 @@ public class Controller {
     private List<Player> players = new ArrayList<>();// lista med spelare som vunnit
     private int numWinners = 0;// Antalet personer som vunnit.
 
-    public Controller(){
+    public Controller() {
 
     }
 
@@ -21,10 +22,10 @@ public class Controller {
         // ta in namn och tid på vinnaren
 
 // Behövde splitta time först för att strängen som skickades vid vinst innnehöll : tecken. Tog bort tecknet i källan istället och har därför kommenterat ut.
-            //String[] hourMin = time.split(":");
-           // int hour = Integer.parseInt(hourMin[0]);
-            int mins = Integer.parseInt(time);
-            //int hoursInMins = hour * 60;
+        //String[] hourMin = time.split(":");
+        // int hour = Integer.parseInt(hourMin[0]);
+        int mins = Integer.parseInt(time);
+        //int hoursInMins = hour * 60;
 
 //Testdata för att testa sortering.... Den fungerar.
         players.add(new Player("kent", 5));
@@ -46,12 +47,41 @@ public class Controller {
             players.remove(10);
         }
 
-            System.out.println(Arrays.toString(players.toArray()));
+        System.out.println(Arrays.toString(players.toArray()));
 
         //view.updateArray();// updatera listan som syns på vinnare i JList.
 
         //Spelet ska starta om eller avslutas.
     }
+
+    public void writePlayersToFile(String filename) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filename))))
+        {oos.writeInt(players.size());
+            for (Player p : players)
+            {oos.writeObject(p);}
+            oos.flush();}
+    }
+
+    public void getPlayersFromFile(String filename) throws IOException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) { // Filename ska skickas in eller kan vara satt till en viss fil
+            int n;
+            n = ois.readInt();
+
+            Player[] p = new Player[n]; // Skapa en array med objekt av klassen player.
+
+            for (int i = 0; i < n; i++) {
+                try {
+                    p[i] = (Player) ois.readObject(); //Läs in objekten från .dat filen in i nya arrayen som är instans av Playerklassen.
+
+
+                } catch (ClassNotFoundException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+    }
 }
+
+
 
 
