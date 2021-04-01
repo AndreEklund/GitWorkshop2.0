@@ -63,22 +63,17 @@ public class Controller {
     }
 
     public void getPlayersFromFile(String filename) throws IOException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) { // Filename ska skickas in eller kan vara satt till en viss fil
-            int n;
-            n = ois.readInt();
-
-            Player[] p = new Player[n]; // Skapa en array med objekt av klassen player.
-
+        players.clear();
+        try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename))) ) {
+            int n = ois.readInt();
             for (int i = 0; i < n; i++) {
                 try {
-                    p[i] = (Player) ois.readObject(); //Läs in objekten från .dat filen in i nya arrayen som är instans av Playerklassen.
-
-
-                } catch (ClassNotFoundException e) {
-                    System.out.println(e);
-                }
+                    players.add((Player)
+                            ois.readObject());
+                } catch(ClassNotFoundException e) {}
             }
         }
+    }
     }
 }
 
