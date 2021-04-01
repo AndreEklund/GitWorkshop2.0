@@ -36,7 +36,7 @@ public class Menu {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            frame.dispose();
+           // frame.dispose();
             if (e.getSource()==startBtn) {
                 try {
                     if (Integer.parseInt(textCol.getText()) < 15 || Integer.parseInt(textRow.getText()) < 15) {

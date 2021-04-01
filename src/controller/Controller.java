@@ -8,21 +8,17 @@ import java.util.*;
 
 public class Controller {
 
-    private StopWatch timer;
-    private Player player;
 
     private List<Player> players = new ArrayList<>();// lista med spelare som vunnit
     private int numWinners = 0;// Antalet personer som vunnit.
 
     public Controller(){
-       // timer = new StopWatch();
-       // player = new Player("", "");
+
     }
 
 
     public void HighScoreList(String time, String winner) { // Klassen ska aktiveras när någon har vunnit spelet. länk från den listenern.
-
-         // ta in namn och tid på vinnaren
+        // ta in namn och tid på vinnaren
 
 // Behövde splitta time först för att strängen som skickades vid vinst innnehöll : tecken. Tog bort tecknet i källan istället och har därför kommenterat ut.
             //String[] hourMin = time.split(":");
@@ -30,7 +26,7 @@ public class Controller {
             int mins = Integer.parseInt(time);
             //int hoursInMins = hour * 60;
 
-
+//Testdata för att testa sortering.... Den fungerar.
         players.add(new Player("kent", 5));
         players.add(new Player("Hercules", 25));
         players.add(new Player("Brago", 1));
@@ -49,9 +45,9 @@ public class Controller {
         if (numWinners > 10) {// Om fler än 10 spelare efter sortering. Ta bort sista spelaren ur listan.
             players.remove(10);
         }
-        for (int i=0; i<players.size(); i++){
+
             System.out.println(Arrays.toString(players.toArray()));
-        }
+
         //view.updateArray();// updatera listan som syns på vinnare i JList.
 
         //Spelet ska starta om eller avslutas.

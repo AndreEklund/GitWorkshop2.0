@@ -122,8 +122,8 @@ public class MainFrame {
             timer.stop();
             JOptionPane.showMessageDialog(null, "You lost!");
             System.out.println(timer.getElapsedTime());
-            frame.dispose();
-            new Menu();
+           // frame.dispose();
+           // new Menu();
         }
         @Override
         public void mouseExited(MouseEvent e) {}
@@ -143,8 +143,8 @@ public class MainFrame {
             String time = timer.getSeconds_string();
             controller.HighScoreList(time, winner);
 
-            frame.dispose();
-            new Menu();
+           // frame.dispose();
+           // new Menu();
         }
         @Override
         public void mouseExited(MouseEvent e) {}
