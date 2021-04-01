@@ -15,8 +15,8 @@ public class Controller {
     private int numWinners = 0;// Antalet personer som vunnit.
 
     public Controller(){
-        timer = new StopWatch();
-        player = new Player("", "");
+       // timer = new StopWatch();
+       // player = new Player("", "");
     }
 
 
@@ -24,14 +24,25 @@ public class Controller {
 
          // ta in namn och tid på vinnaren
 
-        players.add(new Player(winner, time)); // addera spelarens namn med string och dens antal gissningar(poäng) till array av vinnare.
+// Behövde splitta time först för att strängen som skickades vid vinst innnehöll : tecken. Tog bort tecknet i källan istället och har därför kommenterat ut.
+            //String[] hourMin = time.split(":");
+           // int hour = Integer.parseInt(hourMin[0]);
+            int mins = Integer.parseInt(time);
+            //int hoursInMins = hour * 60;
+
+
+        players.add(new Player("kent", 5));
+        players.add(new Player("Hercules", 25));
+        players.add(new Player("Brago", 1));
+        players.add(new Player("Tussen", 2));
+        players.add(new Player(winner, mins)); // addera spelarens namn med string och dens antal gissningar(poäng) till array av vinnare.
         numWinners++;// incrementera antalet vinnare.
         System.out.println(numWinners);
 
         Collections.sort(players, new Comparator<Player>() {// Sortera vinnarna med varandra för att se vem som har bäst score. Sätt den längst upp.
             @Override
             public int compare(Player o1, Player o2) {
-                return Integer.parseInt(o2.getScore()) > Integer.parseInt(o1.getScore()) ? -1 : 1;
+                return o2.getScore() > o1.getScore() ? -1 : 1; // Kan inte parseint här då det finns :-tecken i stringen.
             }
         });
 

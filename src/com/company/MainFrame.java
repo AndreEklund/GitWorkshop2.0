@@ -21,13 +21,13 @@ public class MainFrame {
     private int nbrOfBtns = 0;
     private int x = 0;
     private int y = 0;
-
+    StopWatch timer = new StopWatch();
     private JFrame frame;
     private JButton buttons[];
     private JButton lastBtnPressed;
     private JPanel panel = new JPanel();
     MouseListener m1 = null;
-    private StopWatch timer;
+
     private Controller controller = new Controller();
 
     public MainFrame(int nbrOfBtns, int x, int y) throws IOException {
@@ -47,10 +47,6 @@ public class MainFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (e.getSource()==startGame){
-                    timer = new StopWatch();
-                    timer.start();
-                }
 
                 m1 = new MouseHandler();
 
@@ -59,6 +55,8 @@ public class MainFrame {
                         buttons[i].addMouseListener(m1);
                     }
                 }
+
+                timer.start();
             }
         });
         panel.add(startGame);
@@ -142,7 +140,7 @@ public class MainFrame {
         public void mouseEntered(MouseEvent e) {
             timer.stop();
             String winner = JOptionPane.showInputDialog("You won!!! Print your name");
-            String time = timer.getMinutes_string() + ":" + timer.getSeconds_string();
+            String time = timer.getSeconds_string();
             controller.HighScoreList(time, winner);
 
             frame.dispose();
