@@ -1,4 +1,4 @@
-package com.company;
+package outdatedClasses;
 
 import javax.swing.*;
 import java.awt.*;
