@@ -1,8 +1,10 @@
 package view;
 
+import controller.Controller;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.MazeGenerator;
@@ -10,10 +12,18 @@ import model.MazeGenerator;
 public class Main extends Application {
 
     private Stage mainWindow;
+    private BorderPane rootTemplate;
+    private BorderPane rootMapCreator;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        rootTemplate = new BorderPane();
+        rootTemplate.setPrefSize(600,600);
+
+        rootMapCreator = new BorderPane();
+        rootMapCreator.setPrefSize(600,600);
+
         mainWindow = primaryStage;
         mainWindow.setTitle("Mazegen");
         String[][] level = {{"x","x","x","x","x"},
@@ -25,12 +35,26 @@ public class Main extends Application {
         //ImageCursor cursor = new ImageCursor(goal);
         MazeGenerator maze = new MazeGenerator(10);
 
-        MapTemplate mapTemplate = new MapTemplate(maze.getMaze(), mainWindow);
-        Scene levelScene = new Scene(mapTemplate, 600, 500);
+
+        MapTemplate mapTemplate = new MapTemplate(maze.getMaze());
 
 
-        MapCreator mapCreator = new MapCreator(mainWindow);
-        Scene mapCreatorScene = new Scene(mapCreator, 600, 500);
+
+
+
+        MapCreator mapCreator = new MapCreator();
+        OptionButtonPane obp = new OptionButtonPane(mapCreator);
+        rootMapCreator.setCenter(mapCreator);
+        rootMapCreator.setRight(obp);
+
+
+
+        OptionButtonPane obp2 = new OptionButtonPane(mapCreator);
+        rootTemplate.setCenter(mapTemplate);
+        rootTemplate.setRight(obp2);
+
+        Scene mapCreatorScene = new Scene(rootMapCreator);
+        Scene levelScene = new Scene(rootTemplate);
         //mapTemplate.setCursor(cursor);
 
         VBox layout = new VBox();
