@@ -20,21 +20,18 @@ public class MapCreator extends GridPane {
 
 
     private MouseListener mouseListener = new MouseListener();
-    private StartButtonPressed startButtonPressed = new StartButtonPressed();
+
     private Label[][] labels = new Label[15][15];
     private Image wall = new Image(new FileInputStream("files/wall.jpg"));
     private Image path = new Image(new FileInputStream("files/floor.png"));
     private Image goal = new Image(new FileInputStream("files/red.jpg"));
     private Label lastLabelPressed;
-    private Stage mainWindow;
 
-    public MapCreator(Stage mainWindow) throws FileNotFoundException {
-        this.mainWindow = mainWindow;
+
+    public MapCreator() throws FileNotFoundException {
         initializeButtons();
-        Button button = new Button("Start");
-        button.setOnAction(startButtonPressed);
-        add(button,15,0);
     }
+
     public void initializeButtons() {
         for (int i = 0; i < labels.length; i++) {
             for (int j = 0; j < labels.length; j++) {
@@ -48,10 +45,11 @@ public class MapCreator extends GridPane {
                 labels[i][j].setOnMouseExited(e -> exitedLabel(e));
                 labels[i][j].setStyle("-fx-border-color: grey;");
                 labels[i][j].setId("WALL");
-                add(labels[i][j],i,j);
+                add(labels[i][j], i, j);
             }
         }
     }
+
     private class MouseListener implements EventHandler<MouseEvent> {
 
         @Override
@@ -63,8 +61,7 @@ public class MapCreator extends GridPane {
                 goalView.setFitWidth(30);
                 lastLabelPressed.setGraphic(goalView);
                 lastLabelPressed.setId("GOAL");
-            }
-            else {
+            } else {
                 for (int i = 0; i < labels.length; i++) {
                     for (int j = 0; j < labels.length; j++) {
                         if (e.getSource() == labels[i][j]) {
@@ -80,27 +77,22 @@ public class MapCreator extends GridPane {
             lastLabelPressed = (Label) e.getSource();
         }
     }
-    private class StartButtonPressed implements EventHandler<ActionEvent> {
 
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            for (int i = 0; i < labels.length; i++) {
-                for (int j = 0; j < labels.length; j++) {
-                    if (labels[i][j].getId().equals("WALL")) {
-                        labels[i][j].setOnMouseEntered(e -> enteredWall(e));
-                    }
-                    else if (labels[i][j].getId().equals("PATH")) {
-                        labels[i][j].setOnMouseExited(null);
-                        labels[i][j].setOnMouseEntered(null);
-                    }
-                    else if (labels[i][j].getId().equals("GOAL")) {
-                        labels[i][j].setOnMouseEntered(e -> enteredGoal(e));
-                    }
-                    labels[i][j].removeEventHandler(MouseEvent.MOUSE_PRESSED, mouseListener);
+    public void start() {
+        for (int i = 0; i < labels.length; i++) {
+            for (int j = 0; j < labels.length; j++) {
+                if (labels[i][j].getId().equals("WALL")) {
+                    labels[i][j].setOnMouseEntered(e -> enteredWall(e));
+                } else if (labels[i][j].getId().equals("PATH")) {
+                    labels[i][j].setOnMouseExited(null);
+                    labels[i][j].setOnMouseEntered(null);
+                } else if (labels[i][j].getId().equals("GOAL")) {
+                    labels[i][j].setOnMouseEntered(e -> enteredGoal(e));
                 }
+                labels[i][j].removeEventHandler(MouseEvent.MOUSE_PRESSED, mouseListener);
             }
         }
-    }
+}
     //Lägger till en highlight när håller cursorn över en ruta.
     public void enteredLabel(MouseEvent e) {
         Label label = (Label)e.getSource();

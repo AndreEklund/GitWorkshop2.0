@@ -17,12 +17,12 @@ public class MapTemplate extends GridPane {
     private Image wall = new Image(new FileInputStream("files/wall.jpg"));
     private Image path = new Image(new FileInputStream("files/floor.png"));
     private Image goal = new Image(new FileInputStream("files/red.jpg"));
-    private Stage mainWindow;
+
 
 
     //Konstruktorn ska kunna ta emot String-arrayer och representera dem i GUIt
-    public MapTemplate(int[][] level, Stage mainWindow) throws FileNotFoundException {
-        this.mainWindow = mainWindow;
+    public MapTemplate(int[][] level) throws FileNotFoundException {
+
         this.level = level;
         setupBorders();
         setupLevel();
