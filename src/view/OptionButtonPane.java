@@ -13,6 +13,10 @@ import java.io.FileNotFoundException;
 
 public class OptionButtonPane extends GridPane {
 
+    /**
+     * Author Filip Örnling
+     */
+
     private Image image;
     private String imageUrl = "C:\\Users\\Filip\\Desktop\\GitWorkshop2.0\\files\\Startgame.png";
 

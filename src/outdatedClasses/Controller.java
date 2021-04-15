@@ -1,4 +1,4 @@
-package controller;
+package outdatedClasses;
 
 import model.*;
 
@@ -6,6 +6,10 @@ import java.io.*;
 import java.util.*;
 
 public class Controller {
+
+    /**
+     * Author Benny Petersson
+     */
 
 
     private List<Player> players = new ArrayList<>();// lista med spelare som vunnit

@@ -6,6 +6,10 @@ import java.util.Random;
 import java.util.Stack;
 
 public class MazeGenerator {
+
+    /**
+     * Edit Sebastian Helin
+     */
     
     private Stack<Node> stack = new Stack<>();
     private Random rand = new Random();

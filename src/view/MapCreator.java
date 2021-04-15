@@ -19,6 +19,12 @@ import java.io.FileNotFoundException;
 public class MapCreator extends GridPane {
 
 
+    /**
+     * Author André Eklund
+     * Edit Filip Örnling
+     */
+
+
     private MouseListener mouseListener = new MouseListener();
 
     private Label[][] labels = new Label[15][15];
@@ -29,10 +35,11 @@ public class MapCreator extends GridPane {
 
 
     public MapCreator() throws FileNotFoundException {
-        initializeButtons();
+        initializeTiles();
     }
 
-    public void initializeButtons() {
+    //Initializes tiles
+    public void initializeTiles() {
         for (int i = 0; i < labels.length; i++) {
             for (int j = 0; j < labels.length; j++) {
                 labels[i][j] = new Label();
@@ -49,7 +56,7 @@ public class MapCreator extends GridPane {
             }
         }
     }
-
+    //Denna klassen ser till att tiles bytar utseende när man klickar på dom
     private class MouseListener implements EventHandler<MouseEvent> {
 
         @Override
@@ -77,7 +84,7 @@ public class MapCreator extends GridPane {
             lastLabelPressed = (Label) e.getSource();
         }
     }
-
+    //Denna metoden aktiverar spelet/tilesen
     public void start() {
         for (int i = 0; i < labels.length; i++) {
             for (int j = 0; j < labels.length; j++) {

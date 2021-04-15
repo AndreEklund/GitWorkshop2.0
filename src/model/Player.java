@@ -2,6 +2,11 @@ package model;
 
 public class Player {
 
+
+    /**
+     * Author Benny Petersson
+     */
+
     String Name;
     int Score;
 

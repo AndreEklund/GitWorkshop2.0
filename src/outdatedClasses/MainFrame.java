@@ -1,7 +1,5 @@
 package outdatedClasses;
 
-import controller.Controller;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +9,10 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class MainFrame {
+
+    /**
+     * Author Benny Petersson, Sebastian Helin
+     */
 
     private int nbrOfBtns = 0;
     private int x = 0;
