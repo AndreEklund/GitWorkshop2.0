@@ -1,6 +1,5 @@
 package view;
 
-import controller.Controller;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,11 +10,17 @@ import model.MazeGenerator;
 
 public class Main extends Application {
 
+    /**
+     * Author André Eklund
+     * Edit Filip Örnling
+     */
+
     private Stage mainWindow;
     private BorderPane rootTemplate;
     private BorderPane rootMapCreator;
 
     @Override
+
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         rootTemplate = new BorderPane();
@@ -37,19 +42,16 @@ public class Main extends Application {
 
 
         MapTemplate mapTemplate = new MapTemplate(maze.getMaze());
-
-
-
-
-
         MapCreator mapCreator = new MapCreator();
+
+
         OptionButtonPane obp = new OptionButtonPane(mapCreator);
         rootMapCreator.setCenter(mapCreator);
         rootMapCreator.setRight(obp);
 
 
-
         OptionButtonPane obp2 = new OptionButtonPane(mapCreator);
+
         rootTemplate.setCenter(mapTemplate);
         rootTemplate.setRight(obp2);
 
@@ -58,7 +60,7 @@ public class Main extends Application {
         //mapTemplate.setCursor(cursor);
 
         VBox layout = new VBox();
-        Button button1 = new Button("Level 1");
+        Button button1 = new Button("Random Generated Maze");
         button1.setOnAction(e -> mainWindow.setScene(levelScene));
         Button button2 = new Button("MapCreator");
         button2.setOnAction(e -> mainWindow.setScene(mapCreatorScene));

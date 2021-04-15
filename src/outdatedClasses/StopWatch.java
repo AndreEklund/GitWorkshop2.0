@@ -7,6 +7,10 @@ import java.awt.event.ActionListener;
 
 public class StopWatch implements ActionListener{
 
+    /**
+     * Author Benny Petersson, Sebastian Helin
+     */
+
     JFrame frame = new JFrame();
     JButton startButton = new JButton("START");
     JButton resetButton = new JButton("RESET");

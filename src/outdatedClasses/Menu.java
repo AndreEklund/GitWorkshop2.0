@@ -8,6 +8,10 @@ import java.io.IOException;
 
 public class Menu {
 
+    /**
+     * Author Benny Petersson, Sebastian Helin
+     */
+
     JFrame frame = new JFrame();
     JPanel panel = new JPanel();
     JButton startBtn = new JButton("Start");
@@ -56,7 +60,7 @@ public class Menu {
         }
     }
 
-    public static void main(String[] args) {
-        Menu menu = new Menu();
-    }
+    //public static void main(String[] args) {
+      //  Menu menu = new Menu();
+    //}
 }

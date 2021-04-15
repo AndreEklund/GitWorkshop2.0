@@ -12,6 +12,11 @@ import java.io.FileNotFoundException;
 
 public class MapTemplate extends GridPane {
 
+
+    /**
+     * Author André Eklund
+     */
+
     private int[][] level;
     private MouseListener mouseListener = new MouseListener();
     private Image wall = new Image(new FileInputStream("files/wall.jpg"));
@@ -55,6 +60,7 @@ public class MapTemplate extends GridPane {
             }
         }
     }
+
     public Label getWall() {
         Label label = new Label();
         ImageView wallView = new ImageView(wall);
