@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
-
+/**
+ * Author Benny Petersson
+ */
 public class MusicPlayer {
     private Player player;
     private String filename; // The String that is the selected song
@@ -12,12 +14,12 @@ public class MusicPlayer {
 
     public MusicPlayer(String filename) {
 
-        this.filename=filename;
+        this.filename=filename; // setting filenname to incoming name from other classes.
     }
 
-public void playMusic(){
+public void playMusic(){ // Starts a musicplayer on a new thread that runs until .close is called.
       try {
-        player = new Player((new FileInputStream("Music/DingDong.mp3")));
+        player = new Player((new FileInputStream(filename)));
     } catch (JavaLayerException | FileNotFoundException e) {
         e.printStackTrace();
     }
@@ -32,5 +34,5 @@ public void playMusic(){
 
 public void stopMusic(){
         player.close();
-}
+}// Stops the musicplayer thread.
 }
