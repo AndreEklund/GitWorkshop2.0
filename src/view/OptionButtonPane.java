@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import view.MapCreator;
 
 import java.io.FileInputStream;
@@ -29,8 +29,14 @@ public class OptionButtonPane extends GridPane {
         imageView.setFitHeight(50);
         imageView.setFitWidth(100);
 
+        BackgroundImage bimage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,new BackgroundSize(image.getWidth(),image.getHeight(),true,true,true,false));
+
         Button startGame = new Button();
         startGame.setGraphic(imageView);
+
+        Background background = new Background(bimage);
+        startGame.setBackground(background);
+
         add(startGame,0,0);
         startGame.setOnMouseClicked(e ->startGameClicked(e));
         Button mute = new Button("Mute Music");
