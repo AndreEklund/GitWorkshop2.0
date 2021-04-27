@@ -18,7 +18,7 @@ public class OptionButtonPane extends GridPane {
      */
 
     private Image image;
-    private String imageUrl = "C:\\Users\\Filip\\Desktop\\GitWorkshop2.0\\files\\Startgame.png";
+    private String imageUrl = "files/Startgame.png";
 
     private MapCreator mapCreator;
     public OptionButtonPane(MapCreator mapCreator) throws FileNotFoundException {
@@ -42,7 +42,6 @@ public class OptionButtonPane extends GridPane {
         System.out.println("Startgame Clicked");
         mapCreator.start();
     }
-
 
     private void muteClicked(MouseEvent e){
         System.out.println("Mute button Clicked!");

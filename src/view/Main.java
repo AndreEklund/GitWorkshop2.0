@@ -1,12 +1,15 @@
 package view;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.MazeGenerator;
+
+import java.awt.*;
 
 public class Main extends Application {
 
@@ -31,14 +34,8 @@ public class Main extends Application {
 
         mainWindow = primaryStage;
         mainWindow.setTitle("Mazegen");
-        String[][] level = {{"x","x","x","x","x"},
-                            {"o","o","x","x","x"},
-                            {"x","o","x","x","x"},
-                            {"x","o","o","o","o"},
-                            {"x","x","x","x","x"}};
-        //Image goal = new Image(new FileInputStream("files/red.jpg"));
-        //ImageCursor cursor = new ImageCursor(goal);
-        MazeGenerator maze = new MazeGenerator(10);
+
+        MazeGenerator maze = new MazeGenerator(20);
 
 
         MapTemplate mapTemplate = new MapTemplate(maze.getMaze());
@@ -48,24 +45,30 @@ public class Main extends Application {
         OptionButtonPane obp = new OptionButtonPane(mapCreator);
         rootMapCreator.setCenter(mapCreator);
         rootMapCreator.setRight(obp);
+        obp.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
         OptionButtonPane obp2 = new OptionButtonPane(mapCreator);
+        obp2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         rootTemplate.setCenter(mapTemplate);
         rootTemplate.setRight(obp2);
 
         Scene mapCreatorScene = new Scene(rootMapCreator);
         Scene levelScene = new Scene(rootTemplate);
+
+        //Image goal = new Image(new FileInputStream("files/red.jpg"));
+        //ImageCursor cursor = new ImageCursor(goal);
         //mapTemplate.setCursor(cursor);
 
         VBox layout = new VBox();
+        layout.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
         Button button1 = new Button("Random Generated Maze");
         button1.setOnAction(e -> mainWindow.setScene(levelScene));
         Button button2 = new Button("MapCreator");
         button2.setOnAction(e -> mainWindow.setScene(mapCreatorScene));
         layout.getChildren().addAll(button1,button2);
-        Scene scene1 = new Scene(layout, 600, 500);
+        Scene scene1 = new Scene(layout, 800, 600);
 
         mainWindow.setScene(scene1);
         mainWindow.show();
