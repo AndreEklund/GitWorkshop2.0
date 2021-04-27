@@ -20,7 +20,7 @@ public class MazeGenerator {
         maze = new int[dim][dim];
         dimension = dim;
         generateMaze();
-        System.out.println(getSymbolicMaze());
+        createStartAndGoal();
         System.out.println(getRawMaze());
     }
 
@@ -86,6 +86,14 @@ public class MazeGenerator {
             }
         }
         return neighbors;
+    }
+    public void createStartAndGoal() {
+        maze[randomIndex()][0] = 2;
+        maze[randomIndex()][maze.length - 1] = 3;
+    }
+
+    public int randomIndex() {
+        return new Random().nextBoolean() ? 0 : maze.length - 1;
     }
 
     public int getDimension() {
