@@ -17,10 +17,11 @@ public class Main extends Application {
      * Author André Eklund
      * Edit Filip Örnling
      */
-
+    private ForestLvlTemplate forestLvlTemplate;
     private Stage mainWindow;
     private BorderPane rootTemplate;
     private BorderPane rootMapCreator;
+    private LavaLvlTemplate lavaLvlTemplate;
 
     @Override
 
@@ -36,10 +37,15 @@ public class Main extends Application {
         mainWindow.setTitle("Mazegen");
 
         MazeGenerator maze = new MazeGenerator(20);
+        MazeGenerator maze1 = new MazeGenerator(20);
+        MazeGenerator maze2 = new MazeGenerator(20);
 
-
-        MapTemplate mapTemplate = new MapTemplate(maze.getMaze());
+        MapTemplate mapTemplate = new MapTemplate(maze.getMaze(),this);
         MapCreator mapCreator = new MapCreator();
+
+        lavaLvlTemplate = new LavaLvlTemplate(maze1.getMaze(),this);
+        forestLvlTemplate = new ForestLvlTemplate(maze2.getMaze(),this);
+
 
 
         OptionButtonPane obp = new OptionButtonPane(mapCreator);
@@ -72,6 +78,13 @@ public class Main extends Application {
 
         mainWindow.setScene(scene1);
         mainWindow.show();
+    }
+
+    public void changeToLava() {
+        rootTemplate.setCenter(lavaLvlTemplate);
+    }
+    public void changeToForest(){
+        rootTemplate.setCenter(forestLvlTemplate);
     }
 
 
