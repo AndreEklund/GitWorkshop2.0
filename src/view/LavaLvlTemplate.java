@@ -1,32 +1,32 @@
 package view;
 
-
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.Label;
+
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class MapTemplate extends GridPane {
+public class LavaLvlTemplate extends GridPane {
 
 
     /**
-     * Author André Eklund
+     * Edit Filip Örnling
      */
     private Main main;
     private int[][] level;
     private JLabel[] collectibles;
-    private Image wall = new Image(new FileInputStream("files/wall.jpg"));
-    private Image path = new Image(new FileInputStream("files/floor.jpg"));
+    private Image wall = new Image(new FileInputStream("files/lavavägg.png"));
+    private Image path = new Image(new FileInputStream("files/Obsidian.png"));
     private Image border = new Image(new FileInputStream("files/floor.png"));
     private Image goal = new Image(new FileInputStream("files/red.jpg"));
     private boolean startButtonPressed;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public MapTemplate(int[][] level,Main main) throws FileNotFoundException {
-        this.main = main;
+    public LavaLvlTemplate(int[][] level,Main main) throws FileNotFoundException {
+
         this.level = level;
         setupBorders();
         setupLevel();
@@ -125,11 +125,10 @@ public class MapTemplate extends GridPane {
         if (startButtonPressed) {
             System.out.println("goal");
         }
-        main.changeToForest();
+
     }
     public void startButtonPressed() {
         System.out.println("Start pressed");
         startButtonPressed = true;
     }
-
 }
