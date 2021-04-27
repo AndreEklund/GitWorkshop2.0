@@ -7,6 +7,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -18,14 +21,14 @@ public class MapTemplate extends GridPane {
      */
 
     private int[][] level;
-    private MouseListener mouseListener = new MouseListener();
+    private JLabel[] collectibles;
     private Image wall = new Image(new FileInputStream("files/wall.jpg"));
-    private Image path = new Image(new FileInputStream("files/floor.png"));
+    private Image path = new Image(new FileInputStream("files/floor.jpg"));
+    private Image border = new Image(new FileInputStream("files/floor.png"));
     private Image goal = new Image(new FileInputStream("files/red.jpg"));
+    private boolean startButtonPressed;
 
-
-
-    //Konstruktorn ska kunna ta emot String-arrayer och representera dem i GUIt
+    //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
     public MapTemplate(int[][] level) throws FileNotFoundException {
 
         this.level = level;
@@ -52,10 +55,17 @@ public class MapTemplate extends GridPane {
             for (int j = 0; j < level.length; j++) {
 
                 if (level[i][j] == 1) {
-                    add(getWall(),j + 1,i + 1);
+                    add(getPath(),j + 1,i + 1);
+
                 }
                 else if (level[i][j] == 0){
-                    add(getPath(),j + 1,i + 1);
+                    add(getWall(),j + 1,i + 1);
+                }
+                else if (level[i][j] == 2){
+                    add(getStart(),j + 1,i + 1);
+                }
+                else if (level[i][j] == 3){
+                    add(getGoal(),j + 1,i + 1);
                 }
             }
         }
@@ -68,7 +78,7 @@ public class MapTemplate extends GridPane {
         wallView.setFitWidth(30);
         label.setGraphic(wallView);
         label.setStyle("-fx-border-color: grey;");
-        label.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseListener);
+        label.setOnMouseEntered(e -> enteredWall());
         return label;
     }
     private Label getPath() {
@@ -82,18 +92,47 @@ public class MapTemplate extends GridPane {
     }
     private Label getBorders() {
         Label label = new Label();
+        ImageView borderView = new ImageView(border);
+        borderView.setFitHeight(30);
+        borderView.setFitWidth(30);
+        label.setGraphic(borderView);
+        label.setStyle("-fx-border-color: grey;");
+        label.setOnMouseEntered(e -> enteredWall());
+        return label;
+    }
+    private Label getGoal() {
+        Label label = new Label();
         ImageView borderView = new ImageView(goal);
         borderView.setFitHeight(30);
         borderView.setFitWidth(30);
         label.setGraphic(borderView);
         label.setStyle("-fx-border-color: grey;");
+        label.setOnMouseEntered(e -> enteredGoal());
         return label;
     }
-    private class MouseListener implements EventHandler<MouseEvent> {
-
-        @Override
-        public void handle(MouseEvent mouseEvent) {
-
+    private Label getStart() {
+        Label label = new Label();
+        ImageView borderView = new ImageView();
+        borderView.setFitHeight(30);
+        borderView.setFitWidth(30);
+        label.setGraphic(borderView);
+        label.setStyle("-fx-border-color: grey;");
+        label.setOnMouseClicked(e -> startButtonPressed());
+        return label;
+    }
+    public void enteredWall() {
+        if (startButtonPressed) {
+            System.out.println("wall");
         }
     }
+    public void enteredGoal() {
+        if (startButtonPressed) {
+            System.out.println("goal");
+        }
+    }
+    public void startButtonPressed() {
+        System.out.println("Start pressed");
+        startButtonPressed = true;
+    }
+
 }
