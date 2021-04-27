@@ -1,4 +1,4 @@
-package model;
+/*package model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,4 +33,4 @@ public void playMusic(){
 public void stopMusic(){
         player.close();
 }
-}
+}*/
