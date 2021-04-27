@@ -22,16 +22,18 @@ public class Main extends Application {
     private BorderPane rootTemplate;
     private BorderPane rootMapCreator;
     private LavaLvlTemplate lavaLvlTemplate;
+    private Scene scene1;
+    private MapTemplate mapTemplate;
 
     @Override
 
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         rootTemplate = new BorderPane();
-        rootTemplate.setPrefSize(600,600);
+        rootTemplate.setPrefSize(600,800);
 
         rootMapCreator = new BorderPane();
-        rootMapCreator.setPrefSize(600,600);
+        rootMapCreator.setPrefSize(600,800);
 
         mainWindow = primaryStage;
         mainWindow.setTitle("Mazegen");
@@ -40,7 +42,7 @@ public class Main extends Application {
         MazeGenerator maze1 = new MazeGenerator(20);
         MazeGenerator maze2 = new MazeGenerator(20);
 
-        MapTemplate mapTemplate = new MapTemplate(maze.getMaze(),this);
+        mapTemplate = new MapTemplate(maze.getMaze(),this);
         MapCreator mapCreator = new MapCreator();
 
         lavaLvlTemplate = new LavaLvlTemplate(maze1.getMaze(),this);
@@ -48,13 +50,13 @@ public class Main extends Application {
 
 
 
-        OptionButtonPane obp = new OptionButtonPane(mapCreator);
+        OptionButtonPane obp = new OptionButtonPane(mapCreator,this);
         rootMapCreator.setCenter(mapCreator);
         rootMapCreator.setRight(obp);
         obp.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
-        OptionButtonPane obp2 = new OptionButtonPane(mapCreator);
+        OptionButtonPane obp2 = new OptionButtonPane(mapCreator,this);
         obp2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         rootTemplate.setCenter(mapTemplate);
@@ -74,7 +76,7 @@ public class Main extends Application {
         Button button2 = new Button("MapCreator");
         button2.setOnAction(e -> mainWindow.setScene(mapCreatorScene));
         layout.getChildren().addAll(button1,button2);
-        Scene scene1 = new Scene(layout, 800, 600);
+        scene1 = new Scene(layout, 800, 600);
 
         mainWindow.setScene(scene1);
         mainWindow.show();
@@ -85,6 +87,13 @@ public class Main extends Application {
     }
     public void changeToForest(){
         rootTemplate.setCenter(forestLvlTemplate);
+    }
+
+    public void setStartScreen(){
+        mainWindow.setScene(scene1);
+    }
+    public void changeToMapTemplate(){
+        rootTemplate.setCenter(mapTemplate);
     }
 
 

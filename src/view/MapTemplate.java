@@ -124,8 +124,9 @@ public class MapTemplate extends GridPane {
     public void enteredGoal() {
         if (startButtonPressed) {
             System.out.println("goal");
+            main.changeToForest();
         }
-        main.changeToForest();
+
     }
     public void startButtonPressed() {
         System.out.println("Start pressed");

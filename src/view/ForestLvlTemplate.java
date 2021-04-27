@@ -17,7 +17,7 @@ public class ForestLvlTemplate extends GridPane {
     private Main main;
     private int[][] level;
     private JLabel[] collectibles;
-    private Image wall = new Image(new FileInputStream("files/Dirtwall.png"));
+    private Image wall = new Image(new FileInputStream("files/Dirtwall.jfif"));
     private Image path = new Image(new FileInputStream("files/Grasspath.png"));
     private Image border = new Image(new FileInputStream("files/floor.png"));
     private Image goal = new Image(new FileInputStream("files/red.jpg"));
@@ -118,13 +118,15 @@ public class ForestLvlTemplate extends GridPane {
     public void enteredWall() {
         if (startButtonPressed) {
             System.out.println("wall");
+            main.changeToMapTemplate();
         }
     }
     public void enteredGoal() {
         if (startButtonPressed) {
             System.out.println("goal");
+            main.changeToLava();
         }
-        main.changeToLava();
+
     }
     public void startButtonPressed() {
         System.out.println("Start pressed");
