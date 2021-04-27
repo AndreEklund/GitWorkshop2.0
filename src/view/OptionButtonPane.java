@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import view.MapCreator;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,9 +18,10 @@ public class OptionButtonPane extends GridPane {
 
     private Image image;
     private String imageUrl = "files/Startgame.png";
-
+    private Main main;
     private MapCreator mapCreator;
-    public OptionButtonPane(MapCreator mapCreator) throws FileNotFoundException {
+    public OptionButtonPane(MapCreator mapCreator,Main main) throws FileNotFoundException {
+        this.main=main;
         this.mapCreator=mapCreator;
         FileInputStream inputStream = new FileInputStream(imageUrl);
         image = new Image(inputStream);
@@ -39,8 +39,8 @@ public class OptionButtonPane extends GridPane {
 
         add(startGame,0,0);
         startGame.setOnMouseClicked(e ->startGameClicked(e));
-        Button mute = new Button("Mute Music");
-        mute.setOnMouseClicked(e -> muteClicked(e));
+        Button mute = new Button("Main Menu");
+        mute.setOnMouseClicked(e -> Mainmenyclicked(e));
         add(mute,0,1);
     }
 
@@ -49,8 +49,10 @@ public class OptionButtonPane extends GridPane {
         mapCreator.start();
     }
 
-    private void muteClicked(MouseEvent e){
-        System.out.println("Mute button Clicked!");
+    private void Mainmenyclicked(MouseEvent e){
+        System.out.println("Main Menu clicked");
+        main.setStartScreen();
+
     }
 
 

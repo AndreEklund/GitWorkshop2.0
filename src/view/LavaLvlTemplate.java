@@ -26,7 +26,7 @@ public class LavaLvlTemplate extends GridPane {
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
     public LavaLvlTemplate(int[][] level,Main main) throws FileNotFoundException {
-
+        this.main=main;
         this.level = level;
         setupBorders();
         setupLevel();
@@ -119,6 +119,7 @@ public class LavaLvlTemplate extends GridPane {
     public void enteredWall() {
         if (startButtonPressed) {
             System.out.println("wall");
+            main.changeToForest();
         }
     }
     public void enteredGoal() {
