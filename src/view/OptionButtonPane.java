@@ -28,7 +28,7 @@ public class OptionButtonPane extends GridPane {
     private MapCreator mapCreator;
     private DigitalClock clock = new DigitalClock();
     private boolean running = false;
-    private javafx.scene.control.Label label = new Label("Digital Clock Test...");
+   
 
     public OptionButtonPane(MapCreator mapCreator,Main main) throws FileNotFoundException {
         this.main=main;
@@ -57,8 +57,8 @@ public class OptionButtonPane extends GridPane {
 
         //Background background = new Background(bimage);
        // startGame.setBackground(background);
-        add(label,0,2);
-        add(clock,0,3);
+
+        add(clock,0,4);
         runClock();
         add(startGame,0,0);
         //startGame.setOnMouseClicked(e ->startGameClicked(e));
