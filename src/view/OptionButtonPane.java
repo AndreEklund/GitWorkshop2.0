@@ -55,13 +55,13 @@ public class OptionButtonPane extends GridPane {
         Button startGame = new Button();
         startGame.setGraphic(imageView);
 
-        Background background = new Background(bimage);
-        startGame.setBackground(background);
+        //Background background = new Background(bimage);
+       // startGame.setBackground(background);
         add(label,0,2);
         add(clock,0,3);
         runClock();
         add(startGame,0,0);
-        startGame.setOnMouseClicked(e ->startGameClicked(e));
+        //startGame.setOnMouseClicked(e ->startGameClicked(e));
 
         Button mute = new Button();
         ImageView imageView1 = new ImageView(imageMeny);
