@@ -4,12 +4,15 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.DigitalClock;
 import model.MazeGenerator;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class Main extends Application {
 
@@ -24,6 +27,7 @@ public class Main extends Application {
     private LavaLvlTemplate lavaLvlTemplate;
     private Scene scene1;
     private MapTemplate mapTemplate;
+
 
     @Override
 
@@ -79,6 +83,7 @@ public class Main extends Application {
         scene1 = new Scene(layout, 800, 600);
 
         mainWindow.setScene(scene1);
+
         mainWindow.show();
     }
 
@@ -95,6 +100,8 @@ public class Main extends Application {
     public void changeToMapTemplate(){
         rootTemplate.setCenter(mapTemplate);
     }
+
+
 
 
     public static void main(String[] args) {
