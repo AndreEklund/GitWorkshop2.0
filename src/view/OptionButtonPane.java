@@ -1,13 +1,16 @@
 package view;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import model.DigitalClock;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 
 
 public class OptionButtonPane extends GridPane {
@@ -22,6 +25,9 @@ public class OptionButtonPane extends GridPane {
     private String imageUrlMeny = "files/Menybutton.png";
     private Main main;
     private MapCreator mapCreator;
+    private DigitalClock clock = new DigitalClock();
+    private boolean running = false;
+    private javafx.scene.control.Label label = new Label("Digital Clock Test...");
 
     public OptionButtonPane(MapCreator mapCreator,Main main) throws FileNotFoundException {
         this.main=main;
@@ -45,7 +51,9 @@ public class OptionButtonPane extends GridPane {
 
         Background background = new Background(bimage);
         startGame.setBackground(background);
-
+        add(label,0,2);
+        add(clock,0,3);
+        runClock();
         add(startGame,0,0);
         startGame.setOnMouseClicked(e ->startGameClicked(e));
         Button mute = new Button();
@@ -68,6 +76,32 @@ public class OptionButtonPane extends GridPane {
         System.out.println("Main Menu clicked");
         main.setStartScreen();
 
+    }
+
+    private void runClock() {
+        running = true;
+        new Thread() {
+            public void run() {
+                long last = System.nanoTime();
+                double delta = 0;
+                double ns = 1000000000.0 / 1;
+                int count = 0;
+
+                while (running) {
+                    long now = System.nanoTime();
+                    delta += (now - last) / ns;
+                    last = now;
+
+                    while (delta >= 1) {
+                        count = (count + 1) % 60;
+                        System.out.println("pulse...." + count);
+                        DecimalFormat df = new DecimalFormat("00");
+                        clock.refreshDigits(df.format(count));
+                        delta--;
+                    }
+                }
+            }
+        }.start();
     }
 
 
