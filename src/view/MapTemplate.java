@@ -153,6 +153,7 @@ public class MapTemplate extends GridPane {
         if (startButtonPressed && allCollectiblesObtained) {
             System.out.println("goal");
             main.changeToForest();
+
         }
 
     }
