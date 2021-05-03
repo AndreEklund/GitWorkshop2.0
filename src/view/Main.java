@@ -5,13 +5,22 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
+
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.DigitalClock;
 import model.MazeGenerator;
+
+
+
+import java.awt.*;
+import java.text.DecimalFormat;
 
 public class Main extends Application {
 
@@ -31,6 +40,9 @@ public class Main extends Application {
     private Menu menu;
     private Scene levelScene;
     private Scene mapCreatorScene;
+    private OptionButtonPane obp;
+    private OptionButtonPane obp2;
+
 
     @Override
 
@@ -64,13 +76,13 @@ public class Main extends Application {
 
 
 
-        OptionButtonPane obp = new OptionButtonPane(mapCreator,this);
+        obp = new OptionButtonPane(mapCreator,this);
         rootMapCreator.setCenter(mapCreator);
         rootMapCreator.setRight(obp);
         obp.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
-        OptionButtonPane obp2 = new OptionButtonPane(mapCreator,this);
+        obp2 = new OptionButtonPane(mapCreator,this);
         obp2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         rootTemplate.setCenter(mapTemplate);
@@ -85,15 +97,18 @@ public class Main extends Application {
         //mapTemplate.setCursor(cursor);
 
 
+
         mainWindow.setScene(introScene);
         mainWindow.show();
     }
 
     public void changeToLava() {
         rootTemplate.setCenter(lavaLvlTemplate);
+        obp.changeLvl3();
     }
     public void changeToForest(){
         rootTemplate.setCenter(forestLvlTemplate);
+        obp.changeLvl2();
     }
 
    /* public void setStartScreen(){
@@ -112,6 +127,8 @@ public class Main extends Application {
     public void changeToMapCreator(){
         mainWindow.setScene(mapCreatorScene);
     }
+
+
 
 
     public static void main(String[] args) {
