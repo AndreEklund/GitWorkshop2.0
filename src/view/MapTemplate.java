@@ -39,7 +39,7 @@ public class MapTemplate extends GridPane {
     private int height = 30;
     private int squareSize;
 
-    private File audioFile = new File("C:\\Users\\Filip\\Desktop\\GitWorkshop2.0\\files\\sounds\\Diamond1.mp3");
+    private File audioFile = new File("files/sounds/Diamond1.mp3");
     private Media audio = new Media(audioFile.toURI().toString());
     private MediaPlayer audioPlayer = new MediaPlayer(audio);
 
