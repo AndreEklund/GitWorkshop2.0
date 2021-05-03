@@ -69,9 +69,9 @@ public class Main extends Application {
         mainWindow.setResizable(false);
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
         
-        MazeGenerator maze = new MazeGenerator(20);
-        MazeGenerator maze1 = new MazeGenerator(20);
-        MazeGenerator maze2 = new MazeGenerator(20);
+        MazeGenerator maze = new MazeGenerator(10);
+        MazeGenerator maze1 = new MazeGenerator(10);
+        MazeGenerator maze2 = new MazeGenerator(10);
 
         mapTemplate = new MapTemplate(maze.getMaze(),this);
         MapCreator mapCreator = new MapCreator();
