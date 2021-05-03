@@ -167,6 +167,9 @@ public class MapTemplate extends GridPane {
         @Override
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
+
+                
+
                 for (Label label: collectibles) {
                     if (e.getSource() == label) {
                         label.setVisible(false);
