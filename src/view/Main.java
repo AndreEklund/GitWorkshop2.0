@@ -1,15 +1,17 @@
 package view;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.MazeGenerator;
-
-import java.awt.*;
 
 public class Main extends Application {
 
@@ -22,18 +24,30 @@ public class Main extends Application {
     private BorderPane rootTemplate;
     private BorderPane rootMapCreator;
     private LavaLvlTemplate lavaLvlTemplate;
-    private Scene scene1;
     private MapTemplate mapTemplate;
+    private Scene menuScene;
+    private Scene introScene;
+    private Intro intro;
+    private Menu menu;
+    private Scene levelScene;
+    private Scene mapCreatorScene;
 
     @Override
 
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
+        //Menu och Intro scenes
+        menu = new Menu(this);
+        intro = new Intro(this);
+        introScene = new Scene(intro, 800, 600);
+        menuScene = new Scene(menu, 800, 600);
+
         rootTemplate = new BorderPane();
-        rootTemplate.setPrefSize(600,800);
+        rootTemplate.setPrefSize(600,600);
 
         rootMapCreator = new BorderPane();
-        rootMapCreator.setPrefSize(600,800);
+        rootMapCreator.setPrefSize(600,600);
 
         mainWindow = primaryStage;
         mainWindow.setTitle("Mazegen");
@@ -62,23 +76,16 @@ public class Main extends Application {
         rootTemplate.setCenter(mapTemplate);
         rootTemplate.setRight(obp2);
 
-        Scene mapCreatorScene = new Scene(rootMapCreator);
-        Scene levelScene = new Scene(rootTemplate);
+        mapCreatorScene = new Scene(rootMapCreator);
+        levelScene = new Scene(rootTemplate);
+        //introScene = new Scene(intro);
 
         //Image goal = new Image(new FileInputStream("files/red.jpg"));
         //ImageCursor cursor = new ImageCursor(goal);
         //mapTemplate.setCursor(cursor);
 
-        VBox layout = new VBox();
-        layout.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-        Button button1 = new Button("Random Generated Maze");
-        button1.setOnAction(e -> mainWindow.setScene(levelScene));
-        Button button2 = new Button("MapCreator");
-        button2.setOnAction(e -> mainWindow.setScene(mapCreatorScene));
-        layout.getChildren().addAll(button1,button2);
-        scene1 = new Scene(layout, 800, 600);
 
-        mainWindow.setScene(scene1);
+        mainWindow.setScene(introScene);
         mainWindow.show();
     }
 
@@ -89,11 +96,21 @@ public class Main extends Application {
         rootTemplate.setCenter(forestLvlTemplate);
     }
 
-    public void setStartScreen(){
-        mainWindow.setScene(scene1);
-    }
+   /* public void setStartScreen(){
+        mainWindow.setScene(menuScene);
+    }*/
     public void changeToMapTemplate(){
         rootTemplate.setCenter(mapTemplate);
+    }
+    public void changeToMenu(){
+        mainWindow.setScene(menuScene);
+        System.out.println("MENU");
+    }
+    public void changeToLevel(){
+        mainWindow.setScene(levelScene);
+    }
+    public void changeToMapCreator(){
+        mainWindow.setScene(mapCreatorScene);
     }
 
 

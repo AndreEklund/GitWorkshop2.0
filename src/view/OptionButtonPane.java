@@ -66,7 +66,7 @@ public class OptionButtonPane extends GridPane {
 
     private void Mainmenyclicked(MouseEvent e){
         System.out.println("Main Menu clicked");
-        main.setStartScreen();
+        main.changeToMenu();
 
     }
 
