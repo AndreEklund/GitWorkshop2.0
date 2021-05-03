@@ -27,21 +27,24 @@ public class MapTemplate extends GridPane {
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
-    private Image wall = new Image(new FileInputStream("files/wall.jpg"));
-    private Image path = new Image(new FileInputStream("files/floor.jpg"));
-    private Image border = new Image(new FileInputStream("files/floor.png"));
-    private Image goal = new Image(new FileInputStream("files/red.jpg"));
-    private Image diamond = new Image(new FileInputStream("files/diamond.png"));
+    private Image wall;// = new Image(new FileInputStream("files/wall.jpg"));
+    private Image path;// = new Image(new FileInputStream("files/floor.jpg"));
+    private Image border;// = new Image(new FileInputStream("files/floor.png"));
+    private Image goal;// = new Image(new FileInputStream("files/red.jpg"));
+    private Image diamond;// = new Image(new FileInputStream("files/diamond.png"));
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private int collectiblesObtained = 0;
     private int width = 30;
     private int height = 30;
+    private int squareSize;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
     public MapTemplate(int[][] level, Main main) throws FileNotFoundException {
         this.main = main;
         this.level = level;
+        squareSize = 600/(level.length+4);
+        setupImages();
         setupBorders();
         setupLevel();
     }
@@ -81,12 +84,19 @@ public class MapTemplate extends GridPane {
             }
         }
     }
+    public void setupImages(){
+        wall = new Image("file:files/wall.jpg", squareSize, squareSize, false, false);
+        path = new Image("file:files/floor.jpg", squareSize, squareSize, false, false);
+        border = new Image("file:files/floor.png", squareSize, squareSize, false, false);
+        goal = new Image("file:files/red.jpg", squareSize, squareSize, false, false);
+        diamond = new Image("file:files/diamond.png", squareSize, squareSize, false, false);
+    }
 
     public Label getWall() {
         Label label = new Label();
         ImageView wallView = new ImageView(wall);
-        wallView.setFitHeight(width);
-        wallView.setFitWidth(height);
+        wallView.setFitHeight(squareSize);
+        wallView.setFitWidth(squareSize);
         label.setGraphic(wallView);
         label.setStyle("-fx-border-color: grey; ");
         label.setOnMouseEntered(e -> enteredWall(e));
@@ -96,8 +106,8 @@ public class MapTemplate extends GridPane {
     private Label getPath() {
         Label label = new Label();
         ImageView pathView = new ImageView(path);
-        pathView.setFitHeight(width);
-        pathView.setFitWidth(height);
+        pathView.setFitHeight(squareSize);
+        pathView.setFitWidth(squareSize);
         label.setGraphic(pathView);
         label.setStyle("-fx-border-color: grey;");
         return label;
@@ -105,8 +115,8 @@ public class MapTemplate extends GridPane {
     private Label getBorders() {
         Label label = new Label();
         ImageView borderView = new ImageView(border);
-        borderView.setFitHeight(width);
-        borderView.setFitWidth(height);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
         label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> enteredWall(e));
@@ -116,8 +126,8 @@ public class MapTemplate extends GridPane {
     private Label getGoal() {
         Label label = new Label();
         ImageView borderView = new ImageView(goal);
-        borderView.setFitHeight(width);
-        borderView.setFitWidth(height);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
         label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> enteredGoal());
@@ -126,8 +136,8 @@ public class MapTemplate extends GridPane {
     private Label getStart() {
         Label label = new Label();
         ImageView borderView = new ImageView();
-        borderView.setFitHeight(width);
-        borderView.setFitWidth(height);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
         label.setStyle("-fx-border-color: grey;");
         label.setOnMouseClicked(e -> startButtonPressed());
@@ -136,8 +146,8 @@ public class MapTemplate extends GridPane {
     public Label addCollectible() {
         Label collectible = new Label();
         ImageView borderView = new ImageView(diamond);
-        borderView.setFitHeight(width);
-        borderView.setFitWidth(height);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
         Glow glow = new Glow();
         glow.setLevel(0.7);
         borderView.setEffect(glow);

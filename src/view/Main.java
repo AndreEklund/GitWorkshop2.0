@@ -56,10 +56,10 @@ public class Main extends Application {
         menuScene = new Scene(menu, 800, 600);
 
         rootTemplate = new BorderPane();
-        rootTemplate.setPrefSize(600,600);
+        //rootTemplate.setPrefSize(600,600);
 
         rootMapCreator = new BorderPane();
-        rootMapCreator.setPrefSize(600,600);
+        //rootMapCreator.setPrefSize(600,600);
 
         mainWindow = primaryStage;
         mainWindow.setTitle("Mazegen");
@@ -88,8 +88,8 @@ public class Main extends Application {
         rootTemplate.setCenter(mapTemplate);
         rootTemplate.setRight(obp2);
 
-        mapCreatorScene = new Scene(rootMapCreator);
-        levelScene = new Scene(rootTemplate);
+        mapCreatorScene = new Scene(rootMapCreator, 800, 600);
+        levelScene = new Scene(rootTemplate, 800, 600);
         //introScene = new Scene(intro);
 
         //Image goal = new Image(new FileInputStream("files/red.jpg"));
