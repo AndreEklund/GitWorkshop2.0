@@ -184,7 +184,6 @@ public class MapTemplate extends GridPane {
     public void enteredGoal() {
         if (startButtonPressed && allCollectiblesObtained) {
             main.changeToForest();
-
         }
     }
     public void startButtonPressed() {
