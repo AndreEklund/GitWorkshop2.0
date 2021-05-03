@@ -133,7 +133,7 @@ public class ForestLvlTemplate extends GridPane {
     }
     public void enteredWall() {
         if (startButtonPressed) {
-            System.out.println("wall");
+            //System.out.println("wall");
             main.changeToMapTemplate();
         }
     }

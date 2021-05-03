@@ -135,7 +135,7 @@ public class LavaLvlTemplate extends GridPane {
     }
     public void enteredWall() {
         if (startButtonPressed) {
-            System.out.println("wall");
+            //System.out.println("wall");
             main.changeToForest();
         }
     }
