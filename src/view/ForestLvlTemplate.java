@@ -43,7 +43,7 @@ public class ForestLvlTemplate extends GridPane {
     }
     public void setupImages(){
         wall = new Image("file:files/Dirtwall.jfif", squareSize, squareSize, false, false);
-        path = new Image("file:files/files/Grasspath.png", squareSize, squareSize, false, false);
+        path = new Image("file:files/Grasspath.png", squareSize, squareSize, false, false);
         border = new Image("file:files/floor.png", squareSize, squareSize, false, false);
         goal = new Image("file:files/red.jpg", squareSize, squareSize, false, false);
     }
