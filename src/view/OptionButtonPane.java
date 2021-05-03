@@ -90,13 +90,11 @@ public class OptionButtonPane extends GridPane {
     }
 
     public void changeLvl2(){
-        getChildren().remove(imageView1);
-        add(imageView2,0,1);
+        imageView1.setImage(level2Image);
     }
 
     public void changeLvl3(){
-        imageView2.setVisible(false);
-        imageView3.setVisible(true);
+        imageView1.setImage(level3Image);
     }
 
 

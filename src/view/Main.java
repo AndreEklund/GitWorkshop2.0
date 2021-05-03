@@ -104,11 +104,11 @@ public class Main extends Application {
 
     public void changeToLava() {
         rootTemplate.setCenter(lavaLvlTemplate);
-        obp.changeLvl3();
+        obp2.changeLvl3();
     }
     public void changeToForest(){
         rootTemplate.setCenter(forestLvlTemplate);
-        obp.changeLvl2();
+        obp2.changeLvl2();
     }
 
    /* public void setStartScreen(){
