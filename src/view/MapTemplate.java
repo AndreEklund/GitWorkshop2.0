@@ -1,6 +1,7 @@
 package view;
 
 
+import javafx.animation.FadeTransition;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.event.EventHandler;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,16 +35,15 @@ public class MapTemplate extends GridPane {
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private int collectiblesObtained = 0;
-    private int width = 35;
-    private int height = 35;
+    private int width = 30;
+    private int height = 30;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public MapTemplate(int[][] level,Main main) throws FileNotFoundException {
+    public MapTemplate(int[][] level, Main main) throws FileNotFoundException {
         this.main = main;
         this.level = level;
         setupBorders();
         setupLevel();
-        //Label[][] labels = new Label[20][10];
     }
     public void setupBorders() {
         for (int i = 0; i < level.length + 1; i++) {
@@ -88,7 +89,8 @@ public class MapTemplate extends GridPane {
         wallView.setFitWidth(height);
         label.setGraphic(wallView);
         label.setStyle("-fx-border-color: grey; ");
-        label.setOnMouseEntered(e -> enteredWall());
+        label.setOnMouseEntered(e -> enteredWall(e));
+        label.setOnMouseExited(e -> exitedLabel(e));
         return label;
     }
     private Label getPath() {
@@ -107,7 +109,8 @@ public class MapTemplate extends GridPane {
         borderView.setFitWidth(height);
         label.setGraphic(borderView);
         label.setStyle("-fx-border-color: grey;");
-        label.setOnMouseEntered(e -> enteredWall());
+        label.setOnMouseEntered(e -> enteredWall(e));
+        label.setOnMouseExited(e -> exitedLabel(e));
         return label;
     }
     private Label getGoal() {
@@ -144,22 +147,36 @@ public class MapTemplate extends GridPane {
         collectibles.add(collectible);
         return collectible;
     }
-    public void enteredWall() {
+    public void enteredWall(MouseEvent e) {
+        Label label = (Label)e.getSource();
+        FadeTransition fade = new FadeTransition();
+        fade.setNode(label);
+        fade.setDuration(Duration.seconds(0.3));
+        fade.setFromValue(10);
+        fade.setToValue(0.6);
+        fade.play();
+
         if (startButtonPressed) {
-            System.out.println("wall");
+            startButtonPressed = false;
         }
     }
     public void enteredGoal() {
         if (startButtonPressed && allCollectiblesObtained) {
-            System.out.println("goal");
             main.changeToForest();
 
         }
-
     }
     public void startButtonPressed() {
-        System.out.println("Start pressed");
         startButtonPressed = true;
+    }
+    private void exitedLabel(MouseEvent e) {
+        Label label = (Label)e.getSource();
+        FadeTransition fade = new FadeTransition();
+        fade.setNode(label);
+        fade.setDuration(Duration.seconds(0.3));
+        fade.setFromValue(0.6);
+        fade.setToValue(10);
+        fade.play();
     }
 
     private class MouseListener implements EventHandler<MouseEvent> {
