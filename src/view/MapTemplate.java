@@ -6,7 +6,7 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.event.EventHandler;
 import javafx.scene.media.MediaPlayer;
@@ -48,9 +48,16 @@ public class MapTemplate extends GridPane {
         this.main = main;
         this.level = level;
         squareSize = 600/(level.length+4);
+        setBackground();
         setupImages();
         setupBorders();
         setupLevel();
+    }
+    public void setBackground(){
+        BackgroundImage menuBackground = new BackgroundImage(new Image("file:files/MenuBackground.jpg",800,600,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        this.setBackground(new Background(menuBackground));
     }
     public void setupBorders() {
         for (int i = 0; i < level.length + 1; i++) {
