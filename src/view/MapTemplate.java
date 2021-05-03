@@ -9,10 +9,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.event.EventHandler;
-import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-
-import java.io.FileInputStream;
+import javafx.scene.media.Media;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,6 +38,10 @@ public class MapTemplate extends GridPane {
     private int width = 30;
     private int height = 30;
     private int squareSize;
+
+    private File audioFile = new File("C:\\Users\\Filip\\Desktop\\GitWorkshop2.0\\files\\sounds\\Diamond1.mp3");
+    private Media audio = new Media(audioFile.toURI().toString());
+    private MediaPlayer audioPlayer = new MediaPlayer(audio);
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
     public MapTemplate(int[][] level, Main main) throws FileNotFoundException {
@@ -195,7 +199,8 @@ public class MapTemplate extends GridPane {
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
 
-                
+               audioPlayer.play();
+               audioPlayer.seek(Duration.ZERO);
 
                 for (Label label: collectibles) {
                     if (e.getSource() == label) {

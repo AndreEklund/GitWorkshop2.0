@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.DigitalClock;
 import model.MazeGenerator;
 
@@ -62,8 +63,12 @@ public class Main extends Application {
         //rootMapCreator.setPrefSize(600,600);
 
         mainWindow = primaryStage;
-        mainWindow.setTitle("Mazegen");
 
+        mainWindow.setTitle("Mazegen");
+        mainWindow.initStyle(StageStyle.UTILITY);
+        mainWindow.setResizable(false);
+        mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
+        
         MazeGenerator maze = new MazeGenerator(20);
         MazeGenerator maze1 = new MazeGenerator(20);
         MazeGenerator maze2 = new MazeGenerator(20);
