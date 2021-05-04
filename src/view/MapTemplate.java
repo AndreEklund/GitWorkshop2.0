@@ -2,6 +2,7 @@ package view;
 
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PathTransition;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,10 +11,13 @@ import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.event.EventHandler;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,6 +46,7 @@ public class MapTemplate extends GridPane {
     private File audioFile = new File("files/sounds/Diamond1.mp3");
     private Media audio = new Media(audioFile.toURI().toString());
     private MediaPlayer audioPlayer = new MediaPlayer(audio);
+    private ImageView imageView = new ImageView();
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
     public MapTemplate(int[][] level, Main main) throws FileNotFoundException {
@@ -52,6 +57,40 @@ public class MapTemplate extends GridPane {
         setupImages();
         setupBorders();
         setupLevel();
+        setupGhost();
+    }
+    public void setupGhost() throws FileNotFoundException {
+        InputStream stream = new FileInputStream("files/spöke.jpg");
+        Image image = new Image(stream);
+
+        imageView.setImage(image);
+
+        imageView.setX(1);
+        imageView.setY(1);
+        imageView.setFitHeight(squareSize);
+        imageView.setFitWidth(squareSize);
+
+        imageView.setOnMouseEntered(e -> enteredWall(e));
+
+
+        add(imageView, 10, 10);
+        initialize();
+    }
+    public void initialize() {
+
+        Polyline line = new Polyline();
+        line.getPoints().addAll(
+                -100.0, -50.0,
+                -50.0, 100.0,
+                100.0, 200.0,
+                200.0, -150.0);
+
+        PathTransition path = new PathTransition();
+        path.setNode(imageView);
+        path.setDuration(Duration.seconds(10));
+        path.setPath(line);
+        path.setCycleCount(PathTransition.INDEFINITE);
+        path.play();
     }
     public void setBackground(){
         BackgroundImage menuBackground = new BackgroundImage(new Image("file:files/MenuBackground.jpg",800,600,false,true),
