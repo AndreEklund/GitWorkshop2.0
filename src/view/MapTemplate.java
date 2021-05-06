@@ -198,7 +198,7 @@ public class MapTemplate extends GridPane {
         label.setOnMouseEntered(e -> {
             try {
                 enteredGoal();
-            } catch (FileNotFoundException fileNotFoundException) {
+            } catch (FileNotFoundException | InterruptedException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
         });
@@ -241,9 +241,10 @@ public class MapTemplate extends GridPane {
             startButtonPressed = false;
         }
     }
-    public void enteredGoal() throws FileNotFoundException {
+    public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
             main.generateNewMaze();
+
         }
     }
     public void startButtonPressed() {
