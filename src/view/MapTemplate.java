@@ -52,13 +52,13 @@ public class MapTemplate extends GridPane {
     public MapTemplate(int[][] level, Main main) throws FileNotFoundException {
         this.main = main;
         this.level = level;
-        squareSize = 600/(level.length+4);
+        squareSize = 600/(level.length+2);
         setBackground();
-        setupImages(0);
+        setupImages(new Random().nextInt(2));
         //setupImages(new Random().nextInt(3));
         setupBorders();
         setupLevel();
-        setupGhost();
+        //setupGhost();
     }
     public void setupGhost() throws FileNotFoundException {
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
@@ -141,7 +141,7 @@ public class MapTemplate extends GridPane {
             folder = "forest";
         }
         else if (value == 1) {
-            folder = "";
+            folder = "lava";
         }
         else if (value == 2) {
             folder = "";
@@ -160,7 +160,7 @@ public class MapTemplate extends GridPane {
         wallView.setFitHeight(squareSize);
         wallView.setFitWidth(squareSize);
         label.setGraphic(wallView);
-        label.setStyle("-fx-border-color: grey; ");
+        //label.setStyle("-fx-border-color: grey; ");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
@@ -171,7 +171,7 @@ public class MapTemplate extends GridPane {
         pathView.setFitHeight(squareSize);
         pathView.setFitWidth(squareSize);
         label.setGraphic(pathView);
-        label.setStyle("-fx-border-color: grey;");
+        //label.setStyle("-fx-border-color: grey;");
         return label;
     }
     private Label getBorders() {
@@ -180,7 +180,7 @@ public class MapTemplate extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        label.setStyle("-fx-border-color: grey;");
+        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
@@ -191,7 +191,7 @@ public class MapTemplate extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        label.setStyle("-fx-border-color: grey;");
+        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> {
             try {
                 enteredGoal();
@@ -207,7 +207,7 @@ public class MapTemplate extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        label.setStyle("-fx-border-color: grey;");
+        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseClicked(e -> startButtonPressed());
         return label;
     }
@@ -219,7 +219,7 @@ public class MapTemplate extends GridPane {
         Glow glow = new Glow();
         glow.setLevel(0.7);
         borderView.setEffect(glow);
-        collectible.setStyle("-fx-border-color: grey; fx-background-color: transparent;");
+        collectible.setStyle("fx-background-color: transparent;");
         collectible.setGraphic(borderView);
         collectible.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseListener);
         collectibles.add(collectible);

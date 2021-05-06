@@ -61,7 +61,7 @@ public class Main extends Application {
         mainWindow.setResizable(false);
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
         
-        MazeGenerator maze = new MazeGenerator(18);
+        MazeGenerator maze = new MazeGenerator(10);
         MazeGenerator maze1 = new MazeGenerator(20);
         MazeGenerator maze2 = new MazeGenerator(20);
 
@@ -100,7 +100,7 @@ public class Main extends Application {
     }
 
     public void generateNewMaze() throws FileNotFoundException {
-        rootTemplate.setCenter(new MapTemplate(new MazeGenerator(30).getMaze(), this));
+        rootTemplate.setCenter(new MapTemplate(new MazeGenerator(10).getMaze(), this));
     }
 
    /* public void setStartScreen(){
