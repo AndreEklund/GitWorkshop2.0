@@ -36,11 +36,11 @@ public class MapTemplate extends GridPane {
     private Image border;// = new Image(new FileInputStream("files/floor.png"));
     private Image goal;// = new Image(new FileInputStream("files/red.jpg"));
     private Image diamond;// = new Image(new FileInputStream("files/diamond.png"));
+    private Image start;
+    private Image ghost;
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private int collectiblesObtained = 0;
-    private int width = 30;
-    private int height = 30;
     private int squareSize;
 
     private File audioFile = new File("files/sounds/Diamond1.mp3");
@@ -54,16 +54,16 @@ public class MapTemplate extends GridPane {
         this.level = level;
         squareSize = 600/(level.length+4);
         setBackground();
-        setupImages();
+        setupImages(0);
+        //setupImages(new Random().nextInt(3));
         setupBorders();
         setupLevel();
         setupGhost();
     }
     public void setupGhost() throws FileNotFoundException {
-        InputStream stream = new FileInputStream("files/spöke.jpg");
-        Image image = new Image(stream);
+        ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
 
-        imageView.setImage(image);
+        imageView.setImage(ghost);
 
         imageView.setX(1);
         imageView.setY(1);
@@ -134,12 +134,24 @@ public class MapTemplate extends GridPane {
             }
         }
     }
-    public void setupImages(){
-        wall = new Image("file:files/wall.jpg", squareSize, squareSize, false, false);
-        path = new Image("file:files/floor.jpg", squareSize, squareSize, false, false);
-        border = new Image("file:files/floor.png", squareSize, squareSize, false, false);
-        goal = new Image("file:files/red.jpg", squareSize, squareSize, false, false);
-        diamond = new Image("file:files/diamond.png", squareSize, squareSize, false, false);
+    public void setupImages(int value){
+
+        String folder = "";
+        if (value == 0) {
+            folder = "forest";
+        }
+        else if (value == 1) {
+            folder = "";
+        }
+        else if (value == 2) {
+            folder = "";
+        }
+        wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
+        path = new Image("file:files/" + folder + "/path.png", squareSize, squareSize, false, false);
+        border = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
+        goal = new Image("file:files/" + folder + "/goal.png", squareSize, squareSize, false, false);
+        diamond = new Image("file:files/" + folder + "/collectible.png", squareSize, squareSize, false, false);
+        start = new Image("file:files/" + folder + "/start.png", squareSize, squareSize, false, false);
     }
 
     public Label getWall() {
@@ -180,12 +192,18 @@ public class MapTemplate extends GridPane {
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
         label.setStyle("-fx-border-color: grey;");
-        label.setOnMouseEntered(e -> enteredGoal());
+        label.setOnMouseEntered(e -> {
+            try {
+                enteredGoal();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        });
         return label;
     }
     private Label getStart() {
         Label label = new Label();
-        ImageView borderView = new ImageView();
+        ImageView borderView = new ImageView(start);
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
@@ -220,9 +238,9 @@ public class MapTemplate extends GridPane {
             startButtonPressed = false;
         }
     }
-    public void enteredGoal() {
+    public void enteredGoal() throws FileNotFoundException {
         if (startButtonPressed && allCollectiblesObtained) {
-            main.changeToForest();
+            main.generateNewMaze();
         }
     }
     public void startButtonPressed() {
