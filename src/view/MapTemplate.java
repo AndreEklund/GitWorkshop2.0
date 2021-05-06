@@ -54,7 +54,7 @@ public class MapTemplate extends GridPane {
         this.level = level;
         squareSize = 600/(level.length+2);
         setBackground();
-        setupImages(3);
+        setupImages(new Random().nextInt(4));
         setupBorders();
         setupLevel();
         //setupGhost();
