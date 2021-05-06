@@ -35,6 +35,7 @@ public class Main extends Application {
     private Scene mapCreatorScene;
     private OptionButtonPane obp;
     private OptionButtonPane obp2;
+    private MazeGenerator mazeGenerator;
 
 
     @Override
@@ -61,17 +62,12 @@ public class Main extends Application {
         mainWindow.setResizable(false);
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
         
-        MazeGenerator maze = new MazeGenerator(10);
-        MazeGenerator maze1 = new MazeGenerator(20);
-        MazeGenerator maze2 = new MazeGenerator(20);
+        mazeGenerator = new MazeGenerator(10);
 
-        mapTemplate = new MapTemplate(maze.getMaze(),this);
+
+
+        mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this);
         MapCreator mapCreator = new MapCreator();
-
-        lavaLvlTemplate = new LavaLvlTemplate(maze1.getMaze(),this);
-        forestLvlTemplate = new ForestLvlTemplate(maze2.getMaze(),this);
-
-
 
         obp = new OptionButtonPane(mapCreator,this);
         rootMapCreator.setCenter(mapCreator);
@@ -100,7 +96,43 @@ public class Main extends Application {
     }
 
     public void generateNewMaze() throws FileNotFoundException {
-        rootTemplate.setCenter(new MapTemplate(new MazeGenerator(10).getMaze(), this));
+        int currentMaze[][] = mazeGenerator.getMaze();
+        MazeGenerator newMazegenerator = new MazeGenerator(10);
+        int nextMaze[][] = newMazegenerator.getMaze();
+        int row = 0;
+        int col = 0;
+
+        //Ändra goal till start i nästa labyrint
+        /*for (int i = 0; i < currentMaze.length; i++) {
+            for (int j = 0; j < currentMaze[i].length; j++) {
+                if (currentMaze[i][j] == 3) {
+                    nextMaze[i][j] = 2;
+                    row = i;
+                    col = j;
+                }
+            }
+        }
+
+        boolean goalDeleted = false;
+
+        for (int i = 0; i < nextMaze.length; i++) {
+            for (int j = 0; j < nextMaze[i].length; j++) {
+                if (nextMaze[i][j] == 2 && i != row && j != col) {
+                    nextMaze[i][j] = 3;
+                }
+                if (nextMaze[i][j] == 3 && !goalDeleted) {
+                    nextMaze[i][j] = 1;
+                    goalDeleted = true;
+                }
+            }
+        }*/
+
+        rootTemplate.setCenter(new MapTemplate(nextMaze, this));
+        this.mazeGenerator = newMazegenerator;
+    }
+    public void generateMobMaze() throws FileNotFoundException, InterruptedException {
+        Mobmazelevel mobmazelevel = new Mobmazelevel();
+        rootTemplate.setCenter(mobmazelevel);
     }
 
    /* public void setStartScreen(){
