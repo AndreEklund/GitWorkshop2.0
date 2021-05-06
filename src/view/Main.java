@@ -1,27 +1,19 @@
 package view;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.control.Label;
 
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.DigitalClock;
 import model.MazeGenerator;
+import outdatedClasses.ForestLvlTemplate;
+import outdatedClasses.LavaLvlTemplate;
 
 
-
-import java.awt.*;
-import java.text.DecimalFormat;
+import java.io.FileNotFoundException;
 
 public class Main extends Application {
 
@@ -69,7 +61,7 @@ public class Main extends Application {
         mainWindow.setResizable(false);
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
         
-        MazeGenerator maze = new MazeGenerator(20);
+        MazeGenerator maze = new MazeGenerator(18);
         MazeGenerator maze1 = new MazeGenerator(20);
         MazeGenerator maze2 = new MazeGenerator(20);
 
@@ -107,13 +99,8 @@ public class Main extends Application {
         mainWindow.show();
     }
 
-    public void changeToLava() {
-        rootTemplate.setCenter(lavaLvlTemplate);
-        obp2.changeLvl3();
-    }
-    public void changeToForest(){
-        rootTemplate.setCenter(forestLvlTemplate);
-        obp2.changeLvl2();
+    public void generateNewMaze() throws FileNotFoundException {
+        rootTemplate.setCenter(new MapTemplate(new MazeGenerator(30).getMaze(), this));
     }
 
    /* public void setStartScreen(){

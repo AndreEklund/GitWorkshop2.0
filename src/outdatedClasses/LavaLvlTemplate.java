@@ -1,9 +1,10 @@
-package view;
+package outdatedClasses;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import view.Main;
 
 import javax.swing.*;
 import java.io.FileInputStream;
@@ -136,7 +137,7 @@ public class LavaLvlTemplate extends GridPane {
     public void enteredWall() {
         if (startButtonPressed) {
             //System.out.println("wall");
-            main.changeToForest();
+            //main.changeToForest();
         }
     }
     public void enteredGoal() {

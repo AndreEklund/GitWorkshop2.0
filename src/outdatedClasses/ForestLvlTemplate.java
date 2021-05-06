@@ -1,9 +1,10 @@
-package view;
+package outdatedClasses;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import view.Main;
 
 import javax.swing.*;
 import java.io.FileInputStream;
@@ -140,7 +141,7 @@ public class ForestLvlTemplate extends GridPane {
     public void enteredGoal() {
         if (startButtonPressed) {
             System.out.println("goal");
-            main.changeToLava();
+            //main.changeToLava();
         }
 
     }
