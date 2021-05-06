@@ -243,8 +243,8 @@ public class MapTemplate extends GridPane {
     }
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
-            main.generateNewMaze();
-
+            //main.generateNewMaze();
+            main.generateMobMaze();
         }
     }
     public void startButtonPressed() {
