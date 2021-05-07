@@ -19,7 +19,7 @@ public class Main extends Application {
 
     /**
      * Author André Eklund
-     * Edit Filip Örnling
+     * Edit Filip Örnling, Viktor Näslund
      */
     private ForestLvlTemplate forestLvlTemplate;
     private Stage mainWindow;
