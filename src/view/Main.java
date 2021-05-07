@@ -63,7 +63,7 @@ public class Main extends Application {
         mainWindow.setResizable(false);
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
         
-        mazeGenerator = new MazeGenerator(6, true);
+        mazeGenerator = new MazeGenerator(10, true);
 
 
 
@@ -98,7 +98,7 @@ public class Main extends Application {
 
     public void generateNewMaze() throws FileNotFoundException {
         int currentMaze[][] = mazeGenerator.getMaze();
-        MazeGenerator newMazegenerator = new MazeGenerator(6, false);
+        MazeGenerator newMazegenerator = new MazeGenerator(10, false);
         int nextMaze[][] = newMazegenerator.getMaze();
         int row = 0;
         int col = 0;
