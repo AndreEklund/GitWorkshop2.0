@@ -8,7 +8,7 @@ import java.util.Stack;
 public class MazeGenerator {
 
     /**
-     * Edit Sebastian Helin
+     * Edit Sebastian Helin, André Eklund
      */
     
     private Stack<Node> stack = new Stack<>();
