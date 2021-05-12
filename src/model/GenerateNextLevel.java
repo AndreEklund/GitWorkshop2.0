@@ -58,7 +58,11 @@ public class GenerateNextLevel {
 
                                 if ((offsetCol >= 0) && (offsetCol < maze[0].length)) {
                                     if (maze[offsetRow][offsetCol] == 0) {
-                                        wallCounterStart++;
+                                        if((i == 0) && (j == 0)){
+                                            if((offsetRow!=1 && offsetCol!=1) || (offsetRow!=1 && offsetCol != maze.length-1) ||(offsetRow!=maze.length-1 && offsetCol!=1) || (offsetRow!=maze.length-1 && offsetCol!=maze.length-1)){
+                                                wallCounterStart++;
+                                            }
+                                        }
                                     }
                                     else if (wallCounterStart >= 2) {
                                         for (int offsetRow2 = offsetRow - 1; offsetRow2 <= offsetRow + 1; offsetRow2++){
@@ -75,7 +79,6 @@ public class GenerateNextLevel {
                                     }
                                 }
                             }
-
                         }
                     }
                 }
@@ -86,7 +89,9 @@ public class GenerateNextLevel {
                             if ((offsetRow >= 0) && (offsetRow < maze.length)) {
                                 if ((offsetCol >= 0) && (offsetCol < maze[0].length)) {
                                     if (maze[offsetRow][offsetCol] == 0) {
-                                        wallCounterGoal++;
+                                        if((offsetRow!=1 && offsetCol!=1) || (offsetRow!=1 && offsetCol != maze.length-1) ||(offsetRow!=maze.length-1 && offsetCol!=1) || (offsetRow!=maze.length-1 && offsetCol!=maze.length-1)){
+                                            wallCounterStart++;
+                                        }
                                     }
                                     else if (wallCounterGoal >= 2) {
                                         for (int offsetRow2 = offsetRow - 1; offsetRow2 <= offsetRow + 1; offsetRow2++){
