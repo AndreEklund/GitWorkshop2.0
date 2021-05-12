@@ -13,8 +13,8 @@ public class GenerateNextLevel {
     private BorderPane mainPane;
     private MainProgram mainProgram;
 
-    public GenerateNextLevel(MainProgram mainProgram, BorderPane mainPane){
-        mazeGenerator = new MazeGenerator(10, true);
+    public GenerateNextLevel(MainProgram mainProgram, BorderPane mainPane, MazeGenerator mazeGenerator){
+        this.mazeGenerator = mazeGenerator;
         this.mainProgram = mainProgram;
         this.mainPane = mainPane;
     }
@@ -39,7 +39,77 @@ public class GenerateNextLevel {
             }
         }
         nextMaze[new Random().nextBoolean() ? 0 : nextMaze.length - 1][col] = 3;
-        mainPane.setCenter(new MapTemplate(nextMaze, mainProgram, this));
+        mainPane.setCenter(new MapTemplate(checkStartAndGoalNeighbors(nextMaze), mainProgram, this));
         this.mazeGenerator = newMazegenerator;
+    }
+    public int[][] checkStartAndGoalNeighbors(int[][] maze) {
+
+        int wallCounterStart = 0;
+        int wallCounterGoal = 0;
+
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
+
+                if (maze[i][j] == 2) {
+                    for (int offsetRow = i - 1; offsetRow <= i + 1; offsetRow++){
+                        for (int offsetCol = j - 1; offsetCol <= j + 1; offsetCol++){
+
+                            if ((offsetRow >= 0) && (offsetRow < maze.length)) {
+
+                                if ((offsetCol >= 0) && (offsetCol < maze[0].length)) {
+                                    if (maze[offsetRow][offsetCol] == 0) {
+                                        wallCounterStart++;
+                                    }
+                                    else if (wallCounterStart >= 2) {
+                                        for (int offsetRow2 = offsetRow - 1; offsetRow2 <= offsetRow + 1; offsetRow2++){
+                                            for (int offsetCol2 = offsetCol - 1; offsetCol2 <= offsetCol + 1; offsetCol2++){
+                                                if ((offsetRow2 >= 0) && (offsetRow2 < maze.length)) {
+                                                    if ((offsetCol2 >= 0) && (offsetCol2 < maze[0].length)) {
+                                                        if (maze[offsetRow2][offsetCol2] == 0) {
+                                                            maze[offsetRow2][offsetCol2] = 1;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                else if (maze[i][j] == 3) {
+                    for (int offsetRow = i - 1; offsetRow <= i + 1; offsetRow++){
+                        for (int offsetCol = j - 1; offsetCol <= j + 1; offsetCol++){
+
+                            if ((offsetRow >= 0) && (offsetRow < maze.length)) {
+                                if ((offsetCol >= 0) && (offsetCol < maze[0].length)) {
+                                    if (maze[offsetRow][offsetCol] == 0) {
+                                        wallCounterGoal++;
+                                    }
+                                    else if (wallCounterGoal >= 2) {
+                                        for (int offsetRow2 = offsetRow - 1; offsetRow2 <= offsetRow + 1; offsetRow2++){
+                                            for (int offsetCol2 = offsetCol - 1; offsetCol2 <= offsetCol + 1; offsetCol2++){
+                                                if ((offsetRow2 >= 0) && (offsetRow2 < maze.length)) {
+                                                    if ((offsetCol2 >= 0) && (offsetCol2 < maze[0].length)) {
+                                                        if (maze[offsetRow2][offsetCol2] == 0) {
+                                                            maze[offsetRow2][offsetCol2] = 1;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(wallCounterGoal);
+        System.out.println(wallCounterStart);
+        return maze;
     }
 }
