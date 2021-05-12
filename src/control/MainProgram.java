@@ -57,8 +57,6 @@ public class MainProgram extends Application {
         mainPane = new BorderPane();
         rootMapCreator = new BorderPane();
 
-        generateNextLevel = new GenerateNextLevel(this, mainPane);
-
         mainWindow = primaryStage;
 
         mainWindow.setTitle("Mazegen");
@@ -67,6 +65,8 @@ public class MainProgram extends Application {
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
         
         mazeGenerator = new MazeGenerator(10, true);
+        generateNextLevel = new GenerateNextLevel(this, mainPane, mazeGenerator);
+
 
         mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         MapCreator mapCreator = new MapCreator();
