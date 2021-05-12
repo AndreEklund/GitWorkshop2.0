@@ -1,5 +1,6 @@
 package view;
 
+import control.MainProgram;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -7,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import model.DigitalClock;
+import model.MapCreator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +28,6 @@ public class OptionButtonPane extends GridPane {
     private ImageView imageView1;
     private ImageView imageView2;
     private ImageView imageView3;
-
     private Label level;
 
 
@@ -36,15 +37,15 @@ public class OptionButtonPane extends GridPane {
     private String lvl2 = "files/level2ny.png";
     private String lvl3 = "files/level3ny.png";
     private String imageUrlMeny = "files/Menybutton.png";
-    private Main main;
+    private MainProgram mainProgram;
     private MapCreator mapCreator;
     private DigitalClock clock = new DigitalClock();
     private boolean running = false;
 
 
 
-    public OptionButtonPane(MapCreator mapCreator,Main main) throws FileNotFoundException {
-        this.main=main;
+    public OptionButtonPane(MapCreator mapCreator, MainProgram mainProgram) throws FileNotFoundException {
+        this.mainProgram = mainProgram;
         this.mapCreator=mapCreator;
 
         File file1 = new File(lvl1);
@@ -68,7 +69,6 @@ public class OptionButtonPane extends GridPane {
         level = new Label();
 
         level.setGraphic(imageView1);
-
 
         BackgroundImage bimage2 = new BackgroundImage(imageMeny,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,new BackgroundSize(imageMeny.getWidth(),imageMeny.getHeight(),true,true,true,false));
 
@@ -101,7 +101,7 @@ public class OptionButtonPane extends GridPane {
 
     private void Mainmenyclicked(MouseEvent e){
         System.out.println("Main Menu clicked");
-        main.changeToMenu();
+        mainProgram.changeToMenu();
 
     }
 
