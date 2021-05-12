@@ -1,4 +1,4 @@
-package view;
+package model;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;

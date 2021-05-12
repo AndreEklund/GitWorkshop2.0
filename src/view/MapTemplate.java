@@ -1,6 +1,8 @@
 package view;
 
 
+import model.GenerateNextLevel;
+import control.MainProgram;
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
 import javafx.scene.effect.Glow;
@@ -15,9 +17,7 @@ import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,15 +27,16 @@ public class MapTemplate extends GridPane {
     /**
      * Author André Eklund
      */
-    private Main main;
+    private MainProgram mainProgram;
+    private GenerateNextLevel generateNextLevel;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
-    private Image wall;// = new Image(new FileInputStream("files/wall.jpg"));
-    private Image path;// = new Image(new FileInputStream("files/floor.jpg"));
-    private Image border;// = new Image(new FileInputStream("files/floor.png"));
-    private Image goal;// = new Image(new FileInputStream("files/red.jpg"));
-    private Image diamond;// = new Image(new FileInputStream("files/diamond.png"));
+    private Image wall;
+    private Image path;
+    private Image border;
+    private Image goal;
+    private Image diamond;
     private Image start;
     private Image ghost;
     private boolean startButtonPressed;
@@ -43,15 +44,17 @@ public class MapTemplate extends GridPane {
     private int collectiblesObtained = 0;
     private int squareSize;
 
+
     private File audioFile = new File("files/sounds/Diamond1.mp3");
     private Media audio = new Media(audioFile.toURI().toString());
     private MediaPlayer audioPlayer = new MediaPlayer(audio);
     private ImageView imageView = new ImageView();
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public MapTemplate(int[][] level, Main main) throws FileNotFoundException {
-        this.main = main;
+    public MapTemplate(int[][] level, MainProgram mainProgram, GenerateNextLevel generateNextLevel) throws FileNotFoundException {
+        this.mainProgram = mainProgram;
         this.level = level;
+        this.generateNextLevel = generateNextLevel;
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages(new Random().nextInt(4));
@@ -243,7 +246,7 @@ public class MapTemplate extends GridPane {
     }
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
-            main.generateNewMaze();
+            generateNextLevel.generateNewMaze();
             //main.generateMobMaze();
         }
     }

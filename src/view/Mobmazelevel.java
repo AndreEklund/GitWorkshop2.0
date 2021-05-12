@@ -1,5 +1,6 @@
 package view;
 
+import control.MainProgram;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
@@ -21,9 +22,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Sebastian Helin & Filip Örnling
@@ -32,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Mobmazelevel extends  GridPane  {
 
-    private Main main;
+    private MainProgram mainProgram;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
@@ -69,7 +67,7 @@ public class Mobmazelevel extends  GridPane  {
 
     public Mobmazelevel() throws FileNotFoundException, InterruptedException {
         createArray();
-        this.main = main;
+        this.mainProgram = mainProgram;
         level = maze;
         squareSize = 600/(level.length+4);
         setBackground();

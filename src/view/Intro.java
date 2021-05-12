@@ -1,5 +1,6 @@
 package view;
 
+import control.MainProgram;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -11,10 +12,10 @@ import javafx.scene.layout.*;
 
 public class Intro extends VBox {
 
-    private Main main;
+    private MainProgram mainProgram;
 
-    public Intro(Main main){
-        this.main = main;
+    public Intro(MainProgram mainProgram){
+        this.mainProgram = mainProgram;
         setBackground();
         addListener();
     }
@@ -32,7 +33,7 @@ public class Intro extends VBox {
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                main.changeToMenu();
+                mainProgram.changeToMenu();
             }
         });
     }

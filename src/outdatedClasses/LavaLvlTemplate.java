@@ -4,10 +4,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import view.Main;
+import control.MainProgram;
 
 import javax.swing.*;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class LavaLvlTemplate extends GridPane {
@@ -16,7 +15,7 @@ public class LavaLvlTemplate extends GridPane {
     /**
      * Edit Filip Örnling
      */
-    private Main main;
+    private MainProgram mainProgram;
     private int[][] level;
     private JLabel[] collectibles;
     private Image wall;// = new Image(new FileInputStream("files/lavavägg.png"));
@@ -27,8 +26,8 @@ public class LavaLvlTemplate extends GridPane {
     private int squareSize;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public LavaLvlTemplate(int[][] level,Main main) throws FileNotFoundException {
-        this.main=main;
+    public LavaLvlTemplate(int[][] level, MainProgram mainProgram) throws FileNotFoundException {
+        this.mainProgram = mainProgram;
         this.level = level;
         squareSize = 568/(level.length+2);
         setBackground();

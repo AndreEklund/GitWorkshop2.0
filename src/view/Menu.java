@@ -1,5 +1,6 @@
 package view;
 
+import control.MainProgram;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,10 +11,10 @@ import javafx.scene.layout.*;
  */
 
 public class Menu extends VBox {
-    private Main main;
+    private MainProgram mainProgram;
 
-    public Menu(Main main){
-        this.main = main;
+    public Menu(MainProgram mainProgram){
+        this.mainProgram = mainProgram;
         setBackground();
         addButtons();
     }
@@ -30,13 +31,13 @@ public class Menu extends VBox {
         Button button1 = new Button("");
         Image btnStart = new Image("file:files/BtnStart.png", 250, 30, false, true);
         button1.setGraphic(new ImageView(btnStart));
-        button1.setOnAction(e -> main.changeToLevel());
+        button1.setOnAction(e -> mainProgram.changeToLevel());
         button1.setTranslateX(250);
         button1.setTranslateY(125);
         Button button2 = new Button("");
         Image btnMapCreator = new Image("file:files/BtnMapCreator.png", 250, 30, false, true);
         button2.setGraphic(new ImageView(btnMapCreator));
-        button2.setOnAction(e -> main.changeToMapCreator());
+        button2.setOnAction(e -> mainProgram.changeToMapCreator());
         button2.setTranslateX(250);
         button2.setTranslateY(150);
         this.getChildren().addAll(button1,button2);

@@ -4,10 +4,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import view.Main;
+import control.MainProgram;
 
 import javax.swing.*;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class ForestLvlTemplate extends GridPane {
@@ -15,7 +14,7 @@ public class ForestLvlTemplate extends GridPane {
     /**
      * Edit Filip Örnling
      */
-    private Main main;
+    private MainProgram mainProgram;
     private int[][] level;
     private JLabel[] collectibles;
     private Image wall;// = new Image(new FileInputStream("files/Dirtwall.jfif"));
@@ -26,8 +25,8 @@ public class ForestLvlTemplate extends GridPane {
     private int squareSize;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public ForestLvlTemplate(int[][] level,Main main) throws FileNotFoundException {
-        this.main=main;
+    public ForestLvlTemplate(int[][] level, MainProgram mainProgram) throws FileNotFoundException {
+        this.mainProgram = mainProgram;
         this.level = level;
         squareSize = 568/(level.length+2);
         setBackground();
@@ -135,7 +134,7 @@ public class ForestLvlTemplate extends GridPane {
     public void enteredWall() {
         if (startButtonPressed) {
             //System.out.println("wall");
-            main.changeToMapTemplate();
+            mainProgram.changeToMapTemplate();
         }
     }
     public void enteredGoal() {
