@@ -53,6 +53,13 @@ public class MapTemplate extends GridPane {
     private MediaPlayer deathPlayer = new MediaPlayer(deathMedia);
     private ImageView imageView = new ImageView();
 
+    private File startSound = new File("files/sounds/MazegenStart.mp3");
+    private File goalSound = new File("files/sounds/MazegenGoal.mp3");
+    private Media startMedia = new Media(startSound.toURI().toString());
+    private Media goalMedia = new Media(goalSound.toURI().toString());
+    private MediaPlayer startPlayer = new MediaPlayer(startMedia);
+    private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
+
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
     public MapTemplate(int[][] level, MainProgram mainProgram, GenerateNextLevel generateNextLevel) throws FileNotFoundException {
         this.mainProgram = mainProgram;
@@ -251,11 +258,16 @@ public class MapTemplate extends GridPane {
     }
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
+            goalPlayer.play();
+            goalPlayer.seek(Duration.ZERO);
             generateNextLevel.generateNewMaze();
             //main.generateMobMaze();
         }
     }
     public void startButtonPressed() {
+
+        startPlayer.play();
+        startPlayer.seek(Duration.ZERO);
         startButtonPressed = true;
     }
     private void exitedLabel(MouseEvent e) {
