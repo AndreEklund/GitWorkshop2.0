@@ -45,9 +45,12 @@ public class MapTemplate extends GridPane {
     private int squareSize;
 
 
-    private File audioFile = new File("files/sounds/Diamond1.mp3");
-    private Media audio = new Media(audioFile.toURI().toString());
-    private MediaPlayer audioPlayer = new MediaPlayer(audio);
+    private File diamondSound = new File("files/sounds/Diamond1.mp3");
+    private File deathSound = new File("files/sounds/MazegenDeath.mp3");
+    private Media diamondMedia = new Media(diamondSound.toURI().toString());
+    private Media deathMedia = new Media(deathSound.toURI().toString());
+    private MediaPlayer diamondPlayer = new MediaPlayer(diamondMedia);
+    private MediaPlayer deathPlayer = new MediaPlayer(deathMedia);
     private ImageView imageView = new ImageView();
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
@@ -241,6 +244,8 @@ public class MapTemplate extends GridPane {
         fade.play();
 
         if (startButtonPressed) {
+            deathPlayer.play();
+            deathPlayer.seek(Duration.ZERO);
             startButtonPressed = false;
         }
     }
@@ -269,8 +274,9 @@ public class MapTemplate extends GridPane {
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
 
-               audioPlayer.play();
-               audioPlayer.seek(Duration.ZERO);
+               diamondPlayer.play();
+               diamondPlayer.seek(Duration.ZERO);
+
 
                 for (Label label: collectibles) {
                     if (e.getSource() == label) {
