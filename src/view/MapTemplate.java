@@ -43,21 +43,24 @@ public class MapTemplate extends GridPane {
     private boolean allCollectiblesObtained;
     private int collectiblesObtained = 0;
     private int squareSize;
+    private ImageView imageView = new ImageView();
 
 
     private File diamondSound = new File("files/sounds/Diamond1.mp3");
-    private File deathSound = new File("files/sounds/MazegenDeath.mp3");
     private Media diamondMedia = new Media(diamondSound.toURI().toString());
-    private Media deathMedia = new Media(deathSound.toURI().toString());
     private MediaPlayer diamondPlayer = new MediaPlayer(diamondMedia);
+
+    private File deathSound = new File("files/sounds/MazegenDeath.mp3");
+    private Media deathMedia = new Media(deathSound.toURI().toString());
     private MediaPlayer deathPlayer = new MediaPlayer(deathMedia);
-    private ImageView imageView = new ImageView();
+
 
     private File startSound = new File("files/sounds/MazegenStart.mp3");
-    private File goalSound = new File("files/sounds/MazegenGoal.mp3");
     private Media startMedia = new Media(startSound.toURI().toString());
-    private Media goalMedia = new Media(goalSound.toURI().toString());
     private MediaPlayer startPlayer = new MediaPlayer(startMedia);
+
+    private File goalSound = new File("files/sounds/MazegenGoal.mp3");
+    private Media goalMedia = new Media(goalSound.toURI().toString());
     private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
@@ -286,8 +289,9 @@ public class MapTemplate extends GridPane {
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
 
-               diamondPlayer.play();
-               diamondPlayer.seek(Duration.ZERO);
+                diamondPlayer.play();
+                diamondPlayer.seek(Duration.ZERO);
+
 
 
                 for (Label label: collectibles) {
