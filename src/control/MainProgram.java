@@ -28,8 +28,8 @@ public class MainProgram extends Application {
      */
     private ForestLvlTemplate forestLvlTemplate;
     private Stage mainWindow;
-    private BorderPane mainPane;
-    private BorderPane rootMapCreator;
+    private BorderPane mainPaneRandomMaze;
+    private BorderPane mainPaneCampaign;
     private LavaLvlTemplate lavaLvlTemplate;
     private MapTemplate mapTemplate;
     private Scene menuScene;
@@ -57,8 +57,8 @@ public class MainProgram extends Application {
         menuScene = new Scene(menu, 800, 600);
 
         //BorderPane för levels
-        mainPane = new BorderPane();
-        rootMapCreator = new BorderPane();
+        mainPaneRandomMaze = new BorderPane();
+        mainPaneCampaign = new BorderPane();
 
         mainWindow = primaryStage;
 
@@ -70,27 +70,27 @@ public class MainProgram extends Application {
         mazeGenerator = new MazeGenerator(10, true);
         world1Maps = new World1Maps();
 
-        generateNextLevel = new GenerateNextLevel(this, mainPane, mazeGenerator);
-        world1Template = new World1Template(world1Maps.getLevel11(), 1, this);
+        generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator);
+        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this);
 
 
         mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         MapCreator mapCreator = new MapCreator();
 
         obp = new OptionButtonPane(mapCreator,this);
-        rootMapCreator.setCenter(world1Template);
-        rootMapCreator.setRight(obp);
+        mainPaneCampaign.setCenter(world1Template);
+        mainPaneCampaign.setRight(obp);
         obp.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
         obp2 = new OptionButtonPane(mapCreator,this);
         obp2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        mainPane.setCenter(mapTemplate);
-        mainPane.setRight(obp2);
+        mainPaneRandomMaze.setCenter(mapTemplate);
+        mainPaneRandomMaze.setRight(obp2);
 
-        mapCreatorScene = new Scene(rootMapCreator, 800, 600);
-        levelScene = new Scene(mainPane, 800, 600);
+        mapCreatorScene = new Scene(mainPaneCampaign, 800, 600);
+        levelScene = new Scene(mainPaneRandomMaze, 800, 600);
 
 
         mainWindow.setScene(introScene);
@@ -100,11 +100,11 @@ public class MainProgram extends Application {
 
     public void generateMobMaze() throws FileNotFoundException, InterruptedException {
         Mobmazelevel mobmazelevel = new Mobmazelevel();
-        mainPane.setCenter(mobmazelevel);
+        mainPaneRandomMaze.setCenter(mobmazelevel);
     }
 
     public void changeToMapTemplate(){
-        mainPane.setCenter(mapTemplate);
+        mainPaneRandomMaze.setCenter(mapTemplate);
     }
     public void changeToMenu(){
         mainWindow.setScene(menuScene);
@@ -124,17 +124,20 @@ public class MainProgram extends Application {
         launch(args);
     }
 
-    public void nextWorld1Level(int level) throws FileNotFoundException {
+    public void nextWorld1Level(int level, int heartCrystals) throws FileNotFoundException {
 
         if (level == 1) {
             System.out.println("hello");
-            rootMapCreator.setCenter(new World1Template(world1Maps.getLevel12(), 2, this));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this));
         }
         else if (level == 2) {
-            rootMapCreator.setCenter(new World1Template(world1Maps.getLevel13(), 3, this));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel13(), 3, heartCrystals, this));
         }
         else if (level == 3) {
-            rootMapCreator.setCenter(new World1Template(world1Maps.getLevel14(), 4, this));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel14(), 4, heartCrystals, this));
+        }
+        else if (level == 4) {
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel15(), 5, heartCrystals, this));
         }
     }
 }
