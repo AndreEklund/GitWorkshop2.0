@@ -38,6 +38,7 @@ public class World1Template extends GridPane {
     private Image diamond;
     private Image start;
     private Image ghost;
+    private Image heart;
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private boolean wallDestroyed;
@@ -159,6 +160,10 @@ public class World1Template extends GridPane {
                 else if (level[i][j] == 6){
                     add(getBreakableWall(),j + 1,i + 1);
                 }
+                else if (level[i][j] == 7){
+                    add(getPath(),j + 1,i + 1);
+                    add(addHeartCrystal(),j + 1,i + 1);
+                }
             }
         }
     }
@@ -170,6 +175,7 @@ public class World1Template extends GridPane {
         diamond = new Image("file:files/forest/collectible.png", squareSize, squareSize, false, false);
         start = new Image("file:files/forest/start.png", squareSize, squareSize, false, false);
         pickAxeImage = new Image("file:files/items/pickaxe.png", squareSize, squareSize, false, false);
+        heart = new Image("file:files/items/heart.png", squareSize, squareSize, false, false);
     }
 
     public Label getWall() {
@@ -252,6 +258,31 @@ public class World1Template extends GridPane {
         collectibles.add(collectible);
         return collectible;
     }
+    public Label addHeartCrystal() {
+        Label heartCrystal = new Label();
+        ImageView borderView = new ImageView(heart);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
+        Glow glow = new Glow();
+        glow.setLevel(0.5);
+        borderView.setEffect(glow);
+        heartCrystal.setStyle("fx-background-color: transparent;");
+        heartCrystal.setGraphic(borderView);
+        heartCrystal.setOnMouseEntered(e -> heartCrystalObtained(e));
+        return heartCrystal;
+    }
+
+    private void heartCrystalObtained(MouseEvent e) {
+
+        Label label = (Label)e.getSource();
+        ImageView pathView = new ImageView(path);
+
+        if (startButtonPressed) {
+            label.setGraphic(pathView);
+            heartCrystals++;
+        }
+    }
+
     public Label addPickAxe() {
         Label pickAxe = new Label();
         ImageView borderView = new ImageView(pickAxeImage);
