@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.GenerateNextLevel;
 import model.MapCreator;
+import model.World1Maps;
 import view.MapTemplate;
 import model.MazeGenerator;
 import outdatedClasses.ForestLvlTemplate;
@@ -41,6 +42,8 @@ public class MainProgram extends Application {
     private OptionButtonPane obp2;
     private MazeGenerator mazeGenerator;
     private GenerateNextLevel generateNextLevel;
+    private World1Template world1Template;
+    private World1Maps world1Maps;
 
 
     @Override
@@ -65,14 +68,17 @@ public class MainProgram extends Application {
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
         
         mazeGenerator = new MazeGenerator(10, true);
+        world1Maps = new World1Maps();
+
         generateNextLevel = new GenerateNextLevel(this, mainPane, mazeGenerator);
+        world1Template = new World1Template(world1Maps.getLevel11(), 1, this);
 
 
         mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         MapCreator mapCreator = new MapCreator();
 
         obp = new OptionButtonPane(mapCreator,this);
-        rootMapCreator.setCenter(mapCreator);
+        rootMapCreator.setCenter(world1Template);
         rootMapCreator.setRight(obp);
         obp.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -116,5 +122,19 @@ public class MainProgram extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void nextWorld1Level(int level) throws FileNotFoundException {
+
+        if (level == 1) {
+            System.out.println("hello");
+            rootMapCreator.setCenter(new World1Template(world1Maps.getLevel12(), 2, this));
+        }
+        else if (level == 2) {
+            rootMapCreator.setCenter(new World1Template(world1Maps.getLevel13(), 3, this));
+        }
+        else if (level == 3) {
+            rootMapCreator.setCenter(new World1Template(world1Maps.getLevel14(), 4, this));
+        }
     }
 }
