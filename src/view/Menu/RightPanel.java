@@ -62,6 +62,7 @@ public class RightPanel extends GridPane {
         timerLabel.setTextFill(Color.WHITE);
         timerLabel.setFont(font);
         timerLabel.setTranslateY(200);
+        timerLabel.setTranslateX(4);
 
         add(timerLabel, 0, 3);
 

@@ -21,7 +21,6 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @author Sebastian Helin & Filip Örnling
@@ -420,7 +419,7 @@ public class World2Template extends  GridPane  {
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
         //   label.setStyle("-fx-border-color: grey;");
-        label.setOnMouseClicked(e -> startButtonPressed());
+        label.setOnMouseClicked(e -> startLevel());
         return label;
     }
     public Label addCollectible() {
@@ -494,7 +493,7 @@ public class World2Template extends  GridPane  {
         }
     }
 
-    public void startButtonPressed() {
+    public void startLevel() {
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
         startButtonPressed = true;

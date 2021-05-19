@@ -3,7 +3,6 @@ package view.Campaign;
 
 import control.MainProgram;
 import javafx.animation.FadeTransition;
-import javafx.animation.PathTransition;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,9 +11,10 @@ import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.event.EventHandler;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
+import view.Menu.RightPanel;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -66,12 +66,15 @@ public class World1Template extends GridPane {
     private Media goalMedia = new Media(goalSound.toURI().toString());
     private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
 
+    private RightPanel rightPanel;
+
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram) throws FileNotFoundException {
+    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
         this.level = level;
         this.heartCrystals = heartCrystals;
+        this.rightPanel = rightPanel;
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages();
@@ -206,7 +209,7 @@ public class World1Template extends GridPane {
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
         //label.setStyle("-fx-border-color: grey;");
-        label.setOnMouseClicked(e -> startButtonPressed());
+        label.setOnMouseClicked(e -> startLevel());
         return label;
     }
     public Label addCollectible() {
@@ -297,7 +300,9 @@ public class World1Template extends GridPane {
             mainProgram.nextWorld1Level(currentLevel, heartCrystals);
         }
     }
-    public void startButtonPressed() {
+    public void startLevel() {
+        System.out.println("startpressed");
+        rightPanel.runClock();
 
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);

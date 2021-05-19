@@ -59,6 +59,10 @@ public class MainProgram extends Application {
 
     public void start(Stage primaryStage) throws Exception{
 
+        rightPanel = new RightPanel(this, "11");
+
+        rightPanel.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+
         //Menu och Intro scenes
         menu = new Menu(this);
         intro = new Intro(this);
@@ -83,20 +87,19 @@ public class MainProgram extends Application {
         world1Maps = new World1Maps();
         World2Maps world2Maps = new World2Maps();
 
-        generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel);
-        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this);
 
-        rightPanel = new RightPanel(this, "11");
+        generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel);
+        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel);
+
         mainPaneCampaign.setCenter(world1Template);
 
         mainPaneCampaign.setRight(rightPanel);
-        rightPanel.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
         rightPnlRndm = new RightPanel(this, "Random");
         rightPnlRndm.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel, rightPanel);
+        mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         MapCreator mapCreator = new MapCreator();
 
         //Mobmazelevel mobmazelevel = new Mobmazelevel();
@@ -145,19 +148,19 @@ public class MainProgram extends Application {
         if (level == 1) {
             System.out.println("hello");
             rightPanel.changeLevelCounter("12");
-            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this, rightPanel));
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("13");
-            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel13(), 3, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel13(), 3, heartCrystals, this, rightPanel));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("14");
-            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel14(), 4, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel14(), 4, heartCrystals, this, rightPanel));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("15");
-            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel15(), 5, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel15(), 5, heartCrystals, this, rightPanel));
         }
         else if (level == 5) {
             nextWorld2Level(1, heartCrystals);

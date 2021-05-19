@@ -65,14 +65,14 @@ public class MapTemplate extends GridPane {
     private Media goalMedia = new Media(goalSound.toURI().toString());
     private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
 
-    private RightPanel rightPanel;
+
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public MapTemplate(int[][] level, MainProgram mainProgram, GenerateNextLevel generateNextLevel, RightPanel rightPanel) throws FileNotFoundException {
+    public MapTemplate(int[][] level, MainProgram mainProgram, GenerateNextLevel generateNextLevel) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.level = level;
         this.generateNextLevel = generateNextLevel;
-        this.rightPanel = rightPanel;
+
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages(new Random().nextInt(5));
@@ -234,7 +234,7 @@ public class MapTemplate extends GridPane {
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
         //label.setStyle("-fx-border-color: grey;");
-        label.setOnMouseClicked(e -> startButtonPressed());
+        label.setOnMouseClicked(e -> startLevel());
         return label;
     }
     public Label addCollectible() {
@@ -274,10 +274,9 @@ public class MapTemplate extends GridPane {
             //main.generateMobMaze();
         }
     }
-    public void startButtonPressed() {
+    public void startLevel() {
 
-        System.out.println("startpressed");
-        rightPanel.runClock();
+
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
 
