@@ -44,6 +44,7 @@ public class World2Template extends  GridPane  {
     private Image Obs;
     private Image bridge;
     private Image bridge2;
+    private Image heart;
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private int collectiblesObtained = 0;
@@ -62,9 +63,23 @@ public class World2Template extends  GridPane  {
     private boolean bossMap;
 
 
-    private File audioFile = new File("files/sounds/Diamond1.mp3");
-    private Media audio = new Media(audioFile.toURI().toString());
-    private MediaPlayer audioPlayer = new MediaPlayer(audio);
+    private File diamondSound = new File("files/sounds/Diamond1.mp3");
+    private Media diamondMedia = new Media(diamondSound.toURI().toString());
+    private MediaPlayer diamondPlayer = new MediaPlayer(diamondMedia);
+
+    private File deathSound = new File("files/sounds/MazegenDeath.mp3");
+    private Media deathMedia = new Media(deathSound.toURI().toString());
+    private MediaPlayer deathPlayer = new MediaPlayer(deathMedia);
+
+
+    private File startSound = new File("files/sounds/MazegenStart.mp3");
+    private Media startMedia = new Media(startSound.toURI().toString());
+    private MediaPlayer startPlayer = new MediaPlayer(startMedia);
+
+    private File goalSound = new File("files/sounds/MazegenGoal.mp3");
+    private Media goalMedia = new Media(goalSound.toURI().toString());
+    private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
+
     private ImageView imageView = new ImageView();
     private ImageView bridgeView = new ImageView();
     private ImageView bridgeView2 = new ImageView();
@@ -259,6 +274,10 @@ public class World2Template extends  GridPane  {
                 else if (level[i][j] == 5) {
                     add(getObstacle(), j + 1, i + 1);
                 }
+                else if (level[i][j] == 7){
+                    add(getPath(),j + 1,i + 1);
+                    add(addHeartCrystal(),j + 1,i + 1);
+                }
             }
         }
     }
@@ -275,6 +294,7 @@ public class World2Template extends  GridPane  {
         Obs = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
         bridge = new Image("file:files/floor.png", squareSize, squareSize, false, false);
         bridge2 = new Image("file:files/floor.png", squareSize, squareSize, false, false);
+        heart = new Image("file:files/items/heart.png", squareSize, squareSize, false, false);
     }
 
     public Label getWall() {
@@ -417,6 +437,30 @@ public class World2Template extends  GridPane  {
         collectibles.add(collectible);
         return collectible;
     }
+    public Label addHeartCrystal() {
+        Label heartCrystal = new Label();
+        ImageView borderView = new ImageView(heart);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
+        Glow glow = new Glow();
+        glow.setLevel(0.8);
+        borderView.setEffect(glow);
+        heartCrystal.setStyle("fx-background-color: transparent;");
+        heartCrystal.setGraphic(borderView);
+        heartCrystal.setOpacity(0.8);
+        heartCrystal.setOnMouseEntered(e -> heartCrystalObtained(e));
+        return heartCrystal;
+    }
+    private void heartCrystalObtained(MouseEvent e) {
+
+        Label label = (Label)e.getSource();
+        ImageView pathView = new ImageView(path);
+
+        if (startButtonPressed) {
+            label.setGraphic(pathView);
+            heartCrystals++;
+        }
+    }
     public void enteredWall(MouseEvent e) {
         Label label = (Label)e.getSource();
         FadeTransition fade = new FadeTransition();
@@ -427,16 +471,32 @@ public class World2Template extends  GridPane  {
         fade.play();
 
         if (startButtonPressed) {
+            heartCrystals--;
+            System.out.println("Hearts left: " + heartCrystals);
+
+            if (heartCrystals == 0) {
+                gameOver();
+            }
+            deathPlayer.play();
+            deathPlayer.seek(Duration.ZERO);
             startButtonPressed = false;
         }
     }
+
+    private void gameOver() {
+    }
+
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
+            goalPlayer.play();
+            goalPlayer.seek(Duration.ZERO);
             mainProgram.nextWorld2Level(currentLevel, heartCrystals);
         }
     }
 
     public void startButtonPressed() {
+        startPlayer.play();
+        startPlayer.seek(Duration.ZERO);
         startButtonPressed = true;
     }
     private void exitedLabel(MouseEvent e) {
@@ -474,8 +534,8 @@ public class World2Template extends  GridPane  {
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
 
-                audioPlayer.play();
-                audioPlayer.seek(Duration.ZERO);
+                diamondPlayer.play();
+                diamondPlayer.seek(Duration.ZERO);
 
                 for (Label label: collectibles) {
                     if (e.getSource() == label) {
