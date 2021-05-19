@@ -27,41 +27,39 @@ public class World3Template extends GridPane {
 
 
     /**
-     * Author Filip Örnling
+     * Author André Eklund
      */
     private MainProgram mainProgram;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
+    private ArrayList<Label> pickaxes = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
-    private Image wall;// = new Image(new FileInputStream("files/wall.jpg"));
-    private Image path;// = new Image(new FileInputStream("files/floor.jpg"));
-    private Image border;// = new Image(new FileInputStream("files/floor.png"));
-    private Image goal;// = new Image(new FileInputStream("files/red.jpg"));
-    private Image diamond;// = new Image(new FileInputStream("files/diamond.png"));
+    private Image wall;
+    private Image path;
+    private Image border;
+    private Image goal;
+    private Image diamond;
     private Image start;
     private Image ghost;
-    private Image Obs;
-    private Image bridge;
-    private Image bridge2;
+    private Image heart;
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
+    private boolean wallDestroyed;
     private int collectiblesObtained = 0;
     private int squareSize;
-    private int duration=10;
+    private int currentLevel;
+    private int heartCrystals;
+    private Image pickAxeImage;
+    private boolean pickaxeObtained;
+    private ImageView imageView = new ImageView();
+
     private PathTransition animation;
     private PathTransition animation2;
     private PathTransition animation3;
     private PathTransition animation4;
     private PathTransition animation5;
     private PathTransition animation6;
-    private ArrayList<Label>  obslist = new ArrayList();
-    private Thread timer;
-    private int currentLevel;
-    private int heartCrystals;
 
-    private ImageView imageView = new ImageView();
-    private ImageView bridgeView = new ImageView();
-    private ImageView bridgeView2 = new ImageView();
 
     private File diamondSound = new File("files/sounds/Diamond1.mp3");
     private Media diamondMedia = new Media(diamondSound.toURI().toString());
@@ -80,11 +78,8 @@ public class World3Template extends GridPane {
     private Media goalMedia = new Media(goalSound.toURI().toString());
     private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
 
-
-    private MediaPlayer audioPlayer = new MediaPlayer(diamondMedia);
-
-
-    public World3Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, boolean bossMap) throws FileNotFoundException, InterruptedException {
+    //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
+    public World3Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
         this.level = level;
@@ -94,16 +89,7 @@ public class World3Template extends GridPane {
         setupImages();
         setupBorders();
         setupLevel();
-        if (bossMap) {
-            setupGhost();
-            initialize();
-            buildBridge();
-        }
-    }
-
-    public void buildBridge() throws InterruptedException {
-        timer = new Thread(task);
-
+        //setupGhost();
     }
     public void setupGhost() throws FileNotFoundException {
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
@@ -118,8 +104,8 @@ public class World3Template extends GridPane {
         imageView.setOnMouseEntered(e -> enteredWall(e));
 
 
-        //add(imageView, 10, 10);
-
+        add(imageView, 10, 10);
+        initialize();
     }
     public void initialize() {
 
@@ -223,7 +209,7 @@ public class World3Template extends GridPane {
                 200.0, -150.0);
         animation = new PathTransition();
         animation.setNode(imageView);
-        animation.setDuration(Duration.seconds(duration));
+        animation.setDuration(Duration.seconds(10));
         animation.setPath(line);
         animation.setCycleCount(PathTransition.INDEFINITE);
         animation.play();
@@ -254,11 +240,12 @@ public class World3Template extends GridPane {
     public void setupLevel() {
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level.length; j++) {
-                if (level[i][j] == 0){
-                    add(getWall(),j + 1,i + 1);
+
+                if (level[i][j] == 1) {
+                    add(getPath(),j + 1,i + 1);
                 }
-                else if (level[i][j] == 1) {
-                    add(getPath(), j + 1, i + 1);
+                else if (level[i][j] == 0){
+                    add(getWall(),j + 1,i + 1);
                 }
                 else if (level[i][j] == 2){
                     add(getStart(),j + 1,i + 1);
@@ -266,29 +253,33 @@ public class World3Template extends GridPane {
                 else if (level[i][j] == 3){
                     add(getGoal(),j + 1,i + 1);
                 }
-                else if(level[i][j] == 4){
-                    add(getPath(), j + 1, i + 1);
-                    add(addCollectible(), j + 1, i + 1);
+                else if (level[i][j] == 4){
+                    add(getPath(),j + 1,i + 1);
+                    add(addCollectible(),j + 1,i + 1);
                 }
-                else if (level[i][j] == 5) {
-                    add(getObstacle(), j + 1, i + 1);
+                else if (level[i][j] == 5){
+                    add(getPath(),j + 1,i + 1);
+                    add(addPickAxe(),j + 1,i + 1);
+                }
+                else if (level[i][j] == 6){
+                    add(getBreakableWall(),j + 1,i + 1);
+                }
+                else if (level[i][j] == 7){
+                    add(getPath(),j + 1,i + 1);
+                    add(addHeartCrystal(),j + 1,i + 1);
                 }
             }
         }
     }
     public void setupImages(){
-
-        String folder = "underground";
-
-        wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
-        path = new Image("file:files/" + folder + "/path.png", squareSize, squareSize, false, false);
-        border = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
-        goal = new Image("file:files/" + folder + "/goal.png", squareSize, squareSize, false, false);
-        diamond = new Image("file:files/" + folder + "/collectible.png", squareSize, squareSize, false, false);
-        start = new Image("file:files/" + folder + "/start.png", squareSize, squareSize, false, false);
-        Obs = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
-        bridge = new Image("file:files/floor.png", squareSize, squareSize, false, false);
-        bridge2 = new Image("file:files/floor.png", squareSize, squareSize, false, false);
+        wall = new Image("file:files/forest/wall.png", squareSize, squareSize, false, false);
+        path = new Image("file:files/forest/path.png", squareSize, squareSize, false, false);
+        border = new Image("file:files/forest/border.png", squareSize, squareSize, false, false);
+        goal = new Image("file:files/forest/goal.png", squareSize, squareSize, false, false);
+        diamond = new Image("file:files/forest/collectible.png", squareSize, squareSize, false, false);
+        start = new Image("file:files/forest/start.png", squareSize, squareSize, false, false);
+        pickAxeImage = new Image("file:files/items/pickaxe.png", squareSize, squareSize, false, false);
+        heart = new Image("file:files/items/heart.png", squareSize, squareSize, false, false);
     }
 
     public Label getWall() {
@@ -297,87 +288,18 @@ public class World3Template extends GridPane {
         wallView.setFitHeight(squareSize);
         wallView.setFitWidth(squareSize);
         label.setGraphic(wallView);
-        //  label.setStyle("-fx-border-color: grey; ");
+        //label.setStyle("-fx-border-color: grey; ");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
     }
-    private Label getObstacle(){
-        Label label = new Label();
-        ImageView obsView = new ImageView(Obs);
-        obsView.setFitHeight(squareSize);
-        obsView.setFitWidth(squareSize);
-        label.setGraphic(obsView);
-        //  label.setStyle("-fx-border-color: grey;");
-        obslist.add(label);
-        return label;
-    }
-
-    public void createBridge() throws InterruptedException {
-        bridgeView.setImage(bridge);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                obslist.get(1).setGraphic(bridgeView);
-            }
-        });
-
-    }
-    public void createBridge1(){
-        bridgeView2.setImage(bridge2);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                obslist.get(4).setGraphic(bridgeView2);
-            }
-        });
-
-    }
-
-    /*public void createBridge2(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                obslist.get(6).setGraphic(getBridge());
-            }
-        });
-
-    }*/
-
-
-    Task<Void> task = new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
-            Thread.sleep(1000);
-            /*createBridge2();
-            Thread.sleep(500);*/
-            if (allCollectiblesObtained = true) {
-                createBridge1();
-                Thread.sleep(1000);
-                createBridge();
-            }
-            return null;
-        }
-
-    };
-
-    private Label getBridge(){
-        Label label = new Label();
-        ImageView bridgeView = new ImageView(bridge);
-        bridgeView.setFitHeight(squareSize);
-        bridgeView.setFitWidth(squareSize);
-        label.setGraphic(bridgeView);
-        //   label.setStyle("-fx-border-color: grey;");
-        return label;
-    }
-
     private Label getPath() {
         Label label = new Label();
         ImageView pathView = new ImageView(path);
         pathView.setFitHeight(squareSize);
         pathView.setFitWidth(squareSize);
         label.setGraphic(pathView);
-        //   label.setStyle("-fx-border-color: grey;");
+        //label.setStyle("-fx-border-color: grey;");
         return label;
     }
     private Label getBorders() {
@@ -386,9 +308,18 @@ public class World3Template extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //  label.setStyle("-fx-border-color: grey;");
+        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
+        return label;
+    }
+    private Label getBreakableWall() {
+        Label label = new Label();
+        ImageView borderView = new ImageView(border);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
+        label.setGraphic(borderView);
+        label.setOnMouseEntered(e -> enteredBreakableWall(e));
         return label;
     }
     private Label getGoal() {
@@ -397,7 +328,7 @@ public class World3Template extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //  label.setStyle("-fx-border-color: grey;");
+        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> {
             try {
                 enteredGoal();
@@ -413,7 +344,7 @@ public class World3Template extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //   label.setStyle("-fx-border-color: grey;");
+        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseClicked(e -> startButtonPressed());
         return label;
     }
@@ -425,11 +356,51 @@ public class World3Template extends GridPane {
         Glow glow = new Glow();
         glow.setLevel(0.7);
         borderView.setEffect(glow);
-        //  collectible.setStyle("-fx-border-color: grey; fx-background-color: transparent;");
+        collectible.setStyle("fx-background-color: transparent;");
         collectible.setGraphic(borderView);
         collectible.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseListener);
         collectibles.add(collectible);
         return collectible;
+    }
+    public Label addHeartCrystal() {
+        Label heartCrystal = new Label();
+        ImageView borderView = new ImageView(heart);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
+        Glow glow = new Glow();
+        glow.setLevel(0.8);
+        borderView.setEffect(glow);
+        heartCrystal.setStyle("fx-background-color: transparent;");
+        heartCrystal.setGraphic(borderView);
+        heartCrystal.setOpacity(0.8);
+        heartCrystal.setOnMouseEntered(e -> heartCrystalObtained(e));
+        return heartCrystal;
+    }
+
+    private void heartCrystalObtained(MouseEvent e) {
+
+        Label label = (Label)e.getSource();
+        ImageView pathView = new ImageView(path);
+
+        if (startButtonPressed) {
+            label.setGraphic(pathView);
+            heartCrystals++;
+        }
+    }
+
+    public Label addPickAxe() {
+        Label pickAxe = new Label();
+        ImageView borderView = new ImageView(pickAxeImage);
+        borderView.setFitHeight(squareSize);
+        borderView.setFitWidth(squareSize);
+        Glow glow = new Glow();
+        glow.setLevel(0.7);
+        borderView.setEffect(glow);
+        pickAxe.setStyle("fx-background-color: transparent;");
+        pickAxe.setGraphic(borderView);
+        pickAxe.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseListener);
+        pickaxes.add(pickAxe);
+        return pickAxe;
     }
     public void enteredWall(MouseEvent e) {
         Label label = (Label)e.getSource();
@@ -441,19 +412,37 @@ public class World3Template extends GridPane {
         fade.play();
 
         if (startButtonPressed) {
+
+            heartCrystals--;
+            System.out.println("Hearts left: " + heartCrystals);
+
+            if (heartCrystals == 0) {
+                gameOver();
+            }
+            deathPlayer.play();
+            deathPlayer.seek(Duration.ZERO);
             startButtonPressed = false;
         }
     }
+
+    private void gameOver() {
+        System.out.println("Game over!!!!");
+    }
+
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
-
+            goalPlayer.play();
+            goalPlayer.seek(Duration.ZERO);
+            mainProgram.nextWorld1Level(currentLevel, heartCrystals);
         }
     }
-
     public void startButtonPressed() {
+
+        startPlayer.play();
+        startPlayer.seek(Duration.ZERO);
         startButtonPressed = true;
     }
-    private void exitedLabel(MouseEvent e) {
+    public void exitedLabel(MouseEvent e) {
         Label label = (Label)e.getSource();
         FadeTransition fade = new FadeTransition();
         fade.setNode(label);
@@ -462,24 +451,22 @@ public class World3Template extends GridPane {
         fade.setToValue(10);
         fade.play();
     }
+    public void enteredBreakableWall(MouseEvent e) {
 
+        Label label = (Label)e.getSource();
+        ImageView pathView = new ImageView(path);
 
+        if (startButtonPressed) {
 
-    public void rageMob(){
-        Polyline line = new Polyline();
-        line.getPoints().addAll(
-                -100.0, -50.0,
-                -50.0, 100.0,
-                100.0, 200.0,
-                200.0, -150.0);
-
-        animation= new PathTransition();
-        animation.setNode(imageView);
-        animation.setDuration(Duration.seconds(duration/3));
-        animation.setPath(line);
-        animation.setCycleCount(PathTransition.INDEFINITE);
-        animation.play();
-
+            if (pickaxeObtained) {
+                label.setGraphic(pathView);
+                pickaxeObtained = false;
+                wallDestroyed = true;
+            }
+            else if (!wallDestroyed) {
+                enteredWall(e);
+            }
+        }
     }
 
     private class MouseListener implements EventHandler<MouseEvent> {
@@ -488,8 +475,15 @@ public class World3Template extends GridPane {
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
 
-                audioPlayer.play();
-                audioPlayer.seek(Duration.ZERO);
+                diamondPlayer.play();
+                diamondPlayer.seek(Duration.ZERO);
+
+                for (Label label : pickaxes){
+                    if (e.getSource()== label){
+                        label.setVisible(false);
+                        pickaxeObtained = true;
+                    }
+                }
 
                 for (Label label: collectibles) {
                     if (e.getSource() == label) {
@@ -497,12 +491,8 @@ public class World3Template extends GridPane {
                         collectiblesObtained++;
                         if (collectiblesObtained == collectibles.size()) {
                             allCollectiblesObtained = true;
-                            rageMob();
                         }
                     }
-                }
-                if (allCollectiblesObtained){
-                    timer.start();
                 }
             }
         }
