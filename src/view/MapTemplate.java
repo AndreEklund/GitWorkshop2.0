@@ -71,6 +71,7 @@ public class MapTemplate extends GridPane {
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages(new Random().nextInt(4));
+        setupImages(4);
         setupBorders();
         setupLevel();
         //setupGhost();
@@ -164,6 +165,9 @@ public class MapTemplate extends GridPane {
         }
         else if(value == 3) {
             folder = "cloud";
+        }
+        else if(value == 4) {
+            folder = "Desert";
         }
         wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
         path = new Image("file:files/" + folder + "/path.png", squareSize, squareSize, false, false);

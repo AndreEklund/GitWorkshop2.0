@@ -90,7 +90,7 @@ public class GenerateNextLevel {
                                 if ((offsetCol >= 0) && (offsetCol < maze[0].length)) {
                                     if (maze[offsetRow][offsetCol] == 0) {
                                         if((offsetRow!=1 && offsetCol!=1) || (offsetRow!=1 && offsetCol != maze.length-1) ||(offsetRow!=maze.length-1 && offsetCol!=1) || (offsetRow!=maze.length-1 && offsetCol!=maze.length-1)){
-                                            wallCounterStart++;
+                                            wallCounterGoal++;
                                         }
                                     }
                                     else if (wallCounterGoal >= 2) {
