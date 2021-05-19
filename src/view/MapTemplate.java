@@ -16,6 +16,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
+import view.Menu.RightPanel;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -63,11 +65,14 @@ public class MapTemplate extends GridPane {
     private Media goalMedia = new Media(goalSound.toURI().toString());
     private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
 
+    private RightPanel rightPanel;
+
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public MapTemplate(int[][] level, MainProgram mainProgram, GenerateNextLevel generateNextLevel) throws FileNotFoundException {
+    public MapTemplate(int[][] level, MainProgram mainProgram, GenerateNextLevel generateNextLevel, RightPanel rightPanel) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.level = level;
         this.generateNextLevel = generateNextLevel;
+        this.rightPanel = rightPanel;
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages(new Random().nextInt(5));
@@ -271,8 +276,11 @@ public class MapTemplate extends GridPane {
     }
     public void startButtonPressed() {
 
+        System.out.println("startpressed");
+        rightPanel.runClock();
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
+
         startButtonPressed = true;
     }
     private void exitedLabel(MouseEvent e) {

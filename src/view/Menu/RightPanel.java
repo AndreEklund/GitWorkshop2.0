@@ -1,12 +1,20 @@
 package view.Menu;
 
 import control.MainProgram;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.util.Duration;
 import model.DigitalClock;
 import model.MapCreator;
 
@@ -30,6 +38,12 @@ public class RightPanel extends GridPane {
     private boolean running = false;
     private String gameMode;
 
+    private static final Integer STARTTIME = 15;
+    private Timeline timeline;
+    private Label timerLabel = new Label();
+    private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+    private Font font = Font.loadFont("file:files/fonts/PressStart2P.ttf", 50);
+
 
 
     public RightPanel(MainProgram mainProgram, String gameMode) throws FileNotFoundException {
@@ -44,12 +58,19 @@ public class RightPanel extends GridPane {
         level.setTranslateX(8);
         level.setGraphic(currentLevelView);
 
+        timerLabel.textProperty().bind(timeSeconds.asString());
+        timerLabel.setTextFill(Color.WHITE);
+        timerLabel.setFont(font);
+        timerLabel.setTranslateY(200);
+
+        add(timerLabel, 0, 3);
+
         BackgroundImage menuBGImage = new BackgroundImage(imageMenu,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,new BackgroundSize(imageMenu.getWidth(), imageMenu.getHeight(),false,false,false,false));
 
         add(level,0,1);
 
         //add(clock,0,2);
-        runClock();
+        //runClock();
 
 
         Button btnMenu = new Button();
@@ -62,6 +83,8 @@ public class RightPanel extends GridPane {
         btnMenu.setOnMouseClicked(e -> Mainmenyclicked(e));
         add(btnMenu,0,0);
     }
+
+
 
     public void changeLevelCounter(String number){
         levelNumber = new Image("file:files/levelcounter/" + number + ".png", 90, 30, false, false);
@@ -77,29 +100,14 @@ public class RightPanel extends GridPane {
 
     }
 
-    private void runClock() {
-        running = true;
-        new Thread() {
-            public void run() {
-                long last = System.nanoTime();
-                double delta = 0;
-                double ns = 1000000000.0 / 1;
-                int count = 0;
-
-                while (running) {
-                    long now = System.nanoTime();
-                    delta += (now - last) / ns;
-                    last = now;
-
-                    while (delta >= 1) {
-                        count = (count + 1) % 60;
-                        DecimalFormat df = new DecimalFormat("00");
-                        clock.refreshDigits(df.format(count));
-                        delta--;
-                    }
-                }
-            }
-        }.start();
+    public void runClock() {
+        System.out.println("runClock");
+        timeSeconds.set(STARTTIME);
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(STARTTIME+1),
+                        new KeyValue(timeSeconds, 0)));
+        timeline.playFromStart();
     }
 
 
