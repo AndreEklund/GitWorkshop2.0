@@ -43,7 +43,7 @@ public class Menu extends VBox {
         Button button3 = new Button("");
         Image btnHelp = new Image("file:files/texts/Help.png", 250, 30, false, true);
         button3.setGraphic(new ImageView(btnHelp));
-        button3.setOnAction(e -> mainProgram.changeToRandomize());
+        button3.setOnAction(e -> mainProgram.changeToHelp());
         button3.setTranslateX(250);
         button3.setTranslateY(175);
         this.getChildren().addAll(button1,button2,button3);

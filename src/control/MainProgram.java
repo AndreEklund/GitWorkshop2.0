@@ -20,6 +20,7 @@ import view.Campaign.World2Template;
 import view.Campaign.World1Template;
 import view.MapTemplate;
 import model.MazeGeneration.MazeGenerator;
+import view.Menu.Help;
 import view.Menu.Intro;
 import view.Menu.Menu;
 import view.Menu.RightPanel;
@@ -39,8 +40,10 @@ public class MainProgram extends Application {
     private MapTemplate mapTemplate;
     private Scene menuScene;
     private Scene introScene;
+    private Scene helpScene;
     private Intro intro;
     private Menu menu;
+    private Help help;
     private Scene randomScene;
     private Scene campaignScene;
     private RightPanel rightPanel;
@@ -59,8 +62,10 @@ public class MainProgram extends Application {
         //Menu och Intro scenes
         menu = new Menu(this);
         intro = new Intro(this);
+        help = new Help(this);
         introScene = new Scene(intro, 800, 600);
         menuScene = new Scene(menu, 800, 600);
+        helpScene = new Scene(help, 800, 600);
 
         //BorderPane för levels
         mainPaneRandomMaze = new BorderPane();
@@ -121,6 +126,10 @@ public class MainProgram extends Application {
     }
     public void changeToCampaign(){
         mainWindow.setScene(campaignScene);
+    }
+
+    public void changeToHelp(){
+        mainWindow.setScene(helpScene);
     }
 
 
