@@ -29,18 +29,24 @@ public class Menu extends VBox {
 
     public void addButtons(){
         Button button1 = new Button("");
-        Image btnStart = new Image("file:files/BtnStart.png", 250, 30, false, true);
+        Image btnStart = new Image("file:files/texts/Campaign.png", 250, 30, false, true);
         button1.setGraphic(new ImageView(btnStart));
-        button1.setOnAction(e -> mainProgram.changeToLevel());
+        button1.setOnAction(e -> mainProgram.changeToCampaign());
         button1.setTranslateX(250);
         button1.setTranslateY(125);
         Button button2 = new Button("");
-        Image btnMapCreator = new Image("file:files/BtnMapCreator.png", 250, 30, false, true);
+        Image btnMapCreator = new Image("file:files/texts/Randomize.png", 250, 30, false, true);
         button2.setGraphic(new ImageView(btnMapCreator));
-        button2.setOnAction(e -> mainProgram.changeToMapCreator());
+        button2.setOnAction(e -> mainProgram.changeToRandomize());
         button2.setTranslateX(250);
         button2.setTranslateY(150);
-        this.getChildren().addAll(button1,button2);
+        Button button3 = new Button("");
+        Image btnHelp = new Image("file:files/texts/Help.png", 250, 30, false, true);
+        button3.setGraphic(new ImageView(btnHelp));
+        button3.setOnAction(e -> mainProgram.changeToRandomize());
+        button3.setTranslateX(250);
+        button3.setTranslateY(175);
+        this.getChildren().addAll(button1,button2,button3);
     }
 
 }
