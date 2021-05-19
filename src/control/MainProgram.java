@@ -83,7 +83,7 @@ public class MainProgram extends Application {
         World2Maps world2Maps = new World2Maps();
 
         generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator);
-        world1Template = new World1Template(world3Maps.getLevel32(), 1, 3, this);
+        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this);
 
 
         mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
