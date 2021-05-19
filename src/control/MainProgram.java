@@ -83,15 +83,8 @@ public class MainProgram extends Application {
         world1Maps = new World1Maps();
         World2Maps world2Maps = new World2Maps();
 
-        generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator);
+        generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel);
         world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this);
-
-
-        mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
-        MapCreator mapCreator = new MapCreator();
-
-        //Mobmazelevel mobmazelevel = new Mobmazelevel();
-        //mainPaneCampaign.setCenter(mobmazelevel);
 
         rightPanel = new RightPanel(this, "11");
         mainPaneCampaign.setCenter(world1Template);
@@ -102,6 +95,14 @@ public class MainProgram extends Application {
 
         rightPnlRndm = new RightPanel(this, "Random");
         rightPnlRndm.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel, rightPanel);
+        MapCreator mapCreator = new MapCreator();
+
+        //Mobmazelevel mobmazelevel = new Mobmazelevel();
+        //mainPaneCampaign.setCenter(mobmazelevel);
+
+
 
         mainPaneRandomMaze.setCenter(mapTemplate);
         mainPaneRandomMaze.setRight(rightPnlRndm);
