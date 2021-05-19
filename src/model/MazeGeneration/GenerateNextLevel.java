@@ -1,4 +1,4 @@
-package model;
+package model.MazeGeneration;
 
 import control.MainProgram;
 import javafx.scene.layout.BorderPane;

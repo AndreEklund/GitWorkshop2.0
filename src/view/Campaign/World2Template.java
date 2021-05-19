@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 
-public class Mobmazelevel extends  GridPane  {
+public class World2Template extends  GridPane  {
 
     private MainProgram main;
     private int[][] level;
@@ -72,7 +72,7 @@ public class Mobmazelevel extends  GridPane  {
 
     private int [][] maze;
 
-    public Mobmazelevel() throws FileNotFoundException, InterruptedException {
+    public World2Template() throws FileNotFoundException, InterruptedException {
         createArray();
         this.main = main;
         level = maze;
