@@ -37,7 +37,3 @@ public class Player {
     }
 }
 
-
-//<<Allt nedanför ska vara i en controllerklass>>
-
- //
