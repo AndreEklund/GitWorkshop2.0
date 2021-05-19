@@ -47,7 +47,6 @@ public class World1Template extends GridPane {
     private int heartCrystals;
     private Image pickAxeImage;
     private boolean pickaxeObtained;
-    private ImageView imageView = new ImageView();
 
 
     private File diamondSound = new File("files/sounds/Diamond1.mp3");
@@ -78,39 +77,6 @@ public class World1Template extends GridPane {
         setupImages();
         setupBorders();
         setupLevel();
-        //setupGhost();
-    }
-    public void setupGhost() throws FileNotFoundException {
-        ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
-
-        imageView.setImage(ghost);
-
-        imageView.setX(1);
-        imageView.setY(1);
-        imageView.setFitHeight(squareSize);
-        imageView.setFitWidth(squareSize);
-
-        imageView.setOnMouseEntered(e -> enteredWall(e));
-
-
-        add(imageView, 10, 10);
-        initialize();
-    }
-    public void initialize() {
-
-        Polyline line = new Polyline();
-        line.getPoints().addAll(
-                -100.0, -50.0,
-                -50.0, 100.0,
-                100.0, 200.0,
-                200.0, -150.0);
-
-        PathTransition path = new PathTransition();
-        path.setNode(imageView);
-        path.setDuration(Duration.seconds(10));
-        path.setPath(line);
-        path.setCycleCount(PathTransition.INDEFINITE);
-        path.play();
     }
     public void setBackground(){
         BackgroundImage menuBackground = new BackgroundImage(new Image("file:files/MenuBackground.jpg",800,600,false,true),
