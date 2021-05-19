@@ -1,4 +1,4 @@
-package view;
+package view.Campaign;
 
 
 import model.GenerateNextLevel;

@@ -11,11 +11,15 @@ import javafx.stage.StageStyle;
 import model.GenerateNextLevel;
 import model.MapCreator;
 import model.World1Maps;
+import view.Campaign.Mobmazelevel;
+import view.Campaign.World1Template;
 import view.MapTemplate;
 import model.MazeGenerator;
 import outdatedClasses.ForestLvlTemplate;
 import outdatedClasses.LavaLvlTemplate;
-import view.*;
+import view.Menu.Intro;
+import view.Menu.Menu;
+import view.Menu.OptionButtonPane;
 
 
 import java.io.FileNotFoundException;
@@ -77,8 +81,12 @@ public class MainProgram extends Application {
         mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         MapCreator mapCreator = new MapCreator();
 
+        //Mobmazelevel mobmazelevel = new Mobmazelevel();
+        //mainPaneCampaign.setCenter(mobmazelevel);
+
         obp = new OptionButtonPane(mapCreator,this);
         mainPaneCampaign.setCenter(world1Template);
+
         mainPaneCampaign.setRight(obp);
         obp.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -125,6 +133,22 @@ public class MainProgram extends Application {
     }
 
     public void nextWorld1Level(int level, int heartCrystals) throws FileNotFoundException {
+
+        if (level == 1) {
+            System.out.println("hello");
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this));
+        }
+        else if (level == 2) {
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel13(), 3, heartCrystals, this));
+        }
+        else if (level == 3) {
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel14(), 4, heartCrystals, this));
+        }
+        else if (level == 4) {
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel15(), 1, heartCrystals, this));
+        }
+    }
+    public void nextWorld2Level(int level, int heartCrystals) throws FileNotFoundException {
 
         if (level == 1) {
             System.out.println("hello");

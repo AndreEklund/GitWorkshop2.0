@@ -1,4 +1,4 @@
-package view;
+package view.Campaign;
 
 import control.MainProgram;
 import javafx.animation.Animation;
@@ -22,6 +22,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Sebastian Helin & Filip Örnling
@@ -30,7 +33,7 @@ import java.util.Random;
 
 public class Mobmazelevel extends  GridPane  {
 
-    private MainProgram mainProgram;
+    private MainProgram main;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
@@ -43,6 +46,7 @@ public class Mobmazelevel extends  GridPane  {
     private Image ghost;
     private Image Obs;
     private Image bridge;
+    private Image bridge2;
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private int collectiblesObtained = 0;
@@ -51,6 +55,9 @@ public class Mobmazelevel extends  GridPane  {
     private PathTransition animation;
     private PathTransition animation2;
     private PathTransition animation3;
+    private PathTransition animation4;
+    private PathTransition animation5;
+    private PathTransition animation6;
     private boolean moblevel=true;
     private ArrayList<Label>  obslist = new ArrayList();
     private Thread timer;
@@ -60,51 +67,44 @@ public class Mobmazelevel extends  GridPane  {
     private Media audio = new Media(audioFile.toURI().toString());
     private MediaPlayer audioPlayer = new MediaPlayer(audio);
     private ImageView imageView = new ImageView();
+    private ImageView bridgeView = new ImageView();
+    private ImageView bridgeView2 = new ImageView();
 
     private int [][] maze;
-    private int dim=18;
-
 
     public Mobmazelevel() throws FileNotFoundException, InterruptedException {
         createArray();
-        this.mainProgram = mainProgram;
+        this.main = main;
         level = maze;
-        squareSize = 600/(level.length+4);
+        squareSize = 600/(level.length+2);
         setBackground();
-        setupImages(0);
-        //setupImages(new Random().nextInt(3));
+        setupImages();
         setupBorders();
         setupLevel();
         setupGhost();
         initialize();
         buildBridge();
+
     }
 
     public void buildBridge() throws InterruptedException {
         timer = new Thread(task);
-        timer.start();
+
     }
 
-
     public void createArray(){
-        maze = new int[][] {{0, 0, 0, 0, 0, 0, 0, 1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2}};
+        maze = new int[][] {{0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2, 0},
+                {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0},
+                {1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 2, 1, 0},
+                {1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0},
+                {1, 1, 0, 1, 4, 4, 4, 0, 1, 1, 0, 1, 0},
+                {0, 1, 0, 1, 4, 4, 4, 0, 0, 1, 0, 1, 0},
+                {1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0},
+                {1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0},
+                {1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0},
+                {1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0},
+                {1, 1, 1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,0, 0, 0}};
+
     }
 
     public int[][] getMaze() {
@@ -137,16 +137,31 @@ public class Mobmazelevel extends  GridPane  {
             ImageView ghost1V = new ImageView();
             ImageView ghost2V = new ImageView();
             ImageView ghost3V = new ImageView();
+            ImageView ghost4V = new ImageView();
+            ImageView ghost5V = new ImageView();
+            ImageView ghost6V = new ImageView();
+
             ghost1V.setImage(ghost);
             ghost2V.setImage(ghost);
             ghost3V.setImage(ghost);
+            ghost4V.setImage(ghost);
+            ghost5V.setImage(ghost);
+            ghost6V.setImage(ghost);
+
             add(ghost1V,10,0);
             add(ghost2V,9,0);
             add(ghost3V,8,0);
+            add(ghost4V, 1, 0);
+            add(ghost5V, 2, 0);
+            add(ghost6V, 3, 0);
+
 
             Polyline line1 = new Polyline();
             Polyline line2 = new Polyline();
             Polyline line3 = new Polyline();
+            Polyline line4 = new Polyline();
+            Polyline line5 = new Polyline();
+            Polyline line6 = new Polyline();
 
             line1.getPoints().addAll(
                     16.0, -10.5,
@@ -157,6 +172,16 @@ public class Mobmazelevel extends  GridPane  {
             line3.getPoints().addAll(
                     14.0,-10.5,
                     10.5,650.0);
+            line4.getPoints().addAll(
+                    16.0, -10.5,
+                    10.5, 650.0);
+            line5.getPoints().addAll(
+                    15.0,-10.5,
+                    10.5,650.0);
+            line6.getPoints().addAll(
+                    14.0,-10.5,
+                    10.5,650.0);
+
 
 
             animation3 = new PathTransition();
@@ -179,6 +204,27 @@ public class Mobmazelevel extends  GridPane  {
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(line1);
             animation.play();
+
+            animation4 = new PathTransition();
+            animation4.setNode(ghost4V);
+            animation4.setDuration(Duration.seconds(3.5));
+            animation4.setCycleCount(Animation.INDEFINITE);
+            animation4.setPath(line4);
+            animation4.play();
+
+            animation5 = new PathTransition();
+            animation5.setNode(ghost5V);
+            animation5.setDuration(Duration.seconds(3));
+            animation5.setCycleCount(Animation.INDEFINITE);
+            animation5.setPath(line5);
+            animation5.play();
+
+            animation6 = new PathTransition();
+            animation6.setNode(ghost6V);
+            animation6.setDuration(Duration.seconds(4));
+            animation6.setCycleCount(Animation.INDEFINITE);
+            animation6.setPath(line6);
+            animation6.play();
         }
         else {
 
@@ -224,9 +270,9 @@ public class Mobmazelevel extends  GridPane  {
             for (int j = 0; j < level.length; j++) {
 
                 if (level[i][j] == 1) {
-                        add(getPath(), j + 1, i + 1);
+                    add(getPath(), j + 1, i + 1);
                     if (new Random().nextInt(5) == 4) {
-                        if (!moblevel) {
+                        if (level[i][j] != level[6][3] || level[i][j] != level[6][2] || level[i][j] != level[6][1] || level[i][j] != level[6][3] || level[i][j] != level[6][4]) {
                             add(addCollectible(), j + 1, i + 1);
                         }
                     }
@@ -247,18 +293,10 @@ public class Mobmazelevel extends  GridPane  {
             }
         }
     }
-    public void setupImages(int value){
+    public void setupImages(){
 
         String folder = "";
-        if (value == 0) {
-            folder = "forest";
-        }
-        else if (value == 1) {
-            folder = "";
-        }
-        else if (value == 2) {
-            folder = "";
-        }
+
         wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
         path = new Image("file:files/" + folder + "/path.png", squareSize, squareSize, false, false);
         border = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
@@ -266,7 +304,8 @@ public class Mobmazelevel extends  GridPane  {
         diamond = new Image("file:files/" + folder + "/collectible.png", squareSize, squareSize, false, false);
         start = new Image("file:files/" + folder + "/start.png", squareSize, squareSize, false, false);
         Obs = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
-        bridge = new Image("file:files/" + folder + "/floor.png", squareSize, squareSize, false, false);
+        bridge = new Image("file:files/floor.png", squareSize, squareSize, false, false);
+        bridge2 = new Image("file:files/floor.png", squareSize, squareSize, false, false);
     }
 
     public Label getWall() {
@@ -275,7 +314,7 @@ public class Mobmazelevel extends  GridPane  {
         wallView.setFitHeight(squareSize);
         wallView.setFitWidth(squareSize);
         label.setGraphic(wallView);
-        label.setStyle("-fx-border-color: grey; ");
+        //  label.setStyle("-fx-border-color: grey; ");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
@@ -286,50 +325,54 @@ public class Mobmazelevel extends  GridPane  {
         obsView.setFitHeight(squareSize);
         obsView.setFitWidth(squareSize);
         label.setGraphic(obsView);
-        label.setStyle("-fx-border-color: grey;");
+        //  label.setStyle("-fx-border-color: grey;");
         obslist.add(label);
         return label;
     }
 
     public void createBridge() throws InterruptedException {
+        bridgeView.setImage(bridge);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                obslist.get(1).setGraphic(getBridge());
+                obslist.get(1).setGraphic(bridgeView);
             }
         });
 
     }
     public void createBridge1(){
+        bridgeView2.setImage(bridge2);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                obslist.get(4).setGraphic(getBridge());
+                obslist.get(4).setGraphic(bridgeView2);
             }
         });
 
     }
 
-    public void createBridge2(){
+    /*public void createBridge2(){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                obslist.get(7).setGraphic(getBridge());
+                obslist.get(6).setGraphic(getBridge());
             }
         });
 
-    }
+    }*/
 
 
     Task<Void> task = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
-            Thread.sleep(4000);
-            createBridge2();
-            Thread.sleep(500);
-            createBridge1();
-            Thread.sleep(500);
-            createBridge();
+            Thread.sleep(1000);
+            /*createBridge2();
+            Thread.sleep(500);*/
+            if (allCollectiblesObtained = true) {
+                createBridge1();
+                Thread.sleep(1000);
+                createBridge();
+            }
             return null;
         }
 
@@ -341,7 +384,7 @@ public class Mobmazelevel extends  GridPane  {
         bridgeView.setFitHeight(squareSize);
         bridgeView.setFitWidth(squareSize);
         label.setGraphic(bridgeView);
-        label.setStyle("-fx-border-color: grey;");
+        //   label.setStyle("-fx-border-color: grey;");
         return label;
     }
 
@@ -351,7 +394,7 @@ public class Mobmazelevel extends  GridPane  {
         pathView.setFitHeight(squareSize);
         pathView.setFitWidth(squareSize);
         label.setGraphic(pathView);
-        label.setStyle("-fx-border-color: grey;");
+        //   label.setStyle("-fx-border-color: grey;");
         return label;
     }
     private Label getBorders() {
@@ -360,7 +403,7 @@ public class Mobmazelevel extends  GridPane  {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        label.setStyle("-fx-border-color: grey;");
+        //  label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
@@ -371,7 +414,7 @@ public class Mobmazelevel extends  GridPane  {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        label.setStyle("-fx-border-color: grey;");
+        //  label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> {
             try {
                 enteredGoal();
@@ -387,7 +430,7 @@ public class Mobmazelevel extends  GridPane  {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        label.setStyle("-fx-border-color: grey;");
+        //   label.setStyle("-fx-border-color: grey;");
         label.setOnMouseClicked(e -> startButtonPressed());
         return label;
     }
@@ -399,7 +442,7 @@ public class Mobmazelevel extends  GridPane  {
         Glow glow = new Glow();
         glow.setLevel(0.7);
         borderView.setEffect(glow);
-        collectible.setStyle("-fx-border-color: grey; fx-background-color: transparent;");
+        //  collectible.setStyle("-fx-border-color: grey; fx-background-color: transparent;");
         collectible.setGraphic(borderView);
         collectible.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseListener);
         collectibles.add(collectible);
@@ -420,10 +463,10 @@ public class Mobmazelevel extends  GridPane  {
     }
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
-            // main.generateNewMaze();
-            //main.generateMobMaze();
+
         }
     }
+
     public void startButtonPressed() {
         startButtonPressed = true;
     }
@@ -478,6 +521,9 @@ public class Mobmazelevel extends  GridPane  {
                             rageMob();
                         }
                     }
+                }
+                if (allCollectiblesObtained){
+                    timer.start();
                 }
             }
         }
