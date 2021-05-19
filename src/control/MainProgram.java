@@ -8,7 +8,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import model.Maps.World3Maps;
+
+import model.Maps.World2Maps;
+
 import model.MazeGeneration.GenerateNextLevel;
 import model.MapCreator;
 import model.Maps.World1Maps;
@@ -76,6 +80,7 @@ public class MainProgram extends Application {
         mazeGenerator = new MazeGenerator(10, true);
         world3Maps = new World3Maps();
         world1Maps = new World1Maps();
+        World2Maps world2Maps = new World2Maps();
 
         generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator);
         world1Template = new World1Template(world3Maps.getLevel32(), 1, 3, this);
@@ -108,12 +113,6 @@ public class MainProgram extends Application {
         mainWindow.show();
     }
 
-
-    public void generateMobMaze() throws FileNotFoundException, InterruptedException {
-        World2Template mobmazelevel = new World2Template();
-        mainPaneRandomMaze.setCenter(mobmazelevel);
-    }
-
     public void changeToMapTemplate(){
         mainPaneRandomMaze.setCenter(mapTemplate);
     }
@@ -135,7 +134,7 @@ public class MainProgram extends Application {
         launch(args);
     }
 
-    public void nextWorld1Level(int level, int heartCrystals) throws FileNotFoundException {
+    public void nextWorld1Level(int level, int heartCrystals) throws FileNotFoundException, InterruptedException {
 
         if (level == 1) {
             System.out.println("hello");
@@ -155,22 +154,24 @@ public class MainProgram extends Application {
         }
 
     }
-    public void nextWorld2Level(int level, int heartCrystals) throws FileNotFoundException {
+    public void nextWorld2Level(int level, int heartCrystals) throws FileNotFoundException, InterruptedException {
+
+        World2Maps world2Maps = new World2Maps();
 
         if (level == 1) {
-            //mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel21(), 2, heartCrystals, this, false));
         }
         else if (level == 2) {
-            //mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel13(), 3, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel22(), 3, heartCrystals, this, false));
         }
         else if (level == 3) {
-            //mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel14(), 4, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel23(), 4, heartCrystals, this, false));
         }
         else if (level == 4) {
-            //mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel15(), 5, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel24(), 5, heartCrystals, this, false));
         }
         else if (level == 5) {
-            
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel25(), 5, heartCrystals, this, true));
         }
     }
 }

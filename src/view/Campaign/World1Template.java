@@ -43,8 +43,8 @@ public class World1Template extends GridPane {
     private boolean wallDestroyed;
     private int collectiblesObtained = 0;
     private int squareSize;
-    private int currentLevel = 0;
-    private int heartCrystals = 0;
+    private int currentLevel;
+    private int heartCrystals;
     private Image pickAxeImage;
     private boolean pickaxeObtained;
     private ImageView imageView = new ImageView();
@@ -263,10 +263,11 @@ public class World1Template extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         Glow glow = new Glow();
-        glow.setLevel(0.5);
+        glow.setLevel(0.8);
         borderView.setEffect(glow);
         heartCrystal.setStyle("fx-background-color: transparent;");
         heartCrystal.setGraphic(borderView);
+        heartCrystal.setOpacity(0.8);
         heartCrystal.setOnMouseEntered(e -> heartCrystalObtained(e));
         return heartCrystal;
     }

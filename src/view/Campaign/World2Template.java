@@ -22,9 +22,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Sebastian Helin & Filip Örnling
@@ -33,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 public class World2Template extends  GridPane  {
 
-    private MainProgram main;
+    private MainProgram mainProgram;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
@@ -58,9 +55,10 @@ public class World2Template extends  GridPane  {
     private PathTransition animation4;
     private PathTransition animation5;
     private PathTransition animation6;
-    private boolean moblevel=true;
     private ArrayList<Label>  obslist = new ArrayList();
     private Thread timer;
+    private int currentLevel;
+    private int heartCrystals;
 
 
     private File audioFile = new File("files/sounds/Diamond1.mp3");
@@ -70,52 +68,27 @@ public class World2Template extends  GridPane  {
     private ImageView bridgeView = new ImageView();
     private ImageView bridgeView2 = new ImageView();
 
-    private int [][] maze;
-
-    public World2Template() throws FileNotFoundException, InterruptedException {
-        createArray();
-        this.main = main;
-        level = maze;
+    public World2Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, boolean bossMap) throws FileNotFoundException, InterruptedException {
+        this.mainProgram = mainProgram;
+        this.currentLevel = currentLevel;
+        this.level = level;
+        this.heartCrystals = heartCrystals;
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages();
         setupBorders();
         setupLevel();
-        setupGhost();
-        initialize();
-        buildBridge();
-
+        if (bossMap) {
+            setupGhost();
+            initialize();
+            buildBridge();
+        }
     }
 
     public void buildBridge() throws InterruptedException {
         timer = new Thread(task);
 
     }
-
-    public void createArray(){
-        maze = new int[][] {{0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2, 0},
-                {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0},
-                {1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 2, 1, 0},
-                {1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0},
-                {1, 1, 0, 1, 4, 4, 4, 0, 1, 1, 0, 1, 0},
-                {0, 1, 0, 1, 4, 4, 4, 0, 0, 1, 0, 1, 0},
-                {1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0},
-                {1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0},
-                {1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0},
-                {1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0},
-                {1, 1, 1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,0, 0, 0}};
-
-    }
-
-    public int[][] getMaze() {
-        return maze;
-    }
-
-
-
-
-
-
     public void setupGhost() throws FileNotFoundException {
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
 
@@ -133,115 +106,112 @@ public class World2Template extends  GridPane  {
 
     }
     public void initialize() {
-        if (moblevel){
-            ImageView ghost1V = new ImageView();
-            ImageView ghost2V = new ImageView();
-            ImageView ghost3V = new ImageView();
-            ImageView ghost4V = new ImageView();
-            ImageView ghost5V = new ImageView();
-            ImageView ghost6V = new ImageView();
 
-            ghost1V.setImage(ghost);
-            ghost2V.setImage(ghost);
-            ghost3V.setImage(ghost);
-            ghost4V.setImage(ghost);
-            ghost5V.setImage(ghost);
-            ghost6V.setImage(ghost);
+        ImageView ghost1V = new ImageView();
+        ImageView ghost2V = new ImageView();
+        ImageView ghost3V = new ImageView();
+        ImageView ghost4V = new ImageView();
+        ImageView ghost5V = new ImageView();
+        ImageView ghost6V = new ImageView();
 
-            add(ghost1V,10,0);
-            add(ghost2V,9,0);
-            add(ghost3V,8,0);
-            add(ghost4V, 1, 0);
-            add(ghost5V, 2, 0);
-            add(ghost6V, 3, 0);
+        ghost1V.setImage(ghost);
+        ghost2V.setImage(ghost);
+        ghost3V.setImage(ghost);
+        ghost4V.setImage(ghost);
+        ghost5V.setImage(ghost);
+        ghost6V.setImage(ghost);
 
-
-            Polyline line1 = new Polyline();
-            Polyline line2 = new Polyline();
-            Polyline line3 = new Polyline();
-            Polyline line4 = new Polyline();
-            Polyline line5 = new Polyline();
-            Polyline line6 = new Polyline();
-
-            line1.getPoints().addAll(
-                    16.0, -10.5,
-                    10.5, 650.0);
-            line2.getPoints().addAll(
-                    15.0,-10.5,
-                    10.5,650.0);
-            line3.getPoints().addAll(
-                    14.0,-10.5,
-                    10.5,650.0);
-            line4.getPoints().addAll(
-                    16.0, -10.5,
-                    10.5, 650.0);
-            line5.getPoints().addAll(
-                    15.0,-10.5,
-                    10.5,650.0);
-            line6.getPoints().addAll(
-                    14.0,-10.5,
-                    10.5,650.0);
+        add(ghost1V,10,0);
+        add(ghost2V,9,0);
+        add(ghost3V,8,0);
+        add(ghost4V, 1, 0);
+        add(ghost5V, 2, 0);
+        add(ghost6V, 3, 0);
 
 
+        Polyline line1 = new Polyline();
+        Polyline line2 = new Polyline();
+        Polyline line3 = new Polyline();
+        Polyline line4 = new Polyline();
+        Polyline line5 = new Polyline();
+        Polyline line6 = new Polyline();
 
-            animation3 = new PathTransition();
-            animation3.setNode(ghost3V);
-            animation3.setDuration(Duration.seconds(4));
-            animation3.setCycleCount(Animation.INDEFINITE);
-            animation3.setPath(line3);
-            animation3.play();
+        line1.getPoints().addAll(
+                16.0, -10.5,
+                10.5, 650.0);
+        line2.getPoints().addAll(
+                15.0,-10.5,
+                10.5,650.0);
+        line3.getPoints().addAll(
+                14.0,-10.5,
+                10.5,650.0);
+        line4.getPoints().addAll(
+                16.0, -10.5,
+                10.5, 650.0);
+        line5.getPoints().addAll(
+                15.0,-10.5,
+                10.5,650.0);
+        line6.getPoints().addAll(
+                14.0,-10.5,
+                10.5,650.0);
 
-            animation2 = new PathTransition();
-            animation2.setNode(ghost2V);
-            animation2.setDuration(Duration.seconds(3));
-            animation2.setCycleCount(Animation.INDEFINITE);
-            animation2.setPath(line2);
-            animation2.play();
 
-            animation = new PathTransition();
-            animation.setNode(ghost1V);
-            animation.setDuration(Duration.seconds(3.5));
-            animation.setCycleCount(Animation.INDEFINITE);
-            animation.setPath(line1);
-            animation.play();
 
-            animation4 = new PathTransition();
-            animation4.setNode(ghost4V);
-            animation4.setDuration(Duration.seconds(3.5));
-            animation4.setCycleCount(Animation.INDEFINITE);
-            animation4.setPath(line4);
-            animation4.play();
+        animation3 = new PathTransition();
+        animation3.setNode(ghost3V);
+        animation3.setDuration(Duration.seconds(4));
+        animation3.setCycleCount(Animation.INDEFINITE);
+        animation3.setPath(line3);
+        animation3.play();
 
-            animation5 = new PathTransition();
-            animation5.setNode(ghost5V);
-            animation5.setDuration(Duration.seconds(3));
-            animation5.setCycleCount(Animation.INDEFINITE);
-            animation5.setPath(line5);
-            animation5.play();
+        animation2 = new PathTransition();
+        animation2.setNode(ghost2V);
+        animation2.setDuration(Duration.seconds(3));
+        animation2.setCycleCount(Animation.INDEFINITE);
+        animation2.setPath(line2);
+        animation2.play();
 
-            animation6 = new PathTransition();
-            animation6.setNode(ghost6V);
-            animation6.setDuration(Duration.seconds(4));
-            animation6.setCycleCount(Animation.INDEFINITE);
-            animation6.setPath(line6);
-            animation6.play();
-        }
-        else {
+        animation = new PathTransition();
+        animation.setNode(ghost1V);
+        animation.setDuration(Duration.seconds(3.5));
+        animation.setCycleCount(Animation.INDEFINITE);
+        animation.setPath(line1);
+        animation.play();
 
-            Polyline line = new Polyline();
-            line.getPoints().addAll(
-                    -100.0, -50.0,
-                    -50.0, 100.0,
-                    100.0, 200.0,
-                    200.0, -150.0);
+        animation4 = new PathTransition();
+        animation4.setNode(ghost4V);
+        animation4.setDuration(Duration.seconds(3.5));
+        animation4.setCycleCount(Animation.INDEFINITE);
+        animation4.setPath(line4);
+        animation4.play();
 
-            animation = new PathTransition();
-            animation.setNode(imageView);
-            animation.setDuration(Duration.seconds(duration));
-            animation.setPath(line);
-            animation.setCycleCount(PathTransition.INDEFINITE);
-            animation.play();
-        }
+        animation5 = new PathTransition();
+        animation5.setNode(ghost5V);
+        animation5.setDuration(Duration.seconds(3));
+        animation5.setCycleCount(Animation.INDEFINITE);
+        animation5.setPath(line5);
+        animation5.play();
+
+        animation6 = new PathTransition();
+        animation6.setNode(ghost6V);
+        animation6.setDuration(Duration.seconds(4));
+        animation6.setCycleCount(Animation.INDEFINITE);
+        animation6.setPath(line6);
+        animation6.play();
+
+        Polyline line = new Polyline();
+        line.getPoints().addAll(
+                -100.0, -50.0,
+                -50.0, 100.0,
+                100.0, 200.0,
+                200.0, -150.0);
+        animation = new PathTransition();
+        animation.setNode(imageView);
+        animation.setDuration(Duration.seconds(duration));
+        animation.setPath(line);
+        animation.setCycleCount(PathTransition.INDEFINITE);
+        animation.play();
+
 
 
     }
@@ -268,21 +238,11 @@ public class World2Template extends  GridPane  {
     public void setupLevel() {
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level.length; j++) {
-
-                if (level[i][j] == 1) {
-                    add(getPath(), j + 1, i + 1);
-                    if (new Random().nextInt(5) == 4) {
-                        if (level[i][j] != level[6][3] || level[i][j] != level[6][2] || level[i][j] != level[6][1] || level[i][j] != level[6][3] || level[i][j] != level[6][4]) {
-                            add(addCollectible(), j + 1, i + 1);
-                        }
-                    }
-                }
-                else if(level[i][j] == 4){
-                    add(getObstacle(),j+1,i+1);
-                }
-
-                else if (level[i][j] == 0){
+                if (level[i][j] == 0){
                     add(getWall(),j + 1,i + 1);
+                }
+                else if (level[i][j] == 1) {
+                    add(getPath(), j + 1, i + 1);
                 }
                 else if (level[i][j] == 2){
                     add(getStart(),j + 1,i + 1);
@@ -290,12 +250,19 @@ public class World2Template extends  GridPane  {
                 else if (level[i][j] == 3){
                     add(getGoal(),j + 1,i + 1);
                 }
+                else if(level[i][j] == 4){
+                    add(getPath(), j + 1, i + 1);
+                    add(addCollectible(), j + 1, i + 1);
+                }
+                else if (level[i][j] == 5) {
+                    add(getObstacle(), j + 1, i + 1);
+                }
             }
         }
     }
     public void setupImages(){
 
-        String folder = "";
+        String folder = "underground";
 
         wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
         path = new Image("file:files/" + folder + "/path.png", squareSize, squareSize, false, false);
@@ -497,10 +464,6 @@ public class World2Template extends  GridPane  {
         animation.setCycleCount(PathTransition.INDEFINITE);
         animation.play();
 
-    }
-
-    public void setMoblevel(boolean moblevel) {
-        this.moblevel = moblevel;
     }
 
     private class MouseListener implements EventHandler<MouseEvent> {
