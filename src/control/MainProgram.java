@@ -8,7 +8,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import model.Maps.World3Maps;
+
 import model.Maps.World2Maps;
+
 import model.MazeGeneration.GenerateNextLevel;
 import model.MapCreator;
 import model.Maps.World1Maps;
@@ -49,6 +53,7 @@ public class MainProgram extends Application {
     private GenerateNextLevel generateNextLevel;
     private World1Template world1Template;
     private World1Maps world1Maps;
+    private World3Maps world3Maps;
 
 
     @Override
@@ -73,11 +78,12 @@ public class MainProgram extends Application {
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
         
         mazeGenerator = new MazeGenerator(10, true);
+        world3Maps = new World3Maps();
         world1Maps = new World1Maps();
         World2Maps world2Maps = new World2Maps();
 
         generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator);
-        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this);
+        world1Template = new World1Template(world3Maps.getLevel32(), 1, 3, this);
 
 
         mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
