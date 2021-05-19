@@ -4,6 +4,7 @@ package view.Campaign;
 import control.MainProgram;
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
+import javafx.concurrent.Task;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,8 +37,8 @@ public class World1Template extends GridPane {
     private Image goal;
     private Image diamond;
     private Image start;
-    private Image ghost;
     private Image heart;
+    private Image worldIntro;
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private boolean wallDestroyed;
@@ -47,6 +48,7 @@ public class World1Template extends GridPane {
     private int heartCrystals;
     private Image pickAxeImage;
     private boolean pickaxeObtained;
+    private boolean showWorldIntro;
 
 
     private File diamondSound = new File("files/sounds/Diamond1.mp3");
@@ -70,6 +72,7 @@ public class World1Template extends GridPane {
     public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
+        this.showWorldIntro = showWorldIntro;
         this.level = level;
         this.heartCrystals = heartCrystals;
         squareSize = 600/(level.length+2);
@@ -141,6 +144,7 @@ public class World1Template extends GridPane {
         start = new Image("file:files/forest/start.png", squareSize, squareSize, false, false);
         pickAxeImage = new Image("file:files/items/pickaxe.png", squareSize, squareSize, false, false);
         heart = new Image("file:files/items/heart.png", squareSize, squareSize, false, false);
+        worldIntro = new Image("file:files/worlds/World1.png", squareSize, squareSize, false, false);
     }
 
     public Label getWall() {
