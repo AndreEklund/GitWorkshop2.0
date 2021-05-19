@@ -1,4 +1,4 @@
-package model;
+package model.Maps;
 
 public class World1Maps {
 

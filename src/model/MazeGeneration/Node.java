@@ -1,4 +1,4 @@
-package model;
+package model.MazeGeneration;
 
 public class Node {
     public final int x;

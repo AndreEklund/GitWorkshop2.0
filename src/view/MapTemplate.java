@@ -1,7 +1,7 @@
 package view;
 
 
-import model.GenerateNextLevel;
+import model.MazeGeneration.GenerateNextLevel;
 import control.MainProgram;
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;

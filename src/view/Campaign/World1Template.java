@@ -1,7 +1,6 @@
 package view.Campaign;
 
 
-import model.GenerateNextLevel;
 import control.MainProgram;
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
