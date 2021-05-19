@@ -70,11 +70,9 @@ public class MapTemplate extends GridPane {
         this.generateNextLevel = generateNextLevel;
         squareSize = 600/(level.length+2);
         setBackground();
-        setupImages(new Random().nextInt(4));
-        setupImages(4);
+        setupImages(new Random().nextInt(5));
         setupBorders();
         setupLevel();
-        //setupGhost();
     }
     public void setupGhost() throws FileNotFoundException {
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
@@ -167,7 +165,7 @@ public class MapTemplate extends GridPane {
             folder = "cloud";
         }
         else if(value == 4) {
-            folder = "Desert";
+            folder = "desert";
         }
         wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
         path = new Image("file:files/" + folder + "/path.png", squareSize, squareSize, false, false);
