@@ -4,8 +4,6 @@ import control.MainProgram;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
@@ -15,12 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import java.awt.*;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -279,7 +274,7 @@ public class World3Template extends GridPane {
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
         //label.setStyle("-fx-border-color: grey;");
-        label.setOnMouseClicked(e -> startButtonPressed());
+        label.setOnMouseClicked(e -> startLevel());
         return label;
     }
     public Label addCollectible() {
@@ -370,7 +365,7 @@ public class World3Template extends GridPane {
             mainProgram.nextWorld1Level(currentLevel, heartCrystals);
         }
     }
-    public void startButtonPressed() {
+    public void startLevel() {
 
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
