@@ -22,7 +22,7 @@ public class Intro extends VBox {
 
 
     public void setBackground(){
-        BackgroundImage myBI= new BackgroundImage(new Image("file:files/IntroPic.jpg",800,600,false,true),
+        BackgroundImage myBI= new BackgroundImage(new Image("file:files/IntroPic.png",800,600,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         this.setBackground(new Background(myBI));

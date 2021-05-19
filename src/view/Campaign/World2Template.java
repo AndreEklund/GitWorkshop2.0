@@ -59,6 +59,7 @@ public class World2Template extends  GridPane  {
     private Thread timer;
     private int currentLevel;
     private int heartCrystals;
+    private boolean bossMap;
 
 
     private File audioFile = new File("files/sounds/Diamond1.mp3");
@@ -73,6 +74,7 @@ public class World2Template extends  GridPane  {
         this.currentLevel = currentLevel;
         this.level = level;
         this.heartCrystals = heartCrystals;
+        this.bossMap = bossMap;
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages();
@@ -430,7 +432,7 @@ public class World2Template extends  GridPane  {
     }
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
-
+            mainProgram.nextWorld2Level(currentLevel, heartCrystals);
         }
     }
 
@@ -485,7 +487,7 @@ public class World2Template extends  GridPane  {
                         }
                     }
                 }
-                if (allCollectiblesObtained){
+                if (allCollectiblesObtained && bossMap){
                     timer.start();
                 }
             }
