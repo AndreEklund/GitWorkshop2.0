@@ -333,12 +333,12 @@ public class World3Template extends GridPane {
         }
     }
     public void setupImages(){
-        wall = new Image("file:files/forest/wall.png", squareSize, squareSize, false, false);
-        path = new Image("file:files/forest/path.png", squareSize, squareSize, false, false);
-        border = new Image("file:files/forest/border.png", squareSize, squareSize, false, false);
-        goal = new Image("file:files/forest/goal.png", squareSize, squareSize, false, false);
-        diamond = new Image("file:files/forest/collectible.png", squareSize, squareSize, false, false);
-        start = new Image("file:files/forest/start.png", squareSize, squareSize, false, false);
+        wall = new Image("file:files/lava/wall.png", squareSize, squareSize, false, false);
+        path = new Image("file:files/lava/path.png", squareSize, squareSize, false, false);
+        border = new Image("file:files/lava/border.png", squareSize, squareSize, false, false);
+        goal = new Image("file:files/lava/goal.png", squareSize, squareSize, false, false);
+        diamond = new Image("file:files/lava/collectible.png", squareSize, squareSize, false, false);
+        start = new Image("file:files/lava/start.png", squareSize, squareSize, false, false);
         pickAxeImage = new Image("file:files/items/pickaxe.png", squareSize, squareSize, false, false);
         heart = new Image("file:files/items/heart.png", squareSize, squareSize, false, false);
     }
