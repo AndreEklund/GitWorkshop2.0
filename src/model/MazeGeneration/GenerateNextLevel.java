@@ -116,8 +116,6 @@ public class GenerateNextLevel {
                 }
             }
         }
-        System.out.println(wallCounterGoal);
-        System.out.println(wallCounterStart);
         return maze;
     }
 }
