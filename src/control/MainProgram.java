@@ -22,6 +22,7 @@ import view.Menu.Help;
 import view.Menu.Intro;
 import view.Menu.Menu;
 import view.Menu.RightPanel;
+import view.WorldIntroAnimation;
 
 
 import java.io.FileNotFoundException;
@@ -51,6 +52,7 @@ public class MainProgram extends Application {
     private World1Template world1Template;
     private World1Maps world1Maps;
     private World3Maps world3Maps;
+    private WorldIntroAnimation introAnimation;
 
 
     @Override
@@ -72,24 +74,21 @@ public class MainProgram extends Application {
         //BorderPane för levels
         mainPaneRandomMaze = new BorderPane();
         mainPaneCampaign = new BorderPane();
+        introAnimation = new WorldIntroAnimation();
+        //mainPaneCampaign.getChildren().add(introAnimation);
 
         mainWindow = primaryStage;
 
         mainWindow.setTitle("Mazegen");
-        mainWindow.initStyle(StageStyle.UTILITY);
+        //mainWindow.initStyle(StageStyle.UTILITY);
         mainWindow.setResizable(false);
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
 
         mazeGenerator = new MazeGenerator(10, true);
         world3Maps = new World3Maps();
         world1Maps = new World1Maps();
-        World2Maps world2Maps = new World2Maps();
-
 
         generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel);
-        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel);
-
-        mainPaneCampaign.setCenter(world1Template);
 
         mainPaneCampaign.setRight(rightPanel);
 
@@ -126,14 +125,18 @@ public class MainProgram extends Application {
     public void changeToRandomize(){
         mainWindow.setScene(randomScene);
     }
-    public void changeToCampaign(){
+    public void changeToCampaign() throws FileNotFoundException {
+        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel);
+        mainPaneCampaign.setCenter(world1Template);
         mainWindow.setScene(campaignScene);
+        introAnimation = new WorldIntroAnimation("1");
+        mainPaneCampaign.getChildren().add(introAnimation);
+        introAnimation.setDisable(true);
     }
 
     public void changeToHelp(){
         mainWindow.setScene(helpScene);
     }
-
 
 
 
@@ -147,6 +150,7 @@ public class MainProgram extends Application {
             System.out.println("hello");
             rightPanel.changeLevelCounter("12");
             mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this, rightPanel));
+
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("13");
@@ -172,6 +176,9 @@ public class MainProgram extends Application {
         if (level == 1) {
             rightPanel.changeLevelCounter("21");
             mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel21(), 2, heartCrystals, this, false));
+            introAnimation = new WorldIntroAnimation("2");
+            mainPaneCampaign.getChildren().add(introAnimation);
+            introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("22");
@@ -200,6 +207,9 @@ public class MainProgram extends Application {
         if (level == 1) {
             rightPanel.changeLevelCounter("31");
             mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel31(), 2, heartCrystals, this));
+            introAnimation = new WorldIntroAnimation("3");
+            mainPaneCampaign.getChildren().add(introAnimation);
+            introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("32");
@@ -228,6 +238,9 @@ public class MainProgram extends Application {
         if (level == 1) {
             rightPanel.changeLevelCounter("41");
             mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel41(), 2, heartCrystals, this, false));
+            introAnimation = new WorldIntroAnimation("4");
+            mainPaneCampaign.getChildren().add(introAnimation);
+            introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("42");
@@ -256,6 +269,9 @@ public class MainProgram extends Application {
         if (level == 1) {
             rightPanel.changeLevelCounter("51");
             mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel51(), 2, heartCrystals, this, false));
+            introAnimation = new WorldIntroAnimation("5");
+            mainPaneCampaign.getChildren().add(introAnimation);
+            introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("52");
@@ -284,6 +300,9 @@ public class MainProgram extends Application {
         if (level == 1) {
             rightPanel.changeLevelCounter("61");
             mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel61(), 2, heartCrystals, this, false));
+            introAnimation = new WorldIntroAnimation("6");
+            mainPaneCampaign.getChildren().add(introAnimation);
+            introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("62");

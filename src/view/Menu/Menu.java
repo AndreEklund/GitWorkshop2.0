@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import java.io.FileNotFoundException;
+
 /**
  * Author: Viktor Näslund
  */
@@ -31,7 +33,13 @@ public class Menu extends VBox {
         Button button1 = new Button("");
         Image btnStart = new Image("file:files/texts/Campaign.png", 250, 30, false, true);
         button1.setGraphic(new ImageView(btnStart));
-        button1.setOnAction(e -> mainProgram.changeToCampaign());
+        button1.setOnAction(e -> {
+            try {
+                mainProgram.changeToCampaign();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        });
         button1.setTranslateX(250);
         button1.setTranslateY(125);
         Button button2 = new Button("");
