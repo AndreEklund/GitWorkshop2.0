@@ -75,7 +75,7 @@ public class MapTemplate extends GridPane {
 
         squareSize = 600/(level.length+2);
         setBackground();
-        setupImages(new Random().nextInt(5));
+        setupImages(new Random().nextInt(6));
         setupBorders();
         setupLevel();
     }
@@ -172,12 +172,19 @@ public class MapTemplate extends GridPane {
         else if(value == 4) {
             folder = "desert";
         }
-        wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
+        else if(value == 5) {
+            folder = "space";
+        }
+
         path = new Image("file:files/" + folder + "/path.png", squareSize, squareSize, false, false);
-        border = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
         goal = new Image("file:files/" + folder + "/goal.png", squareSize, squareSize, false, false);
         diamond = new Image("file:files/" + folder + "/collectible.png", squareSize, squareSize, false, false);
         start = new Image("file:files/" + folder + "/start.png", squareSize, squareSize, false, false);
+
+        if(value!=5){
+            border = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
+            wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
+        }
     }
 
     public Label getWall() {
