@@ -18,10 +18,7 @@ import view.Campaign.World1Template;
 import view.Campaign.World3Template;
 import view.MapTemplate;
 import model.MazeGeneration.MazeGenerator;
-import view.Menu.Help;
-import view.Menu.Intro;
-import view.Menu.Menu;
-import view.Menu.RightPanel;
+import view.Menu.*;
 import view.WorldIntroAnimation;
 
 
@@ -40,9 +37,11 @@ public class MainProgram extends Application {
     private Scene menuScene;
     private Scene introScene;
     private Scene helpScene;
+    private Scene chooseDimensionScene;
     private Intro intro;
     private Menu menu;
     private Help help;
+    private ChooseDimension chooseDimension;
     private Scene randomScene;
     private Scene campaignScene;
     private RightPanel rightPanel;
@@ -67,9 +66,11 @@ public class MainProgram extends Application {
         menu = new Menu(this);
         intro = new Intro(this);
         help = new Help(this);
+        chooseDimension = new ChooseDimension(this);
         introScene = new Scene(intro, 800, 600);
         menuScene = new Scene(menu, 800, 600);
         helpScene = new Scene(help, 800, 600);
+        chooseDimensionScene = new Scene(chooseDimension,800,600);
 
         //BorderPane för levels
         mainPaneRandomMaze = new BorderPane();
@@ -79,16 +80,21 @@ public class MainProgram extends Application {
 
         mainWindow = primaryStage;
 
+
+      //  mazeGenerator = new MazeGenerator(5, true);
+
+
+
         mainWindow.setTitle("Mazegen");
         //mainWindow.initStyle(StageStyle.UTILITY);
         mainWindow.setResizable(false);
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
 
-        mazeGenerator = new MazeGenerator(10, true);
+
         world3Maps = new World3Maps();
         world1Maps = new World1Maps();
 
-        generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel);
+        //generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel);
 
         mainPaneCampaign.setRight(rightPanel);
 
@@ -96,7 +102,7 @@ public class MainProgram extends Application {
         rightPnlRndm = new RightPanel(this, "Random");
         rightPnlRndm.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
+        //mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         MapCreator mapCreator = new MapCreator();
 
         //Mobmazelevel mobmazelevel = new Mobmazelevel();
@@ -104,7 +110,7 @@ public class MainProgram extends Application {
 
 
 
-        mainPaneRandomMaze.setCenter(mapTemplate);
+        //mainPaneRandomMaze.setCenter(mapTemplate);
         mainPaneRandomMaze.setRight(rightPnlRndm);
 
         campaignScene = new Scene(mainPaneCampaign, 800, 600);
@@ -122,7 +128,16 @@ public class MainProgram extends Application {
         mainWindow.setScene(menuScene);
         System.out.println("MENU");
     }
-    public void changeToRandomize(){
+    public void changeToRandomize(int dimension) throws FileNotFoundException {
+
+
+        mazeGenerator = new MazeGenerator(dimension, true);
+
+
+        generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel, dimension);
+        mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
+        mainPaneRandomMaze.setCenter(mapTemplate);
+       // mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         mainWindow.setScene(randomScene);
     }
     public void changeToCampaign() throws FileNotFoundException {
@@ -133,11 +148,13 @@ public class MainProgram extends Application {
         mainPaneCampaign.getChildren().add(introAnimation);
         introAnimation.setDisable(true);
     }
+    public void chooseDimension(){
+        mainWindow.setScene(chooseDimensionScene);
+    }
 
     public void changeToHelp(){
         mainWindow.setScene(helpScene);
     }
-
 
 
     public static void main(String[] args) {
