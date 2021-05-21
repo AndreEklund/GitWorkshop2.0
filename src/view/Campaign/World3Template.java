@@ -515,6 +515,7 @@ public class World3Template extends GridPane {
             rightPanel.runClock();
         }
 
+        startNotClickedOnce = true;
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
         startButtonPressed = true;
