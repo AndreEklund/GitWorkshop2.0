@@ -15,6 +15,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import view.Menu.RightPanel;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,6 +28,7 @@ public class World3Template extends GridPane {
      * Author André Eklund
      */
     private MainProgram mainProgram;
+    private RightPanel rightPanel;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private ArrayList<Label> pickaxes = new ArrayList<>();
@@ -49,6 +51,8 @@ public class World3Template extends GridPane {
     private Image pickAxeImage;
     private boolean pickaxeObtained;
     private ImageView imageView = new ImageView();
+    private boolean gameStarted = false;
+    private boolean startNotClickedOnce = true;
 
     private PathTransition animation;
     private PathTransition animation2;
@@ -76,9 +80,10 @@ public class World3Template extends GridPane {
     private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public World3Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram) throws FileNotFoundException {
+    public World3Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
+        this.rightPanel = rightPanel;
         this.level = level;
         this.heartCrystals = heartCrystals;
         squareSize = 600/(level.length+2);
@@ -87,6 +92,7 @@ public class World3Template extends GridPane {
         setupBorders();
         setupLevel();
         setupGhost();
+        rightPanel.setSTARTTIME(15);
     }
     public void setupGhost() throws FileNotFoundException {
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
@@ -495,9 +501,19 @@ public class World3Template extends GridPane {
             goalPlayer.play();
             goalPlayer.seek(Duration.ZERO);
             mainProgram.nextWorld1Level(currentLevel, heartCrystals);
+
+            rightPanel.pauseClock();
+            gameStarted = true;
         }
     }
     public void startLevel() {
+
+        if (!gameStarted){
+            rightPanel.resumeClock();
+            gameStarted = true;
+        }else if (startNotClickedOnce){
+            rightPanel.runClock();
+        }
 
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);

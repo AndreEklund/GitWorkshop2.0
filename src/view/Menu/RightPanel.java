@@ -37,12 +37,16 @@ public class RightPanel extends GridPane {
     private DigitalClock clock = new DigitalClock();
     private boolean running = false;
     private String gameMode;
+    private int seconds;
 
-    private static final Integer STARTTIME = 15;
-    private Timeline timeline;
+    private static Integer STARTTIME = 15;
+    private Timeline timeline = new Timeline();
+    private Timeline timeline2;
     private Label timerLabel = new Label();
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+    private IntegerProperty stackedSeconds = new SimpleIntegerProperty();
     private Font font = Font.loadFont("file:files/fonts/PressStart2P.ttf", 50);
+
 
 
 
@@ -104,13 +108,37 @@ public class RightPanel extends GridPane {
     public void runClock() {
         System.out.println("runClock");
         timeSeconds.set(STARTTIME);
-        timeline = new Timeline();
+
         timeline.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(STARTTIME+1),
                         new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
     }
 
+    public void pauseClock(){
+        seconds = timeSeconds.getValue().intValue();
+        System.out.println(seconds);
+        timeline.stop();
 
+        timeSeconds.set(STARTTIME + seconds);
+        timeline = null;
+      //  timeline2 = null;
+        /*timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(STARTTIME+1),
+                        new KeyValue(timeSeconds, 0)));*/
+    }
 
+    public void resumeClock(){
+        timeSeconds.set(STARTTIME + seconds);
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(STARTTIME + seconds),
+                        new KeyValue(timeSeconds, 0)));
+        timeline.playFromStart();
+    }
+
+    public void setSTARTTIME(Integer STARTTIME) {
+        RightPanel.STARTTIME = STARTTIME;
+    }
 }

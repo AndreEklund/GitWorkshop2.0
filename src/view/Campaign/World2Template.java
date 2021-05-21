@@ -17,6 +17,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
+import view.Menu.RightPanel;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 public class World2Template extends  GridPane  {
 
     private MainProgram mainProgram;
+    private RightPanel rightPanel;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
@@ -60,6 +62,9 @@ public class World2Template extends  GridPane  {
     private int currentLevel;
     private int heartCrystals;
     private boolean bossMap;
+    private boolean gameStarted = false;
+    private boolean startNotClickedOnce = true;
+
 
 
     private File diamondSound = new File("files/sounds/Diamond1.mp3");
@@ -83,12 +88,13 @@ public class World2Template extends  GridPane  {
     private ImageView bridgeView = new ImageView();
     private ImageView bridgeView2 = new ImageView();
 
-    public World2Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, boolean bossMap) throws FileNotFoundException, InterruptedException {
+    public World2Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, boolean bossMap, RightPanel rightPanel) throws FileNotFoundException, InterruptedException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
         this.level = level;
         this.heartCrystals = heartCrystals;
         this.bossMap = bossMap;
+        this.rightPanel = rightPanel;
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages();
@@ -99,6 +105,7 @@ public class World2Template extends  GridPane  {
             initialize();
             buildBridge();
         }
+        rightPanel.setSTARTTIME(15);
     }
 
     public void buildBridge() throws InterruptedException {
@@ -490,14 +497,31 @@ public class World2Template extends  GridPane  {
             goalPlayer.play();
             goalPlayer.seek(Duration.ZERO);
             mainProgram.nextWorld2Level(currentLevel, heartCrystals);
+
+            rightPanel.pauseClock();
+
+            gameStarted = true;
         }
     }
 
     public void startLevel() {
+
+        if (!gameStarted){
+            rightPanel.resumeClock();
+            gameStarted = true;
+        }else if (startNotClickedOnce){
+            rightPanel.runClock();
+        }
+
+        gameStarted = false;
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
         startButtonPressed = true;
+        startNotClickedOnce = false;
+
     }
+
+
     private void exitedLabel(MouseEvent e) {
         Label label = (Label)e.getSource();
         FadeTransition fade = new FadeTransition();
@@ -535,6 +559,7 @@ public class World2Template extends  GridPane  {
 
                 diamondPlayer.play();
                 diamondPlayer.seek(Duration.ZERO);
+
 
                 for (Label label: collectibles) {
                     if (e.getSource() == label) {
