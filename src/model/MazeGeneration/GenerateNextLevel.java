@@ -14,8 +14,10 @@ public class GenerateNextLevel {
     private BorderPane mainPane;
     private MainProgram mainProgram;
     private RightPanel rightPanel;
+    private int dimension;
 
-    public GenerateNextLevel(MainProgram mainProgram, BorderPane mainPane, MazeGenerator mazeGenerator, RightPanel rightPanel){
+    public GenerateNextLevel(MainProgram mainProgram, BorderPane mainPane, MazeGenerator mazeGenerator, RightPanel rightPanel, int dimension){
+        this.dimension = dimension;
         this.mazeGenerator = mazeGenerator;
         this.mainProgram = mainProgram;
         this.mainPane = mainPane;
@@ -25,7 +27,7 @@ public class GenerateNextLevel {
 
     public void generateNewMaze() throws FileNotFoundException {
         int currentMaze[][] = mazeGenerator.getMaze();
-        MazeGenerator newMazegenerator = new MazeGenerator(10, false);
+        MazeGenerator newMazegenerator = new MazeGenerator(dimension, false);
         int nextMaze[][] = newMazegenerator.getMaze();
         int row = 0;
         int col = 0;

@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
  * Author: Viktor Näslund
  */
 
-public class Menu extends VBox {
+public class Menu extends Pane {
     private MainProgram mainProgram;
     private Image campaign;
     private Image campaignResize;
@@ -90,7 +90,7 @@ public class Menu extends VBox {
             randomizeView.setTranslateY(225);
         });
         randomizeView.setOnMouseClicked(e -> {
-            mainProgram.changeToRandomize();
+            mainProgram.chooseDimension();
         });
 
         ImageView helpView = new ImageView(help);
