@@ -314,6 +314,7 @@ public class World1Template extends GridPane {
             rightPanel.runClock();
         }
 
+
         startNotClickedOnce = false;
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);

@@ -512,12 +512,11 @@ public class World2Template extends  GridPane  {
         }else if (startNotClickedOnce){
             rightPanel.runClock();
         }
-
-        gameStarted = false;
+        
+        startNotClickedOnce = false;
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
         startButtonPressed = true;
-        startNotClickedOnce = false;
 
     }
 
