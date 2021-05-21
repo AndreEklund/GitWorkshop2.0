@@ -47,6 +47,8 @@ public class World1Template extends GridPane {
     private int heartCrystals;
     private Image pickAxeImage;
     private boolean pickaxeObtained;
+    private boolean gameStarted;
+    private boolean startNotClickedOnce = true;
 
 
     private File diamondSound = new File("files/sounds/Diamond1.mp3");
@@ -80,6 +82,7 @@ public class World1Template extends GridPane {
         setupImages();
         setupBorders();
         setupLevel();
+        rightPanel.setSTARTTIME(15);
     }
     public void setBackground(){
         BackgroundImage menuBackground = new BackgroundImage(new Image("file:files/MenuBackground.jpg",800,600,false,true),
@@ -298,12 +301,20 @@ public class World1Template extends GridPane {
             goalPlayer.play();
             goalPlayer.seek(Duration.ZERO);
             mainProgram.nextWorld1Level(currentLevel, heartCrystals);
+            rightPanel.pauseClock();
+            gameStarted = true;
         }
     }
     public void startLevel() {
-        System.out.println("startpressed");
-        rightPanel.runClock();
 
+        if (!gameStarted){
+            rightPanel.resumeClock();
+            gameStarted = true;
+        }else if (startNotClickedOnce){
+            rightPanel.runClock();
+        }
+
+        startNotClickedOnce = false;
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
         startButtonPressed = true;

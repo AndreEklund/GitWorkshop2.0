@@ -192,26 +192,26 @@ public class MainProgram extends Application {
 
         if (level == 1) {
             rightPanel.changeLevelCounter("21");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel21(), 2, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel21(), 2, heartCrystals, this, false, rightPanel));
             introAnimation = new WorldIntroAnimation("2");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("22");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel22(), 3, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel22(), 3, heartCrystals, this, false, rightPanel));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("23");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel23(), 4, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel23(), 4, heartCrystals, this, false, rightPanel));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("24");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel24(), 5, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel24(), 5, heartCrystals, this, false, rightPanel));
         }
         else if (level == 5) {
             rightPanel.changeLevelCounter("25");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel25(), 6, heartCrystals, this, true));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel25(), 6, heartCrystals, this, true, rightPanel));
         }
         else if (level == 6) {
             nextWorld3Level(1, heartCrystals);
@@ -223,26 +223,26 @@ public class MainProgram extends Application {
 
         if (level == 1) {
             rightPanel.changeLevelCounter("31");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel31(), 2, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel31(), 2, heartCrystals, this, rightPanel));
             introAnimation = new WorldIntroAnimation("3");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("32");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel32(), 3, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel32(), 3, heartCrystals, this, rightPanel));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("33");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel33(), 4, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel33(), 4, heartCrystals, this, rightPanel));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("34");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel34(), 5, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel34(), 5, heartCrystals, this, rightPanel));
         }
         else if (level == 5) {
             rightPanel.changeLevelCounter("35");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel35(), 6, heartCrystals, this));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel35(), 6, heartCrystals, this, rightPanel));
         }
         else if (level == 6) {
             nextWorld4Level(1, heartCrystals);
@@ -254,26 +254,26 @@ public class MainProgram extends Application {
 
         if (level == 1) {
             rightPanel.changeLevelCounter("41");
-            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel41(), 2, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel41(), 2, heartCrystals, this, false, rightPanel));
             introAnimation = new WorldIntroAnimation("4");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("42");
-            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel42(), 3, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel42(), 3, heartCrystals, this, false, rightPanel));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("43");
-            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel43(), 4, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel43(), 4, heartCrystals, this, false, rightPanel));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("44");
-            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel44(), 5, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel44(), 5, heartCrystals, this, false, rightPanel));
         }
         else if (level == 5) {
             rightPanel.changeLevelCounter("45");
-            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel45(), 6, heartCrystals, this, true));
+            mainPaneCampaign.setCenter(new World2Template(world4Maps.getLevel45(), 6, heartCrystals, this, true, rightPanel));
         }
         else if (level == 6) {
             nextWorld5Level(1, heartCrystals);
@@ -285,26 +285,26 @@ public class MainProgram extends Application {
 
         if (level == 1) {
             rightPanel.changeLevelCounter("51");
-            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel51(), 2, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel51(), 2, heartCrystals, this, false, rightPanel));
             introAnimation = new WorldIntroAnimation("5");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("52");
-            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel52(), 3, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel52(), 3, heartCrystals, this, false, rightPanel));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("53");
-            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel53(), 4, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel53(), 4, heartCrystals, this, false, rightPanel));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("54");
-            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel54(), 5, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel54(), 5, heartCrystals, this, false, rightPanel));
         }
         else if (level == 5) {
             rightPanel.changeLevelCounter("55");
-            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel55(), 6, heartCrystals, this, true));
+            mainPaneCampaign.setCenter(new World2Template(world5Maps.getLevel55(), 6, heartCrystals, this, true, rightPanel));
         }
         else if (level == 6) {
             nextWorld6Level(1, heartCrystals);
@@ -316,26 +316,26 @@ public class MainProgram extends Application {
 
         if (level == 1) {
             rightPanel.changeLevelCounter("61");
-            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel61(), 2, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel61(), 2, heartCrystals, this, false, rightPanel));
             introAnimation = new WorldIntroAnimation("6");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("62");
-            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel62(), 3, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel62(), 3, heartCrystals, this, false, rightPanel));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("63");
-            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel63(), 4, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel63(), 4, heartCrystals, this, false, rightPanel));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("64");
-            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel64(), 5, heartCrystals, this, false));
+            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel64(), 5, heartCrystals, this, false, rightPanel));
         }
         else if (level == 5) {
             rightPanel.changeLevelCounter("65");
-            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel65(), 5, heartCrystals, this, true));
+            mainPaneCampaign.setCenter(new World2Template(world6Maps.getLevel65(), 5, heartCrystals, this, true, rightPanel));
         }
     }
 }
