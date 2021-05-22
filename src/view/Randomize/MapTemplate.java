@@ -1,4 +1,4 @@
-package view;
+package view.Randomize;
 
 
 import model.MazeGeneration.GenerateNextLevel;

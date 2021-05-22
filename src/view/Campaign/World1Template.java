@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
+import view.AudioPlayer;
 import view.Menu.RightPanel;
 
 import java.io.File;
@@ -50,33 +51,17 @@ public class World1Template extends GridPane {
     private boolean gameStarted;
     private boolean startNotClickedOnce = true;
 
-
-    private File diamondSound = new File("files/sounds/Diamond1.mp3");
-    private Media diamondMedia = new Media(diamondSound.toURI().toString());
-    private MediaPlayer diamondPlayer = new MediaPlayer(diamondMedia);
-
-    private File deathSound = new File("files/sounds/MazegenDeath.mp3");
-    private Media deathMedia = new Media(deathSound.toURI().toString());
-    private MediaPlayer deathPlayer = new MediaPlayer(deathMedia);
-
-
-    private File startSound = new File("files/sounds/MazegenStart.mp3");
-    private Media startMedia = new Media(startSound.toURI().toString());
-    private MediaPlayer startPlayer = new MediaPlayer(startMedia);
-
-    private File goalSound = new File("files/sounds/MazegenGoal.mp3");
-    private Media goalMedia = new Media(goalSound.toURI().toString());
-    private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
-
     private RightPanel rightPanel;
+    private AudioPlayer audioPlayer;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage) throws FileNotFoundException {
+    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage, AudioPlayer audioPlayer) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
         this.level = level;
         this.heartCrystals = heartCrystals;
         this.rightPanel = rightPanel;
+        this.audioPlayer = audioPlayer;
         squareSize = 600/(level.length+2);
         setBackground();
         setupImages(worldImage);
@@ -275,6 +260,7 @@ public class World1Template extends GridPane {
         ImageView pathView = new ImageView(path);
 
         if (startButtonPressed) {
+            audioPlayer.playHeartSound();
             label.setGraphic(pathView);
             heartCrystals++;
         }
@@ -311,8 +297,7 @@ public class World1Template extends GridPane {
             if (heartCrystals == 0) {
                 gameOver();
             }
-            deathPlayer.play();
-            deathPlayer.seek(Duration.ZERO);
+            audioPlayer.playDeathSound();
             startButtonPressed = false;
         }
     }
@@ -323,8 +308,7 @@ public class World1Template extends GridPane {
 
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
-            goalPlayer.play();
-            goalPlayer.seek(Duration.ZERO);
+            audioPlayer.playGoalSound();
             mainProgram.nextWorld1Level(currentLevel, heartCrystals);
             rightPanel.pauseClock();
             gameStarted = true;
@@ -341,8 +325,7 @@ public class World1Template extends GridPane {
 
 
         startNotClickedOnce = false;
-        startPlayer.play();
-        startPlayer.seek(Duration.ZERO);
+        audioPlayer.playStartSound();
         startButtonPressed = true;
     }
     public void exitedLabel(MouseEvent e) {
@@ -365,6 +348,7 @@ public class World1Template extends GridPane {
                 label.setGraphic(pathView);
                 pickaxeObtained = false;
                 wallDestroyed = true;
+                audioPlayer.playBreakableWallSound();
             }
             else if (!wallDestroyed) {
                 enteredWall(e);
@@ -378,8 +362,7 @@ public class World1Template extends GridPane {
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
 
-                diamondPlayer.play();
-                diamondPlayer.seek(Duration.ZERO);
+                audioPlayer.playCollectibleSound();
 
                 for (Label label : pickaxes){
                     if (e.getSource()== label){

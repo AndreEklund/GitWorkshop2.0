@@ -2,7 +2,7 @@ package model.MazeGeneration;
 
 import control.MainProgram;
 import javafx.scene.layout.BorderPane;
-import view.MapTemplate;
+import view.Randomize.MapTemplate;
 import view.Menu.RightPanel;
 
 import java.io.FileNotFoundException;
