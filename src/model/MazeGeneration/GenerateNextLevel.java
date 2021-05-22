@@ -29,7 +29,6 @@ public class GenerateNextLevel {
         int currentMaze[][] = mazeGenerator.getMaze();
         MazeGenerator newMazegenerator = new MazeGenerator(dimension, false);
         int nextMaze[][] = newMazegenerator.getMaze();
-        int row = 0;
         int col = 0;
 
         //Ändra goal till start i nästa labyrint
