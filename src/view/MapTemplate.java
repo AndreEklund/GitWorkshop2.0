@@ -278,7 +278,6 @@ public class MapTemplate extends GridPane {
             goalPlayer.play();
             goalPlayer.seek(Duration.ZERO);
             generateNextLevel.generateNewMaze();
-            //main.generateMobMaze();
         }
     }
     public void startLevel() {
