@@ -130,26 +130,41 @@ public class World2Template extends  GridPane  {
     }
     public void initialize() {
 
-        ImageView ghost1V = new ImageView();
-        ImageView ghost2V = new ImageView();
-        ImageView ghost3V = new ImageView();
-        ImageView ghost4V = new ImageView();
-        ImageView ghost5V = new ImageView();
-        ImageView ghost6V = new ImageView();
+        ImageView ghost1V = new ImageView(ghost);
+        ImageView ghost2V = new ImageView(ghost);
+        ImageView ghost3V = new ImageView(ghost);
+        ImageView ghost4V = new ImageView(ghost);
+        ImageView ghost5V = new ImageView(ghost);
+        ImageView ghost6V = new ImageView(ghost);
 
-        ghost1V.setImage(ghost);
-        ghost2V.setImage(ghost);
-        ghost3V.setImage(ghost);
-        ghost4V.setImage(ghost);
-        ghost5V.setImage(ghost);
-        ghost6V.setImage(ghost);
+        Label ghost1VLabel = new Label();
+        Label ghost2VLabel = new Label();
+        Label ghost3VLabel = new Label();
+        Label ghost4VLabel = new Label();
+        Label ghost5VLabel = new Label();
+        Label ghost6VLabel = new Label();
 
-        add(ghost1V,10,0);
-        add(ghost2V,9,0);
-        add(ghost3V,8,0);
-        add(ghost4V, 1, 0);
-        add(ghost5V, 2, 0);
-        add(ghost6V, 3, 0);
+        ghost1VLabel.setGraphic(ghost1V);
+        ghost2VLabel.setGraphic(ghost2V);
+        ghost3VLabel.setGraphic(ghost3V);
+        ghost4VLabel.setGraphic(ghost4V);
+        ghost5VLabel.setGraphic(ghost5V);
+        ghost6VLabel.setGraphic(ghost6V);
+
+        ghost1VLabel.setOnMouseEntered(e -> enteredWall(e));
+        ghost2VLabel.setOnMouseEntered(e -> enteredWall(e));
+        ghost3VLabel.setOnMouseEntered(e -> enteredWall(e));
+        ghost4VLabel.setOnMouseEntered(e -> enteredWall(e));
+        ghost5VLabel.setOnMouseEntered(e -> enteredWall(e));
+        ghost6VLabel.setOnMouseEntered(e -> enteredWall(e));
+
+
+        add(ghost1VLabel,10,0);
+        add(ghost2VLabel,9,0);
+        add(ghost3VLabel,8,0);
+        add(ghost4VLabel, 1, 0);
+        add(ghost5VLabel, 2, 0);
+        add(ghost6VLabel, 3, 0);
 
 
         Polyline line1 = new Polyline();
@@ -234,6 +249,7 @@ public class World2Template extends  GridPane  {
         animation.setPath(line);
         animation.setCycleCount(PathTransition.INDEFINITE);
         animation.play();
+
 
 
 
