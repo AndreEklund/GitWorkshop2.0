@@ -71,7 +71,7 @@ public class World1Template extends GridPane {
     private RightPanel rightPanel;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel) throws FileNotFoundException {
+    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
         this.level = level;
@@ -79,7 +79,7 @@ public class World1Template extends GridPane {
         this.rightPanel = rightPanel;
         squareSize = 600/(level.length+2);
         setBackground();
-        setupImages();
+        setupImages(worldImage);
         setupBorders();
         setupLevel();
         rightPanel.setSTARTTIME(15);
@@ -138,15 +138,40 @@ public class World1Template extends GridPane {
             }
         }
     }
-    public void setupImages(){
-        wall = new Image("file:files/forest/wall.png", squareSize, squareSize, false, false);
-        path = new Image("file:files/forest/path.png", squareSize, squareSize, false, false);
-        border = new Image("file:files/forest/border.png", squareSize, squareSize, false, false);
-        goal = new Image("file:files/forest/goal.png", squareSize, squareSize, false, false);
-        diamond = new Image("file:files/forest/collectible.png", squareSize, squareSize, false, false);
-        start = new Image("file:files/forest/start.png", squareSize, squareSize, false, false);
+    public void setupImages(int value){
+
+        String folder = "";
+
+        if (value == 0) {
+            folder = "forest";
+        }
+        else if (value == 1) {
+            folder = "lava";
+        }
+        else if (value == 2) {
+            folder = "underground";
+        }
+        else if(value == 3) {
+            folder = "cloud";
+        }
+        else if(value == 4) {
+            folder = "desert";
+        }
+        else if(value == 5) {
+            folder = "space";
+        }
+
+        path = new Image("file:files/" + folder + "/path.png", squareSize, squareSize, false, false);
+        goal = new Image("file:files/" + folder + "/goal.png", squareSize, squareSize, false, false);
+        diamond = new Image("file:files/" + folder + "/collectible.png", squareSize, squareSize, false, false);
+        start = new Image("file:files/" + folder + "/start.png", squareSize, squareSize, false, false);
         pickAxeImage = new Image("file:files/items/pickaxe.png", squareSize, squareSize, false, false);
         heart = new Image("file:files/items/heart.png", squareSize, squareSize, false, false);
+
+        if(value!=5){
+            border = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
+            wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
+        }
     }
 
     public Label getWall() {
