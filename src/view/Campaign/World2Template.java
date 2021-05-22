@@ -151,21 +151,19 @@ public class World2Template extends  GridPane  {
         ghost5VLabel.setGraphic(ghost5V);
         ghost6VLabel.setGraphic(ghost6V);
 
-        ghost1VLabel.setOnMouseEntered(e -> enteredWall(e));
-        ghost2VLabel.setOnMouseEntered(e -> enteredWall(e));
-        ghost3VLabel.setOnMouseEntered(e -> enteredWall(e));
-        ghost4VLabel.setOnMouseEntered(e -> enteredWall(e));
-        ghost5VLabel.setOnMouseEntered(e -> enteredWall(e));
-        ghost6VLabel.setOnMouseEntered(e -> enteredWall(e));
+        ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost4V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost5V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost6V.setOnMouseEntered(e -> enteredGhost(e));
 
-
-        add(ghost1VLabel,10,0);
-        add(ghost2VLabel,9,0);
-        add(ghost3VLabel,8,0);
-        add(ghost4VLabel, 1, 0);
-        add(ghost5VLabel, 2, 0);
-        add(ghost6VLabel, 3, 0);
-
+        add(ghost1V,10,0);
+        add(ghost2V,9,0);
+        add(ghost3V,8,0);
+        add(ghost4V, 1, 0);
+        add(ghost5V, 2, 0);
+        add(ghost6V, 3, 0);
 
         Polyline line1 = new Polyline();
         Polyline line2 = new Polyline();
@@ -173,7 +171,7 @@ public class World2Template extends  GridPane  {
         Polyline line4 = new Polyline();
         Polyline line5 = new Polyline();
         Polyline line6 = new Polyline();
-
+        
         line1.getPoints().addAll(
                 16.0, -10.5,
                 10.5, 650.0);
@@ -251,7 +249,12 @@ public class World2Template extends  GridPane  {
         animation.play();
 
 
-
+        ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost4V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost5V.setOnMouseEntered(e -> enteredGhost(e));
+        ghost6V.setOnMouseEntered(e -> enteredGhost(e));
 
     }
     public void setBackground(){
@@ -495,6 +498,29 @@ public class World2Template extends  GridPane  {
         if (startButtonPressed) {
             heartCrystals--;
             System.out.println("Hearts left: " + heartCrystals);
+
+            if (heartCrystals == 0) {
+                gameOver();
+            }
+            deathPlayer.play();
+            deathPlayer.seek(Duration.ZERO);
+            startButtonPressed = false;
+        }
+    }
+
+    public void enteredGhost(MouseEvent e){
+        ImageView view = (ImageView) e.getSource();
+        FadeTransition fade = new FadeTransition();
+        fade.setNode(view);
+        fade.setDuration(Duration.seconds(1));
+        fade.setFromValue(10);
+        fade.setToValue(0.6);
+        fade.setToValue(10);
+        fade.play();
+
+        if (startButtonPressed) {
+            heartCrystals--;
+            System.out.println("spöke träffat");
 
             if (heartCrystals == 0) {
                 gameOver();
