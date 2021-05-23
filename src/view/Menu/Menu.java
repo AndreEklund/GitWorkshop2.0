@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import view.AudioPlayer;
 
 import java.io.FileNotFoundException;
 
@@ -21,9 +22,11 @@ public class Menu extends Pane {
     private Image help;
     private Image helpResize;
     private Image mazegen;
+    private AudioPlayer audioPlayer;
 
-    public Menu(MainProgram mainProgram){
+    public Menu(MainProgram mainProgram, AudioPlayer audioPlayer){
         this.mainProgram = mainProgram;
+        this.audioPlayer = audioPlayer;
         setBackground();
         setupImages();
         addButtons();
@@ -69,6 +72,7 @@ public class Menu extends Pane {
         campaignView.setOnMouseClicked(e -> {
             try {
                 mainProgram.changeToCampaign();
+                audioPlayer.playForestMusic();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }

@@ -70,7 +70,7 @@ public class MainProgram extends Application {
         rightPanel.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         //Menu och Intro scenes
-        menu = new Menu(this);
+        menu = new Menu(this, audioPlayer);
         intro = new Intro(this);
         help = new Help(this);
         chooseDimension = new ChooseDimension(this);

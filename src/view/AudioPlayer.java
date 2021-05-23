@@ -33,10 +33,18 @@ public class AudioPlayer {
     private Media breakableWallMedia;
     private MediaPlayer breakableWallPlayer;
 
+    private File forestMusic;
+    private Media forestMedia;
+    private MediaPlayer forestMediaPlayer;
+
     public AudioPlayer() {
         setupAudioFiles();
     }
     public void setupAudioFiles() {
+
+        forestMusic = new File("files/music/Forest_test1.mp3");
+        forestMedia = new Media(forestMusic.toURI().toString());
+        forestMediaPlayer = new MediaPlayer(forestMedia);
 
         diamondSound = new File("files/sounds/Diamond1.mp3");
         diamondMedia = new Media(diamondSound.toURI().toString());
@@ -61,6 +69,11 @@ public class AudioPlayer {
         breakableWallSound = new File("files/sounds/AxeUsed.mp3");
         breakableWallMedia = new Media(breakableWallSound.toURI().toString());
         breakableWallPlayer = new MediaPlayer(breakableWallMedia);
+    }
+
+    public void playForestMusic(){
+        forestMediaPlayer.play();
+        forestMediaPlayer.seek(Duration.ZERO);
     }
     public void playCollectibleSound() {
         diamondPlayer.play();
@@ -93,5 +106,9 @@ public class AudioPlayer {
         startPlayer.setMute(mute);
         goalPlayer.setMute(mute);
         diamondPlayer.setMute(mute);
+    }
+
+    public void muteMusic(boolean mute){
+        forestMediaPlayer.setMute(mute);
     }
 }
