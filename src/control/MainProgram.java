@@ -14,6 +14,7 @@ import model.MazeGeneration.GenerateNextLevel;
 import model.MapCreator;
 import view.AudioPlayer;
 import view.Campaign.*;
+import view.GameOverScreen;
 import view.Randomize.MapTemplate;
 import model.MazeGeneration.MazeGenerator;
 import view.Menu.*;
@@ -51,6 +52,7 @@ public class MainProgram extends Application {
     private World3Maps world3Maps;
     private WorldIntroAnimation introAnimation;
     private AudioPlayer audioPlayer;
+    private GameOverScreen gameOverScreen;
 
 
     @Override
@@ -157,7 +159,10 @@ public class MainProgram extends Application {
     public void changeToHelp(){
         mainWindow.setScene(helpScene);
     }
-
+    public void gameOver() {
+        gameOverScreen = new GameOverScreen(this);
+        mainPaneCampaign.getChildren().add(gameOverScreen);
+    }
 
     public static void main(String[] args) {
         launch(args);
