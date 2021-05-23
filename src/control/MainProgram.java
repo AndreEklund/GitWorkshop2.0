@@ -59,10 +59,13 @@ public class MainProgram extends Application {
 
     public void start(Stage primaryStage) throws Exception{
 
-        rightPanel = new RightPanel(this, "11");
+
 
         //En klass som spelar alla ljud/musik
         audioPlayer = new AudioPlayer();
+
+        //
+        rightPanel = new RightPanel(this, "11", audioPlayer);
 
         rightPanel.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -103,7 +106,7 @@ public class MainProgram extends Application {
         mainPaneCampaign.setRight(rightPanel);
 
 
-        rightPnlRndm = new RightPanel(this, "Random");
+        rightPnlRndm = new RightPanel(this, "Random", audioPlayer);
         rightPnlRndm.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         //mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
