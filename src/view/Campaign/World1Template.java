@@ -294,6 +294,7 @@ public class World1Template extends GridPane {
 
             heartCrystals--;
             System.out.println("Hearts left: " + heartCrystals);
+            rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
 
             if (heartCrystals == 0) {
                 gameOver();
