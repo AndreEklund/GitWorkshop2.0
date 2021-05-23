@@ -6,7 +6,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.DigitalClock;
+import view.AudioPlayer;
 
 import java.io.FileNotFoundException;
 
@@ -26,23 +26,36 @@ public class RightPanel extends GridPane {
      * Author Filip Örnling
      */
 
-    private ImageView currentLevelView;
-    private Label level;
-    private Image imageMenu;
-    private ImageView menuView;
-    private Label heartLabel;
-    private Image levelNumber;
     private MainProgram mainProgram;
     private DigitalClock clock = new DigitalClock();
     private boolean running = false;
     private String gameMode;
     private int seconds;
+
+    private Image imageMenu;
+    private ImageView menuView;
+
+    private Image levelNumber;
+    private ImageView currentLevelView;
+    private Label levelLabel;
+
     private Image heart;
     private ImageView currentHeartView;
+    private Label heartLabel;
 
     private Image pickaxe;
     private ImageView pickaxeView;
     private Label pickaxeLabel;
+
+    private Image soundImage;
+    private ImageView soundView;
+    private Label soundLabel;
+    private boolean soundOn;
+
+    private Image musicImage;
+    private ImageView musicView;
+    private Label musicLabel;
+    private boolean musicOn;
 
     private static Integer STARTTIME = 15;
     private Timeline timeline = new Timeline();
@@ -52,35 +65,54 @@ public class RightPanel extends GridPane {
     private IntegerProperty stackedSeconds = new SimpleIntegerProperty();
     private Font font = Font.loadFont("file:files/fonts/PressStart2P.ttf", 50);
 
+    private AudioPlayer audioPlayer;
 
 
-
-    public RightPanel(MainProgram mainProgram, String gameMode) throws FileNotFoundException {
+    public RightPanel(MainProgram mainProgram, String gameMode, AudioPlayer audioPlayer) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.gameMode = gameMode;
+        this.audioPlayer = audioPlayer;
 
-        levelNumber = new Image("file:files/levelcounter/"+ gameMode +".png", 90, 30, false, false);
-        currentLevelView = new ImageView(levelNumber);
+        soundOn = true;
+        musicOn = true;
+
         imageMenu = new Image("file:files/texts/Menu.png", 90, 30, false, false);
         menuView = new ImageView(imageMenu);
 
-        heart = new Image("file:files/hearts/3heart.png", 90, 30, false, false);
-        currentHeartView = new ImageView(heart);
-
         pickaxe = new Image("file:files/items/pickaxe.png", 30, 30, false, false);
-
         pickaxeView = new ImageView(pickaxe);
         pickaxeLabel = new Label();
         pickaxeLabel.setTranslateX(8);
 
+        levelNumber = new Image("file:files/levelcounter/"+ gameMode +".png", 90, 30, false, false);
+        currentLevelView = new ImageView(levelNumber);
+        levelLabel = new Label();
+        levelLabel.setTranslateX(8);
+        levelLabel.setGraphic(currentLevelView);
 
-        level = new Label();
-        level.setTranslateX(8);
-        level.setGraphic(currentLevelView);
+        soundImage = new Image("file:files/soundbuttons/soundon.png", 30,30,false,false);
+        soundView = new ImageView(soundImage);
+        soundLabel = new Label();
+        soundLabel.setTranslateX(38);
+        soundLabel.setTranslateY(420);
+        soundLabel.setGraphic(soundView);
 
-        heartLabel = new Label();
-        heartLabel.setTranslateX(8);
-        heartLabel.setGraphic(currentHeartView);
+        musicImage = new Image("file:files/soundbuttons/musicon.png", 30,30,false,false);
+        musicView = new ImageView(musicImage);
+        musicLabel = new Label();
+        musicLabel.setTranslateX(68);
+        musicLabel.setTranslateY(420);
+        musicLabel.setGraphic(musicView);
+
+        //Hearts only in Campaign
+        if(gameMode!="Random"){
+            heart = new Image("file:files/hearts/3heart.png", 90, 30, false, false);
+            currentHeartView = new ImageView(heart);
+            heartLabel = new Label();
+            heartLabel.setTranslateX(8);
+            heartLabel.setGraphic(currentHeartView);
+            add(heartLabel,0,2);
+        }
 
         timerLabel.textProperty().bind(timeSeconds.asString());
         timerLabel.setTextFill(Color.WHITE);
@@ -90,11 +122,16 @@ public class RightPanel extends GridPane {
 
         add(timerLabel, 0, 3);
 
-        add(level,0,1);
-
-        add(heartLabel,0,2);
+        add(levelLabel,0,1);
 
         add(pickaxeLabel, 0, 3);
+
+        soundLabel.setOnMouseClicked(e -> soundLabelClicked());
+        musicLabel.setOnMouseClicked(e -> musicLabelClicked());
+
+        add(soundLabel,0,4);
+        add(musicLabel,0,4);
+
 
         //add(clock,0,2);
         //runClock();
@@ -103,9 +140,35 @@ public class RightPanel extends GridPane {
         add(menuView,0,0);
     }
 
+    public void soundLabelClicked(){
+        if(soundOn){
+            soundImage = new Image("file:files/soundbuttons/soundoff.png", 30,30,false,false);
+            audioPlayer.muteSound(true);
+            soundOn = false;
+        } else{
+            soundImage = new Image("file:files/soundbuttons/soundon.png", 30,30,false,false);
+            audioPlayer.muteSound(false);
+            soundOn = true;
+        }
+        soundView.setImage(soundImage);
+        soundLabel.setGraphic(soundView);
+    }
+
+    public void musicLabelClicked(){
+        if(musicOn){
+            musicImage = new Image("file:files/soundbuttons/musicoff.png",30,30,false,false);
+            musicOn = false;
+        } else{
+            musicImage = new Image("file:files/soundbuttons/musicon.png",30,30,false,false);
+            musicOn = true;
+        }
+        musicView.setImage(musicImage);
+        musicLabel.setGraphic(musicView);
+    }
+
     public void changeHeartCounter(String number){
         heart = new Image("file:files/hearts/" + number + "heart.png", 90, 30, false, false);
-        currentHeartView = new ImageView(heart);
+        currentHeartView.setImage(heart);
         heartLabel.setGraphic(currentHeartView);
 
     }
@@ -121,8 +184,8 @@ public class RightPanel extends GridPane {
 
     public void changeLevelCounter(String number){
         levelNumber = new Image("file:files/levelcounter/" + number + ".png", 90, 30, false, false);
-        currentLevelView = new ImageView(levelNumber);
-        level.setGraphic(currentLevelView);
+        currentLevelView.setImage(levelNumber);
+        levelLabel.setGraphic(currentLevelView);
     }
 
 
