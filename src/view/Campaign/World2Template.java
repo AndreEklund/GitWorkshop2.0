@@ -93,6 +93,7 @@ public class World2Template extends  GridPane  {
         this.currentLevel = currentLevel;
         this.level = level;
         this.heartCrystals = heartCrystals;
+        rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         this.bossMap = bossMap;
         this.rightPanel = rightPanel;
         squareSize = 600/(level.length+2);
@@ -484,6 +485,7 @@ public class World2Template extends  GridPane  {
         if (startButtonPressed) {
             label.setGraphic(pathView);
             heartCrystals++;
+            rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         }
     }
     public void enteredWall(MouseEvent e) {
@@ -498,6 +500,7 @@ public class World2Template extends  GridPane  {
         if (startButtonPressed) {
             heartCrystals--;
             System.out.println("Hearts left: " + heartCrystals);
+            rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
 
             if (heartCrystals == 0) {
                 gameOver();
@@ -521,6 +524,7 @@ public class World2Template extends  GridPane  {
         if (startButtonPressed) {
             heartCrystals--;
             System.out.println("spöke träffat");
+            rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
 
             if (heartCrystals == 0) {
                 gameOver();
