@@ -199,26 +199,26 @@ public class MainProgram extends Application {
 
         if (level == 1) {
             rightPanel.changeLevelCounter("21");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel21(), 2, heartCrystals, this, false, rightPanel));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel21(), 2, heartCrystals, this, rightPanel, 1, audioPlayer, false));
             introAnimation = new WorldIntroAnimation("2");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("22");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel22(), 3, heartCrystals, this, false, rightPanel));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel22(), 3, heartCrystals, this, rightPanel, 1, audioPlayer, false));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("23");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel23(), 4, heartCrystals, this, false, rightPanel));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel23(), 4, heartCrystals, this, rightPanel, 1, audioPlayer, false));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("24");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel24(), 5, heartCrystals, this, false, rightPanel));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel24(), 5, heartCrystals, this, rightPanel, 1, audioPlayer, false));
         }
         else if (level == 5) {
             rightPanel.changeLevelCounter("25");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel25(), 6, heartCrystals, this, true, rightPanel));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel25(), 6, heartCrystals, this, rightPanel, 1, audioPlayer, true));
         }
         else if (level == 6) {
             nextWorld3Level(1, heartCrystals);
