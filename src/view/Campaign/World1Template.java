@@ -309,6 +309,27 @@ public class World1Template extends GridPane {
             startButtonPressed = false;
         }
     }
+    public void enteredGhost(MouseEvent e){
+        ImageView view = (ImageView) e.getSource();
+        FadeTransition fade = new FadeTransition();
+        fade.setNode(view);
+        fade.setDuration(Duration.seconds(1));
+        fade.setFromValue(10);
+        fade.setToValue(0.6);
+        fade.setToValue(10);
+        fade.play();
+
+        if (startButtonPressed) {
+            heartCrystals--;
+            System.out.println("spöke träffat");
+            rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+
+            if (heartCrystals == 0) {
+                gameOver();
+            }
+            startButtonPressed = false;
+        }
+    }
 
     private void gameOver() {
         mainProgram.gameOver();
