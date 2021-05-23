@@ -264,6 +264,7 @@ public class World1Template extends GridPane {
             audioPlayer.playHeartSound();
             label.setVisible(false);
             heartCrystals++;
+            rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         }
     }
 
