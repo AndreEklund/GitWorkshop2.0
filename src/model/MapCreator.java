@@ -25,12 +25,12 @@ public class MapCreator extends GridPane {
      */
 
 
-    private MouseListener mouseListener = new MouseListener();
+    /*private MouseListener mouseListener = new MouseListener();
 
     private Label[][] labels = new Label[15][15];
-    private Image wall = new Image(new FileInputStream("files/wall.jpg"));
-    private Image path = new Image(new FileInputStream("files/floor.png"));
-    private Image goal = new Image(new FileInputStream("files/red.jpg"));
+    //private Image wall = new Image(new FileInputStream();
+    //private Image path = new Image(new FileInputStream();
+    //private Image goal = new Image(new FileInputStream();
     private Label lastLabelPressed;
 
 
@@ -126,6 +126,5 @@ public class MapCreator extends GridPane {
     public void enteredGoal(MouseEvent e) {
         System.out.println("GOAL");
 
-    }
-
+    }*/
 }

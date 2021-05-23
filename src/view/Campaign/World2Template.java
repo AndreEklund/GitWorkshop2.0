@@ -35,11 +35,11 @@ public class World2Template extends  GridPane  {
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
-    private Image wall;// = new Image(new FileInputStream("files/wall.jpg"));
-    private Image path;// = new Image(new FileInputStream("files/floor.jpg"));
-    private Image border;// = new Image(new FileInputStream("files/floor.png"));
-    private Image goal;// = new Image(new FileInputStream("files/red.jpg"));
-    private Image diamond;// = new Image(new FileInputStream("files/diamond.png"));
+    private Image wall;
+    private Image path;
+    private Image border;
+    private Image goal;
+    private Image diamond;
     private Image start;
     private Image ghost;
     private Image Obs;
