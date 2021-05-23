@@ -8,22 +8,22 @@ import java.io.File;
 
 public class AudioPlayer {
 
-    private File diamondSound = new File("files/sounds/Diamond1.mp3");
-    private Media diamondMedia = new Media(diamondSound.toURI().toString());
-    private MediaPlayer diamondPlayer = new MediaPlayer(diamondMedia);
+    private File diamondSound;
+    private Media diamondMedia;
+    private MediaPlayer diamondPlayer;
 
-    private File deathSound = new File("files/sounds/MazegenDeath.mp3");
-    private Media deathMedia = new Media(deathSound.toURI().toString());
-    private MediaPlayer deathPlayer = new MediaPlayer(deathMedia);
+    private File deathSound;
+    private Media deathMedia;
+    private MediaPlayer deathPlayer;
 
 
-    private File startSound = new File("files/sounds/MazegenStart.mp3");
-    private Media startMedia = new Media(startSound.toURI().toString());
-    private MediaPlayer startPlayer = new MediaPlayer(startMedia);
+    private File startSound;
+    private Media startMedia;
+    private MediaPlayer startPlayer;
 
-    private File goalSound = new File("files/sounds/MazegenGoal.mp3");
-    private Media goalMedia = new Media(goalSound.toURI().toString());
-    private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
+    private File goalSound;
+    private Media goalMedia;
+    private MediaPlayer goalPlayer;
 
     private File heartSound;
     private Media heartMedia;
@@ -85,5 +85,13 @@ public class AudioPlayer {
     public void playBreakableWallSound() {
         breakableWallPlayer.play();
         breakableWallPlayer.seek(Duration.ZERO);
+    }
+    public void muteSound(boolean mute) {
+        breakableWallPlayer.setMute(mute);
+        deathPlayer.setMute(mute);
+        heartPlayer.setMute(mute);
+        startPlayer.setMute(mute);
+        goalPlayer.setMute(mute);
+        diamondPlayer.setMute(mute);
     }
 }

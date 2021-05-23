@@ -257,11 +257,10 @@ public class World1Template extends GridPane {
     private void heartCrystalObtained(MouseEvent e) {
 
         Label label = (Label)e.getSource();
-        ImageView pathView = new ImageView(path);
 
         if (startButtonPressed) {
             audioPlayer.playHeartSound();
-            label.setGraphic(pathView);
+            label.setVisible(false);
             heartCrystals++;
         }
     }
@@ -340,12 +339,11 @@ public class World1Template extends GridPane {
     public void enteredBreakableWall(MouseEvent e) {
 
         Label label = (Label)e.getSource();
-        ImageView pathView = new ImageView(path);
 
         if (startButtonPressed) {
 
             if (pickaxeObtained) {
-                label.setGraphic(pathView);
+                label.setVisible(false);
                 pickaxeObtained = false;
                 wallDestroyed = true;
                 audioPlayer.playBreakableWallSound();
