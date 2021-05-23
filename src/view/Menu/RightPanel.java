@@ -157,9 +157,11 @@ public class RightPanel extends GridPane {
     public void musicLabelClicked(){
         if(musicOn){
             musicImage = new Image("file:files/soundbuttons/musicoff.png",30,30,false,false);
+            audioPlayer.muteMusic(true);
             musicOn = false;
         } else{
             musicImage = new Image("file:files/soundbuttons/musicon.png",30,30,false,false);
+            audioPlayer.muteMusic(false);
             musicOn = true;
         }
         musicView.setImage(musicImage);
