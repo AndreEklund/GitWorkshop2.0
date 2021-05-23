@@ -232,7 +232,7 @@ public class World3Template extends World1Template {
 
         }
         else if(currentLevel==4){
-
+            ImageView ghost1V = new ImageView();
 
 
         }
