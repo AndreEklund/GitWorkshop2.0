@@ -16,11 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.DigitalClock;
-import model.MapCreator;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 
 
 public class RightPanel extends GridPane {
@@ -32,12 +29,16 @@ public class RightPanel extends GridPane {
     private ImageView currentLevelView;
     private Label level;
     private Image imageMenu;
+    private ImageView menuView;
+    private Label heartLabel;
     private Image levelNumber;
     private MainProgram mainProgram;
     private DigitalClock clock = new DigitalClock();
     private boolean running = false;
     private String gameMode;
     private int seconds;
+    private Image heart;
+    private ImageView currentHeartView;
 
     private static Integer STARTTIME = 15;
     private Timeline timeline = new Timeline();
@@ -57,10 +58,18 @@ public class RightPanel extends GridPane {
         levelNumber = new Image("file:files/levelcounter/"+ gameMode +".png", 90, 30, false, false);
         currentLevelView = new ImageView(levelNumber);
         imageMenu = new Image("file:files/texts/Menu.png", 90, 30, false, false);
+        menuView = new ImageView(imageMenu);
+
+        heart = new Image("file:files/hearts/3heart.png", 90, 30, false, false);
+        currentHeartView = new ImageView(heart);
 
         level = new Label();
         level.setTranslateX(8);
         level.setGraphic(currentLevelView);
+
+        heartLabel = new Label();
+        heartLabel.setTranslateX(8);
+        heartLabel.setGraphic(currentHeartView);
 
         timerLabel.textProperty().bind(timeSeconds.asString());
         timerLabel.setTextFill(Color.WHITE);
@@ -70,23 +79,22 @@ public class RightPanel extends GridPane {
 
         add(timerLabel, 0, 3);
 
-        BackgroundImage menuBGImage = new BackgroundImage(imageMenu,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,new BackgroundSize(imageMenu.getWidth(), imageMenu.getHeight(),false,false,false,false));
-
         add(level,0,1);
+
+        add(heartLabel,0,2);
 
         //add(clock,0,2);
         //runClock();
 
+        menuView.setOnMouseClicked(e -> MainMenuClicked(e));
+        add(menuView,0,0);
+    }
 
-        Button btnMenu = new Button();
-        ImageView imageViewMenu = new ImageView(imageMenu);
-        btnMenu.setGraphic(imageViewMenu);
+    public void changeHeartCounter(String number){
+        heart = new Image("file:files/hearts/" + number + "heart.png", 90, 30, false, false);
+        currentHeartView = new ImageView(heart);
+        heartLabel.setGraphic(currentHeartView);
 
-        Background menuBackground = new Background(menuBGImage);
-        
-        btnMenu.setBackground(menuBackground);
-        btnMenu.setOnMouseClicked(e -> Mainmenyclicked(e));
-        add(btnMenu,0,0);
     }
 
 
@@ -99,7 +107,7 @@ public class RightPanel extends GridPane {
 
 
 
-    private void Mainmenyclicked(MouseEvent e){
+    private void MainMenuClicked(MouseEvent e){
         System.out.println("Main Menu clicked");
         mainProgram.changeToMenu();
 
