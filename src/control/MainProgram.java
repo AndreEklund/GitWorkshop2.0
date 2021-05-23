@@ -225,26 +225,26 @@ public class MainProgram extends Application {
 
         if (level == 1) {
             rightPanel.changeLevelCounter("31");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel31(), 2, heartCrystals, this, rightPanel));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel31(), 2, heartCrystals, this, rightPanel, 2, audioPlayer));
             introAnimation = new WorldIntroAnimation("3");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("32");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel32(), 3, heartCrystals, this, rightPanel));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel32(), 3, heartCrystals, this, rightPanel, 2, audioPlayer));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("33");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel33(), 4, heartCrystals, this, rightPanel));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel33(), 4, heartCrystals, this, rightPanel, 2, audioPlayer));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("34");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel34(), 5, heartCrystals, this, rightPanel));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel34(), 5, heartCrystals, this, rightPanel, 2, audioPlayer));
         }
         else if (level == 5) {
             rightPanel.changeLevelCounter("35");
-            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel35(), 6, heartCrystals, this, rightPanel));
+            mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel35(), 6, heartCrystals, this, rightPanel, 2, audioPlayer));
         }
         else if (level == 6) {
             nextWorld4Level(1, heartCrystals);

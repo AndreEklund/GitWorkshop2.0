@@ -50,21 +50,23 @@ public class World1Template extends GridPane {
     private boolean pickaxeObtained;
     private boolean gameStarted;
     private boolean startNotClickedOnce = true;
+    private int world;
 
     private RightPanel rightPanel;
     private AudioPlayer audioPlayer;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage, AudioPlayer audioPlayer) throws FileNotFoundException {
+    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int world, AudioPlayer audioPlayer) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
         this.level = level;
         this.heartCrystals = heartCrystals;
         this.rightPanel = rightPanel;
         this.audioPlayer = audioPlayer;
+        this.world = world;
         squareSize = 600/(level.length+2);
         setBackground();
-        setupImages(worldImage);
+        setupImages(world);
         setupBorders();
         setupLevel();
         rightPanel.setSTARTTIME(15);
@@ -131,10 +133,10 @@ public class World1Template extends GridPane {
             folder = "forest";
         }
         else if (value == 1) {
-            folder = "lava";
+            folder = "underground";
         }
         else if (value == 2) {
-            folder = "underground";
+            folder = "lava";
         }
         else if(value == 3) {
             folder = "cloud";
@@ -308,9 +310,29 @@ public class World1Template extends GridPane {
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
             audioPlayer.playGoalSound();
-            mainProgram.nextWorld1Level(currentLevel, heartCrystals);
+            nextLevel();
             rightPanel.pauseClock();
             gameStarted = true;
+        }
+    }
+    public void nextLevel() throws FileNotFoundException, InterruptedException {
+        if (world == 0) {
+            mainProgram.nextWorld1Level(currentLevel, heartCrystals);
+        }
+        else if (world == 1) {
+            mainProgram.nextWorld2Level(currentLevel, heartCrystals);
+        }
+        else if (world == 2) {
+            mainProgram.nextWorld3Level(currentLevel, heartCrystals);
+        }
+        else if (world == 3) {
+            mainProgram.nextWorld4Level(currentLevel, heartCrystals);
+        }
+        else if (world == 4) {
+            mainProgram.nextWorld5Level(currentLevel, heartCrystals);
+        }
+        else if (world == 5) {
+            mainProgram.nextWorld6Level(currentLevel, heartCrystals);
         }
     }
     public void startLevel() {
@@ -339,11 +361,12 @@ public class World1Template extends GridPane {
     public void enteredBreakableWall(MouseEvent e) {
 
         Label label = (Label)e.getSource();
+        ImageView pathView = new ImageView(path);
 
         if (startButtonPressed) {
 
             if (pickaxeObtained) {
-                label.setVisible(false);
+                label.setGraphic(pathView);
                 pickaxeObtained = false;
                 wallDestroyed = true;
                 audioPlayer.playBreakableWallSound();
