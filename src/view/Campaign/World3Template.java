@@ -106,6 +106,12 @@ public class World3Template extends World1Template {
             animation2.setPath(rectangle2);
             animation2.play();
 
+
+            ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+
+            ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+
+
         }
 
         else if (currentLevel ==2){
@@ -140,6 +146,11 @@ public class World3Template extends World1Template {
             animation2.setCycleCount(Animation.INDEFINITE);
             animation2.setPath(rectangle1);
             animation2.play();
+
+
+            ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+
         }
         else if (currentLevel ==3){
           ImageView ghost4V = new ImageView();
@@ -230,9 +241,17 @@ public class World3Template extends World1Template {
             animation2.setAutoReverse(true);
             animation2.play();
 
+
+            ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost4V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost5V.setOnMouseEntered(e -> enteredGhost(e));
+
+
         }
         else if(currentLevel==4){
-
+            ImageView ghost1V = new ImageView();
 
 
         }
