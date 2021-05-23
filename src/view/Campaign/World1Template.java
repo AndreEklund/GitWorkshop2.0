@@ -304,7 +304,7 @@ public class World1Template extends GridPane {
     }
 
     private void gameOver() {
-        System.out.println("Game over!!!!");
+        mainProgram.gameOver();
     }
 
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
