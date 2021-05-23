@@ -108,7 +108,7 @@ public class World3Template extends World1Template {
 
 
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
-            
+
             ghost3V.setOnMouseEntered(e -> enteredGhost(e));
 
 
