@@ -39,6 +39,7 @@ public class World1Template extends GridPane {
     private Image start;
     private Image ghost;
     private Image heart;
+    private Image breakableWall;
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private boolean wallDestroyed;
@@ -127,6 +128,7 @@ public class World1Template extends GridPane {
     }
     public void setupImages(int value){
 
+
         String folder = "";
 
         if (value == 0) {
@@ -154,6 +156,7 @@ public class World1Template extends GridPane {
         start = new Image("file:files/" + folder + "/start.png", squareSize, squareSize, false, false);
         pickAxeImage = new Image("file:files/items/pickaxe.png", squareSize, squareSize, false, false);
         heart = new Image("file:files/items/heart.png", squareSize, squareSize, false, false);
+        breakableWall = new Image("file:files/breakablewall.png", squareSize, squareSize, false, false);
 
         if(value!=5){
             border = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
@@ -194,7 +197,7 @@ public class World1Template extends GridPane {
     }
     private Label getBreakableWall() {
         Label label = new Label();
-        ImageView borderView = new ImageView(border);
+        ImageView borderView = new ImageView(breakableWall);
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
@@ -263,8 +266,10 @@ public class World1Template extends GridPane {
         if (startButtonPressed) {
             audioPlayer.playHeartSound();
             label.setVisible(false);
-            heartCrystals++;
-            rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+            if(heartCrystals<3){
+                heartCrystals++;
+                rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+            }
         }
     }
 

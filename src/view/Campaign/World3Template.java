@@ -45,6 +45,7 @@ public class World3Template extends World1Template {
         super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer);
         squareSize = 600/(level.length+2);
         this.currentLevel = currentLevel;
+        rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         setupGhost();
     }
 
