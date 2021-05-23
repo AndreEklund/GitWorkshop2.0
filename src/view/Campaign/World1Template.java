@@ -370,6 +370,7 @@ public class World1Template extends GridPane {
             if (pickaxeObtained) {
                 label.setGraphic(pathView);
                 pickaxeObtained = false;
+                rightPanel.removePickaxe();
                 wallDestroyed = true;
                 audioPlayer.playBreakableWallSound();
             }
@@ -391,6 +392,7 @@ public class World1Template extends GridPane {
                     if (e.getSource()== label){
                         label.setVisible(false);
                         pickaxeObtained = true;
+                        rightPanel.addPickaxe();
                     }
                 }
 

@@ -40,6 +40,10 @@ public class RightPanel extends GridPane {
     private Image heart;
     private ImageView currentHeartView;
 
+    private Image pickaxe;
+    private ImageView pickaxeView;
+    private Label pickaxeLabel;
+
     private static Integer STARTTIME = 15;
     private Timeline timeline = new Timeline();
     private Timeline timeline2;
@@ -63,6 +67,13 @@ public class RightPanel extends GridPane {
         heart = new Image("file:files/hearts/3heart.png", 90, 30, false, false);
         currentHeartView = new ImageView(heart);
 
+        pickaxe = new Image("file:files/items/pickaxe.png", 30, 30, false, false);
+
+        pickaxeView = new ImageView(pickaxe);
+        pickaxeLabel = new Label();
+        pickaxeLabel.setTranslateX(8);
+
+
         level = new Label();
         level.setTranslateX(8);
         level.setGraphic(currentLevelView);
@@ -83,6 +94,8 @@ public class RightPanel extends GridPane {
 
         add(heartLabel,0,2);
 
+        add(pickaxeLabel, 0, 3);
+
         //add(clock,0,2);
         //runClock();
 
@@ -95,6 +108,13 @@ public class RightPanel extends GridPane {
         currentHeartView = new ImageView(heart);
         heartLabel.setGraphic(currentHeartView);
 
+    }
+
+    public void addPickaxe(){
+        pickaxeLabel.setGraphic(pickaxeView);
+    }
+    public void removePickaxe(){
+        pickaxeLabel.setGraphic(null);
     }
 
 
