@@ -4,6 +4,8 @@ import control.MainProgram;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
@@ -39,13 +41,17 @@ public class World3Template extends World1Template {
     private PathTransition animation4;
     private PathTransition animation5;
     private PathTransition animation6;
+    private Thread platfrom;
     private int currentLevel;
+
+
 
     public World3Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage, AudioPlayer audioPlayer) throws FileNotFoundException {
         super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer);
         squareSize = 600/(level.length+2);
         this.currentLevel = currentLevel;
         setupGhost();
+
     }
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
@@ -68,15 +74,22 @@ public class World3Template extends World1Template {
     public void initialize() {
         if (currentLevel==1){
             ImageView ghost3V = new ImageView();
+            ImageView ghost1V = new ImageView();
             ghost3V.setImage(ghost);
-
+            ghost1V.setImage(ghost);
             add(ghost3V,5,5);
+            add(ghost1V,14,5);
 
-            Rectangle rectangle = new Rectangle(145,400);
-            rectangle.setY(50);
-            rectangle.setX(-150);
-            rectangle.setArcWidth(50);
-            rectangle.setArcHeight(50);
+            Rectangle rectangle = new Rectangle(125,251);
+            rectangle.setY(65);
+            rectangle.setX(-147);
+
+
+            Rectangle rectangle2 = new Rectangle(84,123);
+            rectangle2.setY(65);
+            rectangle2.setX(-147);
+
+
 
             animation = new PathTransition();
             animation.setNode(ghost3V);
@@ -84,6 +97,13 @@ public class World3Template extends World1Template {
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
             animation.play();
+
+            animation2 = new PathTransition();
+            animation2.setNode(ghost1V);
+            animation2.setDuration(Duration.seconds(4));
+            animation2.setCycleCount(Animation.INDEFINITE);
+            animation2.setPath(rectangle2);
+            animation2.play();
 
         }
 
@@ -94,31 +114,28 @@ public class World3Template extends World1Template {
             ghost1V.setImage(ghost);
             ghost2V.setImage(ghost);
 
-            add(ghost1V,10,0);
-            add(ghost2V,9,0);
+            //add(ghost1V,5,8);
+            add(ghost2V,9,3);
 
-            Rectangle rectangle = new Rectangle(145,400);
-            rectangle.setY(50);
-            rectangle.setX(-150);
-            rectangle.setArcWidth(50);
-            rectangle.setArcHeight(50);
+            Rectangle rectangle = new Rectangle(125,120);
+            rectangle.setY(65);
+            rectangle.setX(-147);
 
-            Rectangle rectangle1 = new Rectangle(400,145);
-            rectangle1.setY(200);
-            rectangle1.setX(-250);
-            rectangle1.setArcWidth(50);
-            rectangle1.setArcHeight(50);
+
+            Rectangle rectangle1 = new Rectangle(210,125);
+            rectangle1.setY(190);
+            rectangle1.setX(-231);
 
             animation = new PathTransition();
             animation.setNode(ghost1V);
-            animation.setDuration(Duration.seconds(4));
+            animation.setDuration(Duration.seconds(2));
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
             animation.play();
 
             animation2 = new PathTransition();
             animation2.setNode(ghost2V);
-            animation2.setDuration(Duration.seconds(5));
+            animation2.setDuration(Duration.seconds(2));
             animation2.setCycleCount(Animation.INDEFINITE);
             animation2.setPath(rectangle1);
             animation2.play();
@@ -126,89 +143,95 @@ public class World3Template extends World1Template {
         else if (currentLevel ==3){
           ImageView ghost4V = new ImageView();
           ImageView ghost2V = new ImageView();
+          ImageView ghost1V = new ImageView();
+          ImageView ghost3V = new ImageView();
+          ImageView ghost5V = new ImageView();
 
+
+          ghost1V.setImage(ghost);
           ghost2V.setImage(ghost);
+          ghost3V.setImage(ghost);
           ghost4V.setImage(ghost);
+          ghost5V.setImage(ghost);
 
-          add(ghost2V,5,5);
-          add(ghost4V,4,3);
-            Rectangle rectangle = new Rectangle(100,350);
-            rectangle.setY(50);
-            rectangle.setX(-150);
-            rectangle.setArcWidth(50);
-            rectangle.setArcHeight(50);
 
-            Rectangle rectangle1 = new Rectangle(100,200);
-            rectangle1.setY(200);
-            rectangle1.setX(-250);
-            rectangle1.setArcWidth(50);
-            rectangle1.setArcHeight(50);
+          add(ghost2V,15,4);
+          add(ghost4V,10,4);
+
+          add(ghost1V,10,1);
+          add(ghost3V,15,1);
+          add(ghost5V,12,1);
+
+            Rectangle rectangle = new Rectangle(125,83);
+            rectangle.setY(190);
+            rectangle.setX(-230);
+
+
+            Rectangle rectangle1 = new Rectangle(125,83);
+            rectangle1.setY(190);
+            rectangle1.setX(-230);
+
+            Rectangle rectangle2 = new Rectangle(0,83);
+            rectangle2.setY(105);
+            rectangle2.setX(-232);
+
+
+            Rectangle rectangle3 = new Rectangle(0,83);
+            rectangle3.setY(105);
+            rectangle3.setX(-232);
+
+            Rectangle rectangle4 = new Rectangle(0,83);
+            rectangle4.setY(105);
+            rectangle4.setX(-232);
+
+            //Övre spöken
+
+            animation3 = new PathTransition();
+            animation3.setNode(ghost1V);
+            animation3.setDuration(Duration.seconds(2));
+            animation3.setCycleCount(Animation.INDEFINITE);
+            animation3.setPath(rectangle2);
+            animation3.setAutoReverse(true);
+            animation3.play();
+
+            animation4 = new PathTransition();
+            animation4.setNode(ghost3V);
+            animation4.setDuration(Duration.seconds(2));
+            animation4.setCycleCount(Animation.INDEFINITE);
+            animation4.setPath(rectangle3);
+            animation4.setAutoReverse(true);
+            animation4.play();
+
+
+            animation5 = new PathTransition();
+            animation5.setNode(ghost5V);
+            animation5.setDuration(Duration.seconds(2));
+            animation5.setCycleCount(Animation.INDEFINITE);
+            animation5.setPath(rectangle4);
+            animation5.setAutoReverse(true);
+            animation5.play();
+
+            //Undre spöken
 
             animation = new PathTransition();
             animation.setNode(ghost4V);
-            animation.setDuration(Duration.seconds(4));
+            animation.setDuration(Duration.seconds(2));
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
+            animation.setAutoReverse(true);
             animation.play();
 
             animation2 = new PathTransition();
             animation2.setNode(ghost2V);
-            animation2.setDuration(Duration.seconds(5));
+            animation2.setDuration(Duration.seconds(3));
             animation2.setCycleCount(Animation.INDEFINITE);
             animation2.setPath(rectangle1);
+            animation2.setAutoReverse(true);
             animation2.play();
 
         }
         else if(currentLevel==4){
-           ImageView ghost5V = new ImageView();
-           ImageView ghost6V = new ImageView();
-           ImageView ghost7V = new ImageView();
 
-           ghost5V.setImage(ghost);
-           ghost6V.setImage(ghost);
-           ghost7V.setImage(ghost);
-
-           add(ghost5V,4,5);
-           add(ghost6V,5,3);
-           add(ghost7V,4,3);
-            Rectangle rectangle = new Rectangle(100,350);
-            rectangle.setY(50);
-            rectangle.setX(-150);
-            rectangle.setArcWidth(50);
-            rectangle.setArcHeight(50);
-
-            Rectangle rectangle1 = new Rectangle(100,200);
-            rectangle1.setY(200);
-            rectangle1.setX(-250);
-            rectangle1.setArcWidth(50);
-            rectangle1.setArcHeight(50);
-
-            Rectangle rectangle3 = new Rectangle(120,275);
-            rectangle1.setY(250);
-            rectangle1.setX(-300);
-            rectangle1.setArcWidth(80);
-            rectangle1.setArcHeight(50);
-
-            animation = new PathTransition();
-            animation.setNode(ghost5V);
-            animation.setDuration(Duration.seconds(4));
-            animation.setCycleCount(Animation.INDEFINITE);
-            animation.setPath(rectangle);
-            animation.play();
-
-            animation2 = new PathTransition();
-            animation2.setNode(ghost6V);
-            animation2.setDuration(Duration.seconds(5));
-            animation2.setCycleCount(Animation.INDEFINITE);
-            animation2.setPath(rectangle1);
-            animation2.play();
-
-            animation3 = new PathTransition();
-            animation3.setNode(ghost7V);
-            animation3.setDuration(Duration.seconds(5));
-            animation3.setCycleCount(Animation.INDEFINITE);
-            animation3.setPath(rectangle3);
-            animation3.play();
 
 
         }
@@ -226,4 +249,6 @@ public class World3Template extends World1Template {
 
 */
     }
+
+
 }//Class
