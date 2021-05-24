@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 public class World4Template extends World1Template {
 
     private Image ghost;
+    private Image largeGhost;
 
     private int squareSize;
     private ImageView imageView = new ImageView();
@@ -30,6 +31,29 @@ public class World4Template extends World1Template {
     public World4Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage, AudioPlayer audioPlayer) throws FileNotFoundException {
         super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer);
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+        this.currentLevel = currentLevel;
+        squareSize = 600/(level.length+2);
+
+        rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+        setupGhost();
+    }
+
+    public void setupGhost() throws FileNotFoundException {
+        ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
+
+
+        imageView.setImage(ghost);
+
+        imageView.setX(1);
+        imageView.setY(1);
+        imageView.setFitHeight(squareSize);
+        imageView.setFitWidth(squareSize);
+
+        imageView.setOnMouseEntered(e -> enteredWall(e));
+
+
+
+        initialize();
     }
 
 
@@ -37,32 +61,47 @@ public class World4Template extends World1Template {
         if (currentLevel==2){
             ImageView ghost3V = new ImageView();
             ImageView ghost1V = new ImageView();
+            ImageView ghost2V = new ImageView();
+
+            ghost2V.setImage(ghost);
             ghost3V.setImage(ghost);
             ghost1V.setImage(ghost);
-            add(ghost3V,5,5);
+            add(ghost3V,15,9);
             add(ghost1V,14,5);
+            add(ghost2V,0,10);
+            Rectangle rectangle = new Rectangle(110,150);
+            rectangle.setY(57);
+            rectangle.setX(-130);
 
-            Rectangle rectangle = new Rectangle(125,251);
-            rectangle.setY(65);
-            rectangle.setX(-147);
+
+            Rectangle rectangle2 = new Rectangle(110,75);
+            rectangle2.setY(57);
+            rectangle2.setX(-130);
 
 
-            Rectangle rectangle2 = new Rectangle(84,123);
-            rectangle2.setY(65);
-            rectangle2.setX(-147);
+            Rectangle rectangle1 = new Rectangle(75,75);
+            rectangle1.setX(57);
+            rectangle1.setY(-130);
 
+            animation3 = new PathTransition();
+            animation3.setNode(ghost2V);
+            animation3.setPath(rectangle1);
+            animation3.setDuration(Duration.seconds(2.5));
+            animation3.setCycleCount(Animation.INDEFINITE);
+            animation3.setAutoReverse(true);
+            animation3.play();
 
 
             animation = new PathTransition();
             animation.setNode(ghost3V);
-            animation.setDuration(Duration.seconds(4));
+            animation.setDuration(Duration.seconds(3.5));
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
             animation.play();
 
             animation2 = new PathTransition();
             animation2.setNode(ghost1V);
-            animation2.setDuration(Duration.seconds(4));
+            animation2.setDuration(Duration.seconds(2));
             animation2.setCycleCount(Animation.INDEFINITE);
             animation2.setPath(rectangle2);
             animation2.play();
