@@ -112,6 +112,7 @@ public class World2TemplateTest extends  GridPane  {
     public void buildBridge() throws InterruptedException {
         timer = new Thread(task);
 
+
     }
     public void setupGhost() throws FileNotFoundException {
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
