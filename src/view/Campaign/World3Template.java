@@ -250,8 +250,145 @@ public class World3Template extends World1Template {
 
 
         }
-        else if(currentLevel==5){
+        else if(currentLevel==5) {
             ImageView ghost1V = new ImageView();
+            ImageView ghost2V = new ImageView();
+            ImageView ghost3V = new ImageView();
+            ImageView ghost4V = new ImageView();
+
+            ghost4V.setImage(ghost);
+            ghost3V.setImage(ghost);
+            ghost2V.setImage(ghost);
+            ghost1V.setImage(ghost);
+
+            add(ghost4V, 8, 11);
+            add(ghost1V, 8, 3);
+            add(ghost2V, 8, 8);
+            add(ghost3V, 8, 12);
+
+
+            Rectangle rectangle = new Rectangle(83, 125);
+            rectangle.setY(65);
+            rectangle.setX(-150);
+
+            Rectangle rectangle1 = new Rectangle(0, 125);
+            rectangle1.setY(65);
+            rectangle1.setX(-150);
+
+            Rectangle rectangle2 = new Rectangle(400, 0);
+            rectangle2.setY(20);
+            rectangle2.setX(-150);
+
+            Rectangle rectangle3 = new Rectangle(400, 0);
+            rectangle3.setY(20);
+            rectangle3.setX(-150);
+
+
+            animation4 = new PathTransition();
+            animation4.setNode(ghost4V);
+            animation4.setDuration(Duration.seconds(3));
+            animation4.setAutoReverse(true);
+            animation4.setCycleCount(Animation.INDEFINITE);
+            animation4.setPath(rectangle3);
+            animation4.play();
+
+            animation3 = new PathTransition();
+            animation3.setNode(ghost3V);
+            animation3.setDuration(Duration.seconds(2.5));
+            animation3.setAutoReverse(true);
+            animation3.setCycleCount(Animation.INDEFINITE);
+            animation3.setPath(rectangle2);
+            animation3.play();
+
+            animation2 = new PathTransition();
+            animation2.setNode(ghost2V);
+            animation2.setDuration(Duration.seconds(1.5));
+            animation2.setAutoReverse(true);
+            animation2.setCycleCount(Animation.INDEFINITE);
+            animation2.setPath(rectangle1);
+            animation2.play();
+
+            animation = new PathTransition();
+            animation.setNode(ghost1V);
+            animation.setDuration(Duration.seconds(2));
+            animation.setAutoReverse(true);
+            animation.setCycleCount(Animation.INDEFINITE);
+            animation.setPath(rectangle);
+            animation.play();
+
+        }
+
+            else if (currentLevel==6){
+            ImageView ghost1V = new ImageView();
+            ImageView ghost2V = new ImageView();
+            ImageView ghost3V = new ImageView();
+            ImageView ghost4V = new ImageView();
+
+            ghost4V.setImage(ghost);
+            ghost3V.setImage(ghost);
+            ghost2V.setImage(ghost);
+            ghost1V.setImage(ghost);
+
+            add(ghost4V, 8, 10);
+            add(ghost3V, 8, 6);
+
+            add(ghost1V, 7, 6);
+            add(ghost2V, 8, 2);
+
+
+
+            Rectangle rectangle = new Rectangle(83, 125);
+            rectangle.setY(65);
+            rectangle.setX(-150);
+
+            Rectangle rectangle1 = new Rectangle(0, 40);
+            rectangle1.setY(65);
+            rectangle1.setX(-150);
+
+            Rectangle rectangle2 = new Rectangle(170, 87);
+            rectangle2.setY(20);
+            rectangle2.setX(20);
+
+            Rectangle rectangle3 = new Rectangle(170, 87);
+            rectangle3.setY(20);
+            rectangle3.setX(20);
+
+
+            animation4 = new PathTransition();
+            animation4.setNode(ghost4V);
+            animation4.setDuration(Duration.seconds(3));
+            animation4.setAutoReverse(true);
+            animation4.setCycleCount(Animation.INDEFINITE);
+            animation4.setPath(rectangle3);
+            animation4.play();
+
+            animation3 = new PathTransition();
+            animation3.setNode(ghost3V);
+            animation3.setDuration(Duration.seconds(2.5));
+            animation3.setAutoReverse(true);
+            animation3.setCycleCount(Animation.INDEFINITE);
+            animation3.setPath(rectangle2);
+            animation3.play();
+
+            animation2 = new PathTransition();
+            animation2.setNode(ghost2V);
+            animation2.setDuration(Duration.seconds(1.5));
+            animation2.setAutoReverse(true);
+            animation2.setCycleCount(Animation.INDEFINITE);
+            animation2.setPath(rectangle1);
+            animation2.play();
+
+            animation = new PathTransition();
+            animation.setNode(ghost1V);
+            animation.setDuration(Duration.seconds(2));
+            animation.setAutoReverse(false);
+            animation.setCycleCount(Animation.INDEFINITE);
+            animation.setPath(rectangle);
+            animation.play();
+
+
+            }
+
 
 
         }
@@ -268,7 +405,7 @@ public class World3Template extends World1Template {
         add(ghost6V, 3, 0);
 
 */
-    }
+
 
 
 }//Class
