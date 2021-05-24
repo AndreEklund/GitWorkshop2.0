@@ -73,7 +73,7 @@ public class MainProgram extends Application {
         //Menu och Intro scenes
         menu = new Menu(this, audioPlayer);
         intro = new Intro(this, audioPlayer);
-        help = new Help(this);
+        help = new Help(this, audioPlayer);
         chooseDimension = new ChooseDimension(this, audioPlayer);
         introScene = new Scene(intro, 800, 600);
         menuScene = new Scene(menu, 800, 600);
@@ -151,6 +151,7 @@ public class MainProgram extends Application {
         introAnimation = new WorldIntroAnimation("1");
         mainPaneCampaign.getChildren().add(introAnimation);
         introAnimation.setDisable(true);
+        audioPlayer.playWorldIntroSound();
     }
     public void chooseDimension(){
         mainWindow.setScene(chooseDimensionScene);
@@ -203,6 +204,7 @@ public class MainProgram extends Application {
             introAnimation = new WorldIntroAnimation("2");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
+            audioPlayer.playWorldIntroSound();
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("22");
@@ -234,6 +236,7 @@ public class MainProgram extends Application {
             introAnimation = new WorldIntroAnimation("3");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
+            audioPlayer.playWorldIntroSound();
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("32");
@@ -265,6 +268,7 @@ public class MainProgram extends Application {
             introAnimation = new WorldIntroAnimation("4");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
+            audioPlayer.playWorldIntroSound();
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("42");
@@ -296,6 +300,7 @@ public class MainProgram extends Application {
             introAnimation = new WorldIntroAnimation("5");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
+            audioPlayer.playWorldIntroSound();
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("52");
@@ -327,6 +332,7 @@ public class MainProgram extends Application {
             introAnimation = new WorldIntroAnimation("6");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
+            audioPlayer.playWorldIntroSound();
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("62");

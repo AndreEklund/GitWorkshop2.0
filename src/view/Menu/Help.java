@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
+import view.AudioPlayer;
 
 /**
  * Author: Viktor Näslund
@@ -18,10 +19,12 @@ public class Help extends VBox {
 
     private MainProgram mainProgram;
     private Image pressMouse;
+    private AudioPlayer audioPlayer;
 
-    public Help(MainProgram mainProgram){
+    public Help(MainProgram mainProgram, AudioPlayer audioPlayer){
         pressMouse = new Image("file:files/menuImages/helppicmouse.png");
         this.mainProgram = mainProgram;
+        this.audioPlayer = audioPlayer;
         setBackground();
         pressMouseAnimation();
         addListener();
@@ -55,6 +58,7 @@ public class Help extends VBox {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 mainProgram.changeToMenu();
+                audioPlayer.playButtonSound();
             }
         });
     }
