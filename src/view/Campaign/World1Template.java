@@ -62,6 +62,7 @@ public class World1Template extends GridPane {
         this.currentLevel = currentLevel;
         this.level = level;
         this.heartCrystals = heartCrystals;
+        rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         this.rightPanel = rightPanel;
         this.audioPlayer = audioPlayer;
         this.world = world;
