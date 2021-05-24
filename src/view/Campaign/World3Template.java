@@ -73,7 +73,7 @@ public class World3Template extends World1Template {
         initialize();
     }
     public void initialize() {
-        if (currentLevel==1){
+        if (currentLevel==2){
             ImageView ghost3V = new ImageView();
             ImageView ghost1V = new ImageView();
             ghost3V.setImage(ghost);
@@ -114,7 +114,7 @@ public class World3Template extends World1Template {
 
         }
 
-        else if (currentLevel ==2){
+        else if (currentLevel ==3){
             ImageView ghost1V = new ImageView();
             ImageView ghost2V = new ImageView();
 
@@ -152,7 +152,7 @@ public class World3Template extends World1Template {
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
 
         }
-        else if (currentLevel ==3){
+        else if (currentLevel ==4){
           ImageView ghost4V = new ImageView();
           ImageView ghost2V = new ImageView();
           ImageView ghost1V = new ImageView();
@@ -250,7 +250,7 @@ public class World3Template extends World1Template {
 
 
         }
-        else if(currentLevel==4){
+        else if(currentLevel==5){
             ImageView ghost1V = new ImageView();
 
 
