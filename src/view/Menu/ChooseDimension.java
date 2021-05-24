@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import view.AudioPlayer;
 
 import java.io.FileNotFoundException;
 
@@ -23,9 +24,11 @@ public class ChooseDimension extends Pane {
     private Image eighteenResize;
     private Image pain;
     private Image painResize;
+    private AudioPlayer audioPlayer;
 
-    public ChooseDimension(MainProgram mainProgram){
+    public ChooseDimension(MainProgram mainProgram, AudioPlayer audioPlayer){
         this.mainProgram = mainProgram;
+        this.audioPlayer = audioPlayer;
         setBackground();
         setupImages();
         addButtons();
@@ -73,6 +76,7 @@ public class ChooseDimension extends Pane {
         tenByTenView.setOnMouseClicked(e -> {
             try {
                 mainProgram.changeToRandomize(10);
+                audioPlayer.playButtonSound();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
@@ -96,6 +100,7 @@ public class ChooseDimension extends Pane {
         fourteenView.setOnMouseClicked(e -> {
             try {
                 mainProgram.changeToRandomize(14);
+                audioPlayer.playButtonSound();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
@@ -119,6 +124,7 @@ public class ChooseDimension extends Pane {
         eighteenView.setOnMouseClicked(e -> {
             try {
                 mainProgram.changeToRandomize(18);
+                audioPlayer.playButtonSound();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
@@ -142,6 +148,7 @@ public class ChooseDimension extends Pane {
         painView.setOnMouseClicked(e -> {
             try {
                 mainProgram.changeToRandomize(28);
+                audioPlayer.playButtonSound();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
