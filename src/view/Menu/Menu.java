@@ -24,8 +24,9 @@ public class Menu extends Pane {
     private Image mazegen;
     private AudioPlayer audioPlayer;
 
-    public Menu(MainProgram mainProgram){
+    public Menu(MainProgram mainProgram, AudioPlayer audioPlayer){
         this.mainProgram = mainProgram;
+        this.audioPlayer = audioPlayer;
         setBackground();
         setupImages();
         addButtons();
@@ -72,6 +73,7 @@ public class Menu extends Pane {
             try {
                 mainProgram.changeToCampaign();
                 audioPlayer.playForestMusic();
+                audioPlayer.playButtonSound();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
@@ -94,6 +96,7 @@ public class Menu extends Pane {
         });
         randomizeView.setOnMouseClicked(e -> {
             mainProgram.chooseDimension();
+            audioPlayer.playButtonSound();
         });
 
         ImageView helpView = new ImageView(help);
@@ -113,6 +116,7 @@ public class Menu extends Pane {
         });
         helpView.setOnMouseClicked(e -> {
             mainProgram.changeToHelp();
+            audioPlayer.playButtonSound();
         });
 
         this.getChildren().addAll(campaignView,randomizeView,helpView,mazegenView);

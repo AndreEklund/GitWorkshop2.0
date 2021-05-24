@@ -55,6 +55,7 @@ public class Intro extends Pane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 audioPlayer.stopMusic();
+                audioPlayer.playButtonSound();
                 mainProgram.changeToMenu();
             }
         });
