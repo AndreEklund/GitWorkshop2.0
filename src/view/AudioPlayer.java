@@ -53,6 +53,10 @@ public class AudioPlayer {
     private Media introMedia;
     private MediaPlayer introMediaPlayer;
 
+    private File worldIntroSound;
+    private Media worldIntroMedia;
+    private MediaPlayer worldIntroMediaPlayer;
+
     public AudioPlayer() {
         setupAudioFiles();
     }
@@ -101,6 +105,10 @@ public class AudioPlayer {
         introSound = new File("files/sounds/introsound.mp3");
         introMedia = new Media(introSound.toURI().toString());
         introMediaPlayer = new MediaPlayer(introMedia);
+
+        worldIntroSound = new File("files/sounds/nextworld.mp3");
+        worldIntroMedia = new Media(worldIntroSound.toURI().toString());
+        worldIntroMediaPlayer = new MediaPlayer(worldIntroMedia);
     }
 
     public void playForestMusic(){
@@ -146,6 +154,7 @@ public class AudioPlayer {
         startPlayer.setMute(mute);
         goalPlayer.setMute(mute);
         diamondPlayer.setMute(mute);
+        worldIntroMediaPlayer.setMute(mute);
     }
     public void playIntroMusic() {
         introMediaPlayer.play();
@@ -158,6 +167,10 @@ public class AudioPlayer {
     public void playButtonSound() {
         buttonClickedMediaPlayer.play();
         buttonClickedMediaPlayer.seek(Duration.ZERO);
+    }
+    public void playWorldIntroSound() {
+        worldIntroMediaPlayer.play();
+        worldIntroMediaPlayer.seek(Duration.ZERO);
     }
 
     public void muteMusic(boolean mute){
