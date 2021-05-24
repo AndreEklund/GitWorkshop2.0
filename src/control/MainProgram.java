@@ -2,8 +2,12 @@ package control;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Camera;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -50,9 +54,11 @@ public class MainProgram extends Application {
     private World1Template world1Template;
     private World1Maps world1Maps;
     private World3Maps world3Maps;
+    private World4Maps world4Maps;
     private WorldIntroAnimation introAnimation;
     private AudioPlayer audioPlayer;
     private GameOverScreen gameOverScreen;
+    private Image cursorImage;
 
 
     @Override
@@ -90,6 +96,7 @@ public class MainProgram extends Application {
 
 
       //  mazeGenerator = new MazeGenerator(5, true);
+        cursorImage = new Image("file:files/imagecursor.png");
 
 
 
@@ -101,6 +108,7 @@ public class MainProgram extends Application {
 
         world3Maps = new World3Maps();
         world1Maps = new World1Maps();
+        world4Maps = new World4Maps();
 
         //generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel);
 
@@ -127,6 +135,13 @@ public class MainProgram extends Application {
 
         mainWindow.setScene(introScene);
         mainWindow.show();
+
+        introScene.setCursor(new ImageCursor(cursorImage));
+        menuScene.setCursor(new ImageCursor(cursorImage));
+        campaignScene.setCursor(new ImageCursor(cursorImage));
+        chooseDimensionScene.setCursor(new ImageCursor(cursorImage));
+        helpScene.setCursor(new ImageCursor(cursorImage));
+        randomScene.setCursor(new ImageCursor(cursorImage));
     }
 
     public void changeToMapTemplate(){
@@ -145,7 +160,7 @@ public class MainProgram extends Application {
         mainWindow.setScene(randomScene);
     }
     public void changeToCampaign() throws FileNotFoundException {
-        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel, 0, audioPlayer);
+        world1Template = new World4Template(world4Maps.getLevel41(), 2, 3, this, rightPanel, 0, audioPlayer);
         mainPaneCampaign.setCenter(world1Template);
         mainWindow.setScene(campaignScene);
         introAnimation = new WorldIntroAnimation("1");
