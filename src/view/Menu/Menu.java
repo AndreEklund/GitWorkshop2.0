@@ -73,7 +73,6 @@ public class Menu extends Pane {
             try {
                 mainProgram.changeToCampaign();
                 audioPlayer.playForestMusic();
-                audioPlayer.playButtonSound();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }

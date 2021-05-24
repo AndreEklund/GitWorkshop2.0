@@ -166,7 +166,6 @@ public class MainProgram extends Application {
         introAnimation = new WorldIntroAnimation("1");
         mainPaneCampaign.getChildren().add(introAnimation);
         introAnimation.setDisable(true);
-        audioPlayer.playWorldIntroSound();
     }
     public void chooseDimension(){
         mainWindow.setScene(chooseDimensionScene);
