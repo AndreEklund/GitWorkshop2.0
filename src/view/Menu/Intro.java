@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
+import view.AudioPlayer;
 
 /**
  * Author: Viktor Näslund
@@ -21,9 +22,11 @@ public class Intro extends Pane {
     private Image mazeGen;
     private Image mazeGenGlow;
     private Image pressMouse;
+    private AudioPlayer audioPlayer;
 
-    public Intro(MainProgram mainProgram){
+    public Intro(MainProgram mainProgram, AudioPlayer audioPlayer){
         this.mainProgram = mainProgram;
+        this.audioPlayer = audioPlayer;
         setBackground();
         addListener();
         setupImages();
@@ -51,7 +54,7 @@ public class Intro extends Pane {
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
+                audioPlayer.stopMusic();
                 mainProgram.changeToMenu();
             }
         });

@@ -332,6 +332,8 @@ public class World1Template extends GridPane {
     }
 
     private void gameOver() {
+        audioPlayer.playGameOverSound();
+        audioPlayer.stopMusic();
         mainProgram.gameOver();
     }
 
@@ -412,10 +414,9 @@ public class World1Template extends GridPane {
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
 
-                audioPlayer.playCollectibleSound();
-
                 for (Label label : pickaxes){
                     if (e.getSource()== label){
+                        audioPlayer.playPickAxeSound();
                         label.setVisible(false);
                         pickaxeObtained = true;
                         rightPanel.addPickaxe();
@@ -424,6 +425,7 @@ public class World1Template extends GridPane {
 
                 for (Label label: collectibles) {
                     if (e.getSource() == label) {
+                        audioPlayer.playCollectibleSound();
                         label.setVisible(false);
                         collectiblesObtained++;
                         if (collectiblesObtained == collectibles.size()) {

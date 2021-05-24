@@ -63,6 +63,7 @@ public class MainProgram extends Application {
 
         //En klass som spelar alla ljud/musik
         audioPlayer = new AudioPlayer();
+        audioPlayer.playIntroMusic();
 
         //
         rightPanel = new RightPanel(this, "11", audioPlayer);
@@ -70,8 +71,8 @@ public class MainProgram extends Application {
         rightPanel.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         //Menu och Intro scenes
-        menu = new Menu(this, audioPlayer);
-        intro = new Intro(this);
+        menu = new Menu(this);
+        intro = new Intro(this, audioPlayer);
         help = new Help(this);
         chooseDimension = new ChooseDimension(this);
         introScene = new Scene(intro, 800, 600);
@@ -136,11 +137,7 @@ public class MainProgram extends Application {
         System.out.println("MENU");
     }
     public void changeToRandomize(int dimension) throws FileNotFoundException {
-
-
         mazeGenerator = new MazeGenerator(dimension, true);
-
-
         generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel, dimension);
         mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         mainPaneRandomMaze.setCenter(mapTemplate);

@@ -37,6 +37,22 @@ public class AudioPlayer {
     private Media forestMedia;
     private MediaPlayer forestMediaPlayer;
 
+    private File pickAxeSound;
+    private Media pickAxeMedia;
+    private MediaPlayer pickAxeMediaPlayer;
+
+    private File gameOverSound;
+    private Media gameOverMedia;
+    private MediaPlayer gameOverMediaPlayer;
+
+    private File buttonClickSound;
+    private Media buttonClickMedia;
+    private MediaPlayer buttonClickedMediaPlayer;
+
+    private File introSound;
+    private Media introMedia;
+    private MediaPlayer introMediaPlayer;
+
     public AudioPlayer() {
         setupAudioFiles();
     }
@@ -69,6 +85,22 @@ public class AudioPlayer {
         breakableWallSound = new File("files/sounds/AxeUsed.mp3");
         breakableWallMedia = new Media(breakableWallSound.toURI().toString());
         breakableWallPlayer = new MediaPlayer(breakableWallMedia);
+
+        pickAxeSound = new File("files/sounds/pickaxe.mp3");
+        pickAxeMedia = new Media(pickAxeSound.toURI().toString());
+        pickAxeMediaPlayer = new MediaPlayer(pickAxeMedia);
+
+        gameOverSound = new File("files/sounds/gameover.mp3");
+        gameOverMedia = new Media(gameOverSound.toURI().toString());
+        gameOverMediaPlayer = new MediaPlayer(gameOverMedia);
+
+        buttonClickSound = new File("files/sounds/menubuttons.mp3");
+        buttonClickMedia = new Media(buttonClickSound.toURI().toString());
+        buttonClickedMediaPlayer = new MediaPlayer(buttonClickMedia);
+
+        introSound = new File("files/sounds/introsound.mp3");
+        introMedia = new Media(introSound.toURI().toString());
+        introMediaPlayer = new MediaPlayer(introMedia);
     }
 
     public void playForestMusic(){
@@ -99,6 +131,14 @@ public class AudioPlayer {
         breakableWallPlayer.play();
         breakableWallPlayer.seek(Duration.ZERO);
     }
+    public void playPickAxeSound() {
+        pickAxeMediaPlayer.play();
+        pickAxeMediaPlayer.seek(Duration.ZERO);
+    }
+    public void playGameOverSound() {
+        gameOverMediaPlayer.play();
+        gameOverMediaPlayer.seek(Duration.ZERO);
+    }
     public void muteSound(boolean mute) {
         breakableWallPlayer.setMute(mute);
         deathPlayer.setMute(mute);
@@ -106,6 +146,18 @@ public class AudioPlayer {
         startPlayer.setMute(mute);
         goalPlayer.setMute(mute);
         diamondPlayer.setMute(mute);
+    }
+    public void playIntroMusic() {
+        introMediaPlayer.play();
+        introMediaPlayer.seek(Duration.ZERO);
+    }
+    public void stopMusic() {
+        forestMediaPlayer.stop();
+        introMediaPlayer.stop();
+    }
+    public void playButtonSound() {
+        buttonClickedMediaPlayer.play();
+        buttonClickedMediaPlayer.seek(Duration.ZERO);
     }
 
     public void muteMusic(boolean mute){
