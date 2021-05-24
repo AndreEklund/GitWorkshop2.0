@@ -24,7 +24,10 @@ public class ChooseDimension extends Pane {
     private Image eighteenResize;
     private Image pain;
     private Image painResize;
+    private Image returnImage;
+    private Image returnResize;
     private AudioPlayer audioPlayer;
+
 
     public ChooseDimension(MainProgram mainProgram, AudioPlayer audioPlayer){
         this.mainProgram = mainProgram;
@@ -37,13 +40,15 @@ public class ChooseDimension extends Pane {
     public void setupImages(){
         chooseDimension = new Image("file:files/texts/ChooseDimension.png", 800, 600, false,false);
         tenByTen = new Image("file:files/texts/10x10.png", 250, 30, false, false);
-        tenByTenResize = new Image("file:files/texts/10x10.png", 275, 33, false, false);
+        tenByTenResize = new Image("file:files/texts/10x10.png", 255, 33, false, false);
         fourteen = new Image("file:files/texts/14x14.png", 250, 30, false, false);
-        fourteenResize = new Image("file:files/texts/14x14.png", 275, 33, false, false);
+        fourteenResize = new Image("file:files/texts/14x14.png", 255, 33, false, false);
         eighteen = new Image("file:files/texts/18x18.png", 250, 30, false, false);
-        eighteenResize = new Image("file:files/texts/18x18.png", 275, 33, false, false);
+        eighteenResize = new Image("file:files/texts/18x18.png", 255, 33, false, false);
         pain = new Image("file:files/texts/Pain.png", 250, 30, false, false);
-        painResize = new Image("file:files/texts/Pain.png", 275, 33, false, false);
+        painResize = new Image("file:files/texts/Pain.png", 255, 33, false, false);
+        returnImage = new Image("file:files/texts/return.png", 250,30,false,false);
+        returnResize = new Image("file:files/texts/return.png", 255,33,false,false);
     }
 
     public void setBackground(){
@@ -65,8 +70,8 @@ public class ChooseDimension extends Pane {
         tenByTenView.toFront();
         tenByTenView.setOnMouseEntered(e -> {
             tenByTenView.setImage(tenByTenResize);
-            tenByTenView.setTranslateX(263);
-            tenByTenView.setTranslateY(197);
+            tenByTenView.setTranslateX(273);
+            tenByTenView.setTranslateY(198);
         });
         tenByTenView.setOnMouseExited(e -> {
             tenByTenView.setImage(tenByTen);
@@ -85,17 +90,17 @@ public class ChooseDimension extends Pane {
         ImageView fourteenView = new ImageView(fourteen);
         fourteenView.setStyle("fx-background-color: transparent;");
         fourteenView.setTranslateX(275);
-        fourteenView.setTranslateY(225);
+        fourteenView.setTranslateY(250);
         fourteenView.toFront();
         fourteenView.setOnMouseEntered(e -> {
             fourteenView.setImage(fourteenResize);
-            fourteenView.setTranslateX(263);
-            fourteenView.setTranslateY(222);
+            fourteenView.setTranslateX(273);
+            fourteenView.setTranslateY(248);
         });
         fourteenView.setOnMouseExited(e -> {
             fourteenView.setImage(fourteen);
             fourteenView.setTranslateX(275);
-            fourteenView.setTranslateY(225);
+            fourteenView.setTranslateY(250);
         });
         fourteenView.setOnMouseClicked(e -> {
             try {
@@ -109,17 +114,17 @@ public class ChooseDimension extends Pane {
         ImageView eighteenView = new ImageView(eighteen);
         eighteenView.setStyle("fx-background-color: transparent;");
         eighteenView.setTranslateX(275);
-        eighteenView.setTranslateY(250);
+        eighteenView.setTranslateY(300);
         eighteenView.toFront();
         eighteenView.setOnMouseEntered(e -> {
             eighteenView.setImage(eighteenResize);
-            eighteenView.setTranslateX(263);
-            eighteenView.setTranslateY(247);
+            eighteenView.setTranslateX(273);
+            eighteenView.setTranslateY(298);
         });
         eighteenView.setOnMouseExited(e -> {
             eighteenView.setImage(eighteen);
             eighteenView.setTranslateX(275);
-            eighteenView.setTranslateY(250);
+            eighteenView.setTranslateY(300);
         });
         eighteenView.setOnMouseClicked(e -> {
             try {
@@ -133,17 +138,17 @@ public class ChooseDimension extends Pane {
         ImageView painView = new ImageView(pain);
         painView.setStyle("fx-background-color: transparent;");
         painView.setTranslateX(275);
-        painView.setTranslateY(275);
+        painView.setTranslateY(350);
         painView.toFront();
         painView.setOnMouseEntered(e -> {
             painView.setImage(painResize);
-            painView.setTranslateX(263);
-            painView.setTranslateY(272);
+            painView.setTranslateX(273);
+            painView.setTranslateY(348);
         });
         painView.setOnMouseExited(e -> {
             painView.setImage(pain);
             painView.setTranslateX(275);
-            painView.setTranslateY(275);
+            painView.setTranslateY(350);
         });
         painView.setOnMouseClicked(e -> {
             try {
@@ -154,7 +159,27 @@ public class ChooseDimension extends Pane {
             }
         });
 
-        getChildren().addAll(dimensionView,tenByTenView,fourteenView,eighteenView,painView);
+        ImageView returnView = new ImageView(returnImage);
+        returnView.setStyle("fx-background-color: transparent;");
+        returnView.setTranslateX(300);
+        returnView.setTranslateY(450);
+        returnView.toFront();
+        returnView.setOnMouseEntered(e -> {
+            returnView.setImage(returnResize);
+            returnView.setTranslateX(298);
+            returnView.setTranslateY(448);
+        });
+        returnView.setOnMouseExited(e -> {
+            returnView.setImage(returnImage);
+            returnView.setTranslateX(300);
+            returnView.setTranslateY(450);
+        });
+        returnView.setOnMouseClicked(e -> {
+            mainProgram.changeToMenu();
+            audioPlayer.playButtonSound();
+        });
+
+        getChildren().addAll(dimensionView,tenByTenView,fourteenView,eighteenView,painView,returnView);
     }
 
 }
