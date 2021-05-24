@@ -24,9 +24,8 @@ public class Menu extends Pane {
     private Image mazegen;
     private AudioPlayer audioPlayer;
 
-    public Menu(MainProgram mainProgram, AudioPlayer audioPlayer){
+    public Menu(MainProgram mainProgram){
         this.mainProgram = mainProgram;
-        this.audioPlayer = audioPlayer;
         setBackground();
         setupImages();
         addButtons();
