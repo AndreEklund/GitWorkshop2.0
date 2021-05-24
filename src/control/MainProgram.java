@@ -160,7 +160,7 @@ public class MainProgram extends Application {
         mainWindow.setScene(randomScene);
     }
     public void changeToCampaign() throws FileNotFoundException {
-        world1Template = new World4Template(world4Maps.getLevel41(), 2, 3, this, rightPanel, 0, audioPlayer);
+        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel, 0, audioPlayer);
         mainPaneCampaign.setCenter(world1Template);
         mainWindow.setScene(campaignScene);
         introAnimation = new WorldIntroAnimation("1");
