@@ -115,101 +115,42 @@ public class World5Template extends World1Template {
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
 
         }
-        else if (currentLevel ==4){
-            ImageView ghost4V = new ImageView();
-            ImageView ghost2V = new ImageView();
+        else if (currentLevel == 3 ){
             ImageView ghost1V = new ImageView();
-            ImageView ghost3V = new ImageView();
-            ImageView ghost5V = new ImageView();
-
+            ImageView ghost2V = new ImageView();
 
             ghost1V.setImage(ghost);
             ghost2V.setImage(ghost);
-            ghost3V.setImage(ghost);
-            ghost4V.setImage(ghost);
-            ghost5V.setImage(ghost);
+
+            add(ghost1V,13,3);
+            add(ghost2V,12,10);
+
+            Rectangle rectangle = new Rectangle(132,100);
+            rectangle.setY(50);
+            rectangle.setX(-150);
 
 
-            add(ghost2V,15,4);
-            add(ghost4V,10,4);
-
-            add(ghost1V,10,1);
-            add(ghost3V,15,1);
-            add(ghost5V,12,1);
-
-            Rectangle rectangle = new Rectangle(125,83);
-            rectangle.setY(190);
-            rectangle.setX(-230);
-
-
-            Rectangle rectangle1 = new Rectangle(125,83);
-            rectangle1.setY(190);
-            rectangle1.setX(-230);
-
-            Rectangle rectangle2 = new Rectangle(0,83);
-            rectangle2.setY(105);
-            rectangle2.setX(-232);
-
-
-            Rectangle rectangle3 = new Rectangle(0,83);
-            rectangle3.setY(105);
-            rectangle3.setX(-232);
-
-            Rectangle rectangle4 = new Rectangle(0,83);
-            rectangle4.setY(105);
-            rectangle4.setX(-232);
-
-            //Övre spöken
-
-            animation3 = new PathTransition();
-            animation3.setNode(ghost1V);
-            animation3.setDuration(Duration.seconds(2));
-            animation3.setCycleCount(Animation.INDEFINITE);
-            animation3.setPath(rectangle2);
-            animation3.setAutoReverse(true);
-            animation3.play();
-
-            animation4 = new PathTransition();
-            animation4.setNode(ghost3V);
-            animation4.setDuration(Duration.seconds(2));
-            animation4.setCycleCount(Animation.INDEFINITE);
-            animation4.setPath(rectangle3);
-            animation4.setAutoReverse(true);
-            animation4.play();
-
-
-            animation5 = new PathTransition();
-            animation5.setNode(ghost5V);
-            animation5.setDuration(Duration.seconds(2));
-            animation5.setCycleCount(Animation.INDEFINITE);
-            animation5.setPath(rectangle4);
-            animation5.setAutoReverse(true);
-            animation5.play();
-
-            //Undre spöken
+            Rectangle rectangle1 = new Rectangle(100,100);
+            rectangle1.setY(80);
+            rectangle1.setX(-150);
 
             animation = new PathTransition();
-            animation.setNode(ghost4V);
-            animation.setDuration(Duration.seconds(2));
+            animation.setNode(ghost1V);
+            animation.setDuration(Duration.seconds(1.5));
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
-            animation.setAutoReverse(true);
             animation.play();
 
             animation2 = new PathTransition();
             animation2.setNode(ghost2V);
-            animation2.setDuration(Duration.seconds(3));
+            animation2.setDuration(Duration.seconds(1.5));
             animation2.setCycleCount(Animation.INDEFINITE);
             animation2.setPath(rectangle1);
-            animation2.setAutoReverse(true);
             animation2.play();
 
 
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
-            ghost3V.setOnMouseEntered(e -> enteredGhost(e));
-            ghost4V.setOnMouseEntered(e -> enteredGhost(e));
-            ghost5V.setOnMouseEntered(e -> enteredGhost(e));
 
 
         }
