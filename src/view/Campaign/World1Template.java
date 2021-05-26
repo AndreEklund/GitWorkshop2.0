@@ -321,6 +321,7 @@ public class World1Template extends GridPane {
         fade.play();
 
         if (startButtonPressed) {
+            audioPlayer.playDeathSound();
             heartCrystals--;
             System.out.println("spöke träffat");
             rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
