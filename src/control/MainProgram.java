@@ -72,7 +72,7 @@ public class MainProgram extends Application {
         audioPlayer.playIntroMusic();
 
         //
-        rightPanel = new RightPanel(this, "11", audioPlayer);
+        rightPanel = new RightPanel(this, "11", audioPlayer, null);
 
         rightPanel.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -115,7 +115,7 @@ public class MainProgram extends Application {
         mainPaneCampaign.setRight(rightPanel);
 
 
-        rightPnlRndm = new RightPanel(this, "Random", audioPlayer);
+        rightPnlRndm = new RightPanel(this, "Random", audioPlayer, null);
         rightPnlRndm.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         //mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
@@ -160,7 +160,7 @@ public class MainProgram extends Application {
         mainWindow.setScene(randomScene);
     }
     public void changeToCampaign() throws FileNotFoundException {
-        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel, 0, audioPlayer);
+        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel, 0, audioPlayer, 15);
         mainPaneCampaign.setCenter(world1Template);
         mainWindow.setScene(campaignScene);
         introAnimation = new WorldIntroAnimation("1");
@@ -188,20 +188,20 @@ public class MainProgram extends Application {
         if (level == 1) {
             System.out.println("hello");
             rightPanel.changeLevelCounter("12");
-            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this, rightPanel, 0, audioPlayer));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this, rightPanel, 0, audioPlayer, 15));
 
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("13");
-            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel13(), 3, heartCrystals, this, rightPanel, 0, audioPlayer));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel13(), 3, heartCrystals, this, rightPanel, 0, audioPlayer, 15));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("14");
-            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel14(), 4, heartCrystals, this, rightPanel, 0, audioPlayer));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel14(), 4, heartCrystals, this, rightPanel, 0, audioPlayer, 15));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("15");
-            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel15(), 5, heartCrystals, this, rightPanel, 0, audioPlayer));
+            mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel15(), 5, heartCrystals, this, rightPanel, 0, audioPlayer, 15));
         }
         else if (level == 5) {
             nextWorld2Level(1, heartCrystals);
@@ -214,7 +214,7 @@ public class MainProgram extends Application {
 
         if (level == 1) {
             rightPanel.changeLevelCounter("21");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel21(), 2, heartCrystals, this, rightPanel, 1, audioPlayer, false));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel21(), 2, heartCrystals, this, rightPanel, 1, audioPlayer, false, rightPanel));
             introAnimation = new WorldIntroAnimation("2");
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
@@ -222,19 +222,19 @@ public class MainProgram extends Application {
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("22");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel22(), 3, heartCrystals, this, rightPanel, 1, audioPlayer, false));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel22(), 3, heartCrystals, this, rightPanel, 1, audioPlayer, false, rightPanel));
         }
         else if (level == 3) {
             rightPanel.changeLevelCounter("23");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel23(), 4, heartCrystals, this, rightPanel, 1, audioPlayer, false));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel23(), 4, heartCrystals, this, rightPanel, 1, audioPlayer, false, rightPanel));
         }
         else if (level == 4) {
             rightPanel.changeLevelCounter("24");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel24(), 5, heartCrystals, this, rightPanel, 1, audioPlayer, false));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel24(), 5, heartCrystals, this, rightPanel, 1, audioPlayer, false, rightPanel));
         }
         else if (level == 5) {
             rightPanel.changeLevelCounter("25");
-            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel25(), 6, heartCrystals, this, rightPanel, 1, audioPlayer, true));
+            mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel25(), 6, heartCrystals, this, rightPanel, 1, audioPlayer, true, rightPanel));
         }
         else if (level == 6) {
             nextWorld3Level(1, heartCrystals);
