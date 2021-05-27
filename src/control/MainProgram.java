@@ -72,7 +72,7 @@ public class MainProgram extends Application {
         audioPlayer.playIntroMusic();
 
         //
-        rightPanel = new RightPanel(this, "11", audioPlayer, null, null);
+        rightPanel = new RightPanel(this, "11", audioPlayer, null);
 
         rightPanel.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -115,7 +115,7 @@ public class MainProgram extends Application {
         mainPaneCampaign.setRight(rightPanel);
 
 
-        rightPnlRndm = new RightPanel(this, "Random", audioPlayer, null, null);
+        rightPnlRndm = new RightPanel(this, "Random", audioPlayer, null);
         rightPnlRndm.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         //mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);

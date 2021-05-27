@@ -3,7 +3,8 @@ package model;
 public class TotalTime extends Thread{
 
     private boolean gameOver;
-    private int time;
+    private int seconds;
+    private int minutes;
 
     public TotalTime(boolean gameOver){
         this.gameOver = gameOver;
@@ -14,12 +15,16 @@ public class TotalTime extends Thread{
         while(!gameOver){
             try {
                 Thread.sleep(1000);
-                time++;
+                seconds++;
+                if (seconds==60){
+                    minutes++;
+                    seconds = 0;
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(time/60 + "" + time);
+        System.out.println("Total tid: " + minutes + ":" + seconds);
     }
 
     public void setGameOver(boolean gameOver) {
