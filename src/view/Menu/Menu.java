@@ -1,7 +1,6 @@
 package view.Menu;
 
 import control.MainProgram;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -72,7 +71,7 @@ public class Menu extends Pane {
         campaignView.setOnMouseClicked(e -> {
             try {
                 mainProgram.changeToCampaign();
-                audioPlayer.playForestMusic();
+                audioPlayer.playLevelMusic("Forest_Test1");
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
