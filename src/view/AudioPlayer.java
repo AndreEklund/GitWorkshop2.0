@@ -115,7 +115,7 @@ public class AudioPlayer {
 
         String songName = songToPlay;
 
-        if (songName.equals("Forest.test1")) {
+        if (songName.equals("Forest_test1")) {
             currentSong = new File("files/music/" + songName + ".mp3");
         }
         else if (songName.equals("LavaSong")) {

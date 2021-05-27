@@ -205,6 +205,7 @@ public class RightPanel extends GridPane {
         System.out.println("Main Menu clicked");
         mainProgram.changeToMenu();
         audioPlayer.playButtonSound();
+        audioPlayer.stopMusic();
 
     }
 
