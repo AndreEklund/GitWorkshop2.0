@@ -251,7 +251,8 @@ public class MainProgram extends Application {
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
             audioPlayer.playWorldIntroSound();
-            audioPlayer.playLevelMusic("LavaSong");
+            audioPlayer.stopMusic();
+            audioPlayer.playLevelMusic("lava");
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("32");
@@ -284,7 +285,8 @@ public class MainProgram extends Application {
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
             audioPlayer.playWorldIntroSound();
-            audioPlayer.playLevelMusic("HeavenSong");
+            audioPlayer.stopMusic();
+            audioPlayer.playLevelMusic("heaven");
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("42");
@@ -317,6 +319,8 @@ public class MainProgram extends Application {
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
             audioPlayer.playWorldIntroSound();
+            audioPlayer.stopMusic();
+            audioPlayer.playLevelMusic("egypt");
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("52");

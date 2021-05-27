@@ -105,7 +105,7 @@ public class AudioPlayer {
         worldIntroMedia = new Media(worldIntroSound.toURI().toString());
         worldIntroMediaPlayer = new MediaPlayer(worldIntroMedia);
 
-        currentSong = new File("files/music/Forest_test1.mp3");
+        currentSong = new File("files/music/forest.mp3");
         currentMedia = new Media(currentSong.toURI().toString());
         currentSongPlayer = new MediaPlayer(currentMedia);
 
@@ -115,16 +115,16 @@ public class AudioPlayer {
 
         String songName = songToPlay;
 
-        if (songName.equals("Forest_test1")) {
+        if (songName.equals("forest")) {
             currentSong = new File("files/music/" + songName + ".mp3");
         }
-        else if (songName.equals("LavaSong")) {
+        else if (songName.equals("lava")) {
             currentSong = new File("files/music/" + songName + ".mp3");
         }
-        else if (songName.equals("HeavenSong")) {
+        else if (songName.equals("heaven")) {
             currentSong = new File("files/music/" + songName + ".mp3");
         }
-        else if (songName.equals("SpaceSong")) {
+        else if (songName.equals("egypt")) {
             currentSong = new File("files/music/" + songName + ".mp3");
         }
         currentMedia = new Media(currentSong.toURI().toString());

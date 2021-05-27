@@ -71,7 +71,7 @@ public class Menu extends Pane {
         campaignView.setOnMouseClicked(e -> {
             try {
                 mainProgram.changeToCampaign();
-                audioPlayer.playLevelMusic("Forest_Test1");
+                audioPlayer.playLevelMusic("forest");
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
