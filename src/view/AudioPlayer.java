@@ -33,9 +33,9 @@ public class AudioPlayer {
     private Media breakableWallMedia;
     private MediaPlayer breakableWallPlayer;
 
-    private File forestMusic;
-    private Media forestMedia;
-    private MediaPlayer forestMediaPlayer;
+    private File currentSong;
+    private Media currentMedia;
+    private MediaPlayer currentSongPlayer;
 
     private File pickAxeSound;
     private Media pickAxeMedia;
@@ -61,11 +61,6 @@ public class AudioPlayer {
         setupAudioFiles();
     }
     public void setupAudioFiles() {
-
-        forestMusic = new File("files/music/Forest_test1.mp3");
-        forestMedia = new Media(forestMusic.toURI().toString());
-        forestMediaPlayer = new MediaPlayer(forestMedia);
-
         diamondSound = new File("files/sounds/Diamond1.mp3");
         diamondMedia = new Media(diamondSound.toURI().toString());
         diamondPlayer = new MediaPlayer(diamondMedia);
@@ -109,11 +104,37 @@ public class AudioPlayer {
         worldIntroSound = new File("files/sounds/nextworld.mp3");
         worldIntroMedia = new Media(worldIntroSound.toURI().toString());
         worldIntroMediaPlayer = new MediaPlayer(worldIntroMedia);
+
+        currentSong = new File("files/music/Forest_test1.mp3");
+        currentMedia = new Media(currentSong.toURI().toString());
+        currentSongPlayer = new MediaPlayer(currentMedia);
+
     }
 
-    public void playForestMusic(){
-        forestMediaPlayer.play();
-        forestMediaPlayer.seek(Duration.ZERO);
+    public void playLevelMusic(String songToPlay) {
+
+        String songName = songToPlay;
+
+        if (songName.equals("Forest.test1")) {
+            currentSong = new File("files/music/" + songName + ".mp3");
+        }
+        else if (songName.equals("LavaSong")) {
+            currentSong = new File("files/music/" + songName + ".mp3");
+        }
+        else if (songName.equals("HeavenSong")) {
+            currentSong = new File("files/music/" + songName + ".mp3");
+        }
+        else if (songName.equals("SpaceSong")) {
+            currentSong = new File("files/music/" + songName + ".mp3");
+        }
+        currentMedia = new Media(currentSong.toURI().toString());
+        currentSongPlayer = new MediaPlayer(currentMedia);
+        currentSongPlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                currentSongPlayer.seek(Duration.ZERO);
+            }
+        });
+        currentSongPlayer.play();
     }
     public void playCollectibleSound() {
         diamondPlayer.play();
@@ -161,7 +182,7 @@ public class AudioPlayer {
         introMediaPlayer.seek(Duration.ZERO);
     }
     public void stopMusic() {
-        forestMediaPlayer.stop();
+        currentSongPlayer.stop();
         introMediaPlayer.stop();
     }
     public void playButtonSound() {
@@ -174,6 +195,6 @@ public class AudioPlayer {
     }
 
     public void muteMusic(boolean mute){
-        forestMediaPlayer.setMute(mute);
+        currentSongPlayer.setMute(mute);
     }
 }

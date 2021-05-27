@@ -251,6 +251,7 @@ public class MainProgram extends Application {
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
             audioPlayer.playWorldIntroSound();
+            audioPlayer.playLevelMusic("LavaSong");
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("32");
@@ -283,6 +284,7 @@ public class MainProgram extends Application {
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
             audioPlayer.playWorldIntroSound();
+            audioPlayer.playLevelMusic("HeavenSong");
         }
         else if (level == 2) {
             rightPanel.changeLevelCounter("42");
