@@ -40,7 +40,7 @@ public class World5Template extends World1Template {
 
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
 
-        if (currentLevel==1){
+        if (currentLevel==2){
             ImageView ghost3V = new ImageView();
             ImageView ghost1V = new ImageView();
             ghost3V.setImage(ghost);
@@ -81,7 +81,7 @@ public class World5Template extends World1Template {
 
         }
 
-        else if (currentLevel == 2){
+        else if (currentLevel == 3){
             ImageView ghost1V = new ImageView();
             ImageView ghost2V = new ImageView();
 
@@ -119,7 +119,7 @@ public class World5Template extends World1Template {
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
 
         }
-        else if (currentLevel == 3 ){
+        else if (currentLevel == 4 ){
             ImageView ghost1V = new ImageView();
             ImageView ghost2V = new ImageView();
 
@@ -158,7 +158,7 @@ public class World5Template extends World1Template {
 
 
         }
-        else if(currentLevel==4) {
+        else if(currentLevel==5) {
             ImageView ghost1V = new ImageView();
             ImageView ghost2V = new ImageView();
             ImageView ghost3V = new ImageView();
