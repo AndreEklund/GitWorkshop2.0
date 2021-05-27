@@ -62,6 +62,7 @@ public class RightPanel extends GridPane {
     private Label musicLabel;
     private boolean musicOn;
     private boolean gameOver = false;
+    private boolean timerIsStartedOnce = false;
 
 
     private static Integer STARTTIME = 15;
@@ -78,11 +79,10 @@ public class RightPanel extends GridPane {
     private TotalTime totTime;
 
 
-    public RightPanel(MainProgram mainProgram, String gameMode, AudioPlayer audioPlayer, TimeThread time, TotalTime totTime) throws FileNotFoundException {
+    public RightPanel(MainProgram mainProgram, String gameMode, AudioPlayer audioPlayer, TimeThread time) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.gameMode = gameMode;
         this.audioPlayer = audioPlayer;
-        this.totTime = totTime;
         this.time = time;
 
         soundOn = true;
@@ -149,6 +149,7 @@ public class RightPanel extends GridPane {
         add(menuView,0,0);
 
        // timer = new Thread(task);
+        totTime = new TotalTime(false);
 
     }
 
@@ -255,12 +256,9 @@ public class RightPanel extends GridPane {
         RightPanel.STARTTIME = STARTTIME;
     }
 
-    public int getTimeSeconds() {
-        return timeSeconds.get();
-    }
-
-    public IntegerProperty timeSecondsProperty() {
-        return timeSeconds;
+    public void startTotalTimer(){
+        if (!timerIsStartedOnce)
+        totTime.start();
     }
 
     public void startTask(){
@@ -296,4 +294,12 @@ public class RightPanel extends GridPane {
         }
 
     };
+
+    public void setGameOver(boolean b) {
+        totTime.setGameOver(true);
+    }
+
+    public void setTimerIsStarted(boolean timerIsStartedOnce) {
+        this.timerIsStartedOnce = timerIsStartedOnce;
+    }
 }

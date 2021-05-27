@@ -53,6 +53,7 @@ public class World1Template extends GridPane {
     private boolean pickaxeObtained;
     private boolean gameStarted;
     private boolean startNotClickedOnce = true;
+    private boolean totalTimeStarted = false;
     private int world;
     private int seconds = 25;
 
@@ -354,7 +355,7 @@ public class World1Template extends GridPane {
         rightPanel.pauseClock();
         gameStarted = true;
         time.setGameOver(true);
-        totTime.setGameOver(true);
+        rightPanel.setGameOver(true);
         time = null;
 
     }
@@ -394,6 +395,11 @@ public class World1Template extends GridPane {
     }
     public void startLevel() {
 
+        if (!totalTimeStarted){
+            rightPanel.startTotalTimer();
+            rightPanel.setTimerIsStarted(true);
+        }
+
         if (!gameStarted){
             rightPanel.resumeClock();
             gameStarted = true;
@@ -401,17 +407,16 @@ public class World1Template extends GridPane {
             time.setGameOver(false);
             time.start();
 
+
         }else if (startNotClickedOnce){
             rightPanel.runClock();
             time = new TimeThread(seconds, rightPanel);
             time.setGameOver(false);
             time.start();
 
-            totTime = new TotalTime(false);
-            totTime.start();
         }
 
-
+        totalTimeStarted = true;
         startNotClickedOnce = false;
         audioPlayer.playStartSound();
         startButtonPressed = true;
