@@ -64,6 +64,8 @@ public class RightPanel extends GridPane {
     private boolean gameOver = false;
     private boolean timerIsStartedOnce = false;
 
+    private Image emptySprite;
+    private ImageView emptyView;
 
     private static Integer STARTTIME = 15;
     private Timeline timeline = new Timeline();
@@ -91,9 +93,13 @@ public class RightPanel extends GridPane {
         imageMenu = new Image("file:files/texts/Menu.png", 90, 30, false, false);
         menuView = new ImageView(imageMenu);
 
+        emptySprite = new Image("file:files/emptySprite.png", 30, 30, false, false);
+        emptyView = new ImageView(emptySprite);
+
         pickaxe = new Image("file:files/items/pickaxe.png", 30, 30, false, false);
         pickaxeView = new ImageView(pickaxe);
         pickaxeLabel = new Label();
+        pickaxeLabel.setGraphic(emptyView);
 
         levelNumber = new Image("file:files/levelcounter/"+ gameMode +".png", 90, 30, false, false);
         currentLevelView = new ImageView(levelNumber);
@@ -104,14 +110,14 @@ public class RightPanel extends GridPane {
         soundView = new ImageView(soundImage);
         soundLabel = new Label();
         soundLabel.setTranslateX(30);
-        soundLabel.setTranslateY(455);
+        soundLabel.setTranslateY(440);
         soundLabel.setGraphic(soundView);
 
         musicImage = new Image("file:files/soundbuttons/musicon.png", 30,30,false,false);
         musicView = new ImageView(musicImage);
         musicLabel = new Label();
         musicLabel.setTranslateX(60);
-        musicLabel.setTranslateY(455);
+        musicLabel.setTranslateY(440);
         musicLabel.setGraphic(musicView);
 
         //Hearts only in Campaign
@@ -140,10 +146,6 @@ public class RightPanel extends GridPane {
 
         add(soundLabel,0,4);
         add(musicLabel,0,4);
-
-
-        //add(clock,0,2);
-        //runClock();
 
         menuView.setOnMouseClicked(e -> MainMenuClicked(e));
         add(menuView,0,0);
@@ -192,7 +194,7 @@ public class RightPanel extends GridPane {
         pickaxeLabel.setGraphic(pickaxeView);
     }
     public void removePickaxe(){
-        pickaxeLabel.setGraphic(null);
+        pickaxeLabel.setGraphic(emptyView);
     }
 
 
