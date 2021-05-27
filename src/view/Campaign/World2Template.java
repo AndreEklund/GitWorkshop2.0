@@ -17,6 +17,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
+import model.TimeThread;
 import view.AudioPlayer;
 import view.Menu.RightPanel;
 
@@ -41,20 +42,28 @@ public class World2Template extends World1Template {
     private PathTransition animation6;
     private Image ghost;
     private ImageView imageView = new ImageView();
+    private TimeThread time;
+    private RightPanel panel;
+    private AudioPlayer audioPlayer;
+    private int seconds;
 
-    public World2Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int world, AudioPlayer audioPlayer, boolean bossMap) throws FileNotFoundException {
-        super(level, currentLevel, heartCrystals, mainProgram, rightPanel, world, audioPlayer);
+    public World2Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int world, AudioPlayer audioPlayer, boolean bossMap, RightPanel panel) throws FileNotFoundException {
+        super(level, currentLevel, heartCrystals, mainProgram, rightPanel, world, audioPlayer, 35);
         squareSize = 600/(level.length+2);
+        this.panel = panel;
+        this.audioPlayer = audioPlayer;
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         if (bossMap) {
             setupGhost();
             initialize();
         }
-
+        time = new TimeThread(35, rightPanel);
+        rightPanel.setSTARTTIME(35);
     }
     public void setupGhost() {
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
     }
+
     public void initialize() {
 
         ImageView ghost1V = new ImageView(ghost);

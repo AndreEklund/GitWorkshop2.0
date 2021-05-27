@@ -17,6 +17,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import model.TimeThread;
 import view.AudioPlayer;
 import view.Menu.RightPanel;
 
@@ -43,14 +44,18 @@ public class World3Template extends World1Template {
     private PathTransition animation6;
     private Thread platfrom;
     private int currentLevel;
-
-
+    private RightPanel panel;
+    private TimeThread time;
+    private AudioPlayer audioPlayer;
 
     public World3Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage, AudioPlayer audioPlayer) throws FileNotFoundException {
-        super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer);
+        super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer, 60);
         squareSize = 600/(level.length+2);
         this.currentLevel = currentLevel;
+        this.panel = rightPanel;
+        this.audioPlayer = audioPlayer;
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+        rightPanel.setSTARTTIME(60);
         setupGhost();
 
     }
@@ -72,6 +77,7 @@ public class World3Template extends World1Template {
 
         initialize();
     }
+
     public void initialize() {
         if (currentLevel==2){
             ImageView ghost3V = new ImageView();

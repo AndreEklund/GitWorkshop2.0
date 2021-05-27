@@ -26,9 +26,13 @@ public class World5Template extends World1Template {
 
 
     public World5Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage, AudioPlayer audioPlayer) throws FileNotFoundException {
-        super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer);
+ 
+        super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer, 90);
+
+      
         squareSize = 600/(level.length+2);
         this.currentLevel = currentLevel;
+
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         initialize();
     }
