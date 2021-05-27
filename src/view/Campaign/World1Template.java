@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
+import model.TimeThread;
 import view.AudioPlayer;
 import view.Menu.RightPanel;
 
@@ -52,16 +53,20 @@ public class World1Template extends GridPane {
     private boolean gameStarted;
     private boolean startNotClickedOnce = true;
     private int world;
+    private int seconds = 15;
 
     private RightPanel rightPanel;
     private AudioPlayer audioPlayer;
+    private TimeThread time;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
-    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int world, AudioPlayer audioPlayer) throws FileNotFoundException {
+    public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int world, AudioPlayer audioPlayer, int seconds) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.currentLevel = currentLevel;
         this.level = level;
         this.heartCrystals = heartCrystals;
+        this.seconds = seconds;
+
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         this.rightPanel = rightPanel;
         this.audioPlayer = audioPlayer;
@@ -71,7 +76,8 @@ public class World1Template extends GridPane {
         setupImages(world);
         setupBorders();
         setupLevel();
-        rightPanel.setSTARTTIME(15);
+        rightPanel.setSTARTTIME(seconds);
+
     }
     public void setBackground(){
         BackgroundImage menuBackground = new BackgroundImage(new Image("file:files/MenuBackground.jpg",800,600,false,true),
@@ -336,6 +342,7 @@ public class World1Template extends GridPane {
         audioPlayer.playGameOverSound();
         audioPlayer.stopMusic();
         mainProgram.gameOver();
+        time = null;
     }
 
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
@@ -344,9 +351,12 @@ public class World1Template extends GridPane {
             nextLevel();
             rightPanel.pauseClock();
             gameStarted = true;
+            time.setGameOver(true);
+            time = null;
         }
     }
     public void nextLevel() throws FileNotFoundException, InterruptedException {
+
         if (world == 0) {
             mainProgram.nextWorld1Level(currentLevel, heartCrystals);
         }
@@ -371,8 +381,14 @@ public class World1Template extends GridPane {
         if (!gameStarted){
             rightPanel.resumeClock();
             gameStarted = true;
+            time = new TimeThread(seconds, rightPanel);
+            time.setGameOver(false);
+            time.start();
         }else if (startNotClickedOnce){
             rightPanel.runClock();
+            time = new TimeThread(seconds, rightPanel);
+            time.setGameOver(false);
+            time.start();
         }
 
 
@@ -434,6 +450,7 @@ public class World1Template extends GridPane {
                         }
                     }
                 }
+
             }
         }
     }

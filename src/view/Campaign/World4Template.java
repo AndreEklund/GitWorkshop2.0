@@ -29,7 +29,7 @@ public class World4Template extends World1Template {
     private int currentLevel;
 
     public World4Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int worldImage, AudioPlayer audioPlayer) throws FileNotFoundException {
-        super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer);
+        super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer, 80);
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         this.currentLevel = currentLevel;
         squareSize = 600/(level.length+2);

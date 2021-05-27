@@ -4,8 +4,10 @@ import control.MainProgram;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.DigitalClock;
+import model.TimeThread;
 import view.AudioPlayer;
 
 import java.io.FileNotFoundException;
@@ -38,6 +41,7 @@ public class RightPanel extends GridPane {
     private Image levelNumber;
     private ImageView currentLevelView;
     private Label levelLabel;
+    private Thread timer;
 
     private Image heart;
     private ImageView currentHeartView;
@@ -56,6 +60,8 @@ public class RightPanel extends GridPane {
     private ImageView musicView;
     private Label musicLabel;
     private boolean musicOn;
+    private boolean gameOver = false;
+
 
     private static Integer STARTTIME = 15;
     private Timeline timeline = new Timeline();
@@ -63,15 +69,18 @@ public class RightPanel extends GridPane {
     private Label timerLabel = new Label();
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     private IntegerProperty stackedSeconds = new SimpleIntegerProperty();
-    private Font font = Font.loadFont("file:files/fonts/PressStart2P.ttf", 50);
+    private Font font = Font.loadFont("file:files/fonts/PressStart2P.ttf", 35);
+    private int checkSeconds = timeSeconds.getValue().intValue();
 
     private AudioPlayer audioPlayer;
+    private TimeThread time;
 
 
-    public RightPanel(MainProgram mainProgram, String gameMode, AudioPlayer audioPlayer) throws FileNotFoundException {
+    public RightPanel(MainProgram mainProgram, String gameMode, AudioPlayer audioPlayer, TimeThread time) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.gameMode = gameMode;
         this.audioPlayer = audioPlayer;
+        this.time = time;
 
         soundOn = true;
         musicOn = true;
@@ -82,26 +91,24 @@ public class RightPanel extends GridPane {
         pickaxe = new Image("file:files/items/pickaxe.png", 30, 30, false, false);
         pickaxeView = new ImageView(pickaxe);
         pickaxeLabel = new Label();
-        pickaxeLabel.setTranslateX(8);
 
         levelNumber = new Image("file:files/levelcounter/"+ gameMode +".png", 90, 30, false, false);
         currentLevelView = new ImageView(levelNumber);
         levelLabel = new Label();
-        levelLabel.setTranslateX(8);
         levelLabel.setGraphic(currentLevelView);
 
         soundImage = new Image("file:files/soundbuttons/soundon.png", 30,30,false,false);
         soundView = new ImageView(soundImage);
         soundLabel = new Label();
-        soundLabel.setTranslateX(38);
-        soundLabel.setTranslateY(420);
+        soundLabel.setTranslateX(30);
+        soundLabel.setTranslateY(455);
         soundLabel.setGraphic(soundView);
 
         musicImage = new Image("file:files/soundbuttons/musicon.png", 30,30,false,false);
         musicView = new ImageView(musicImage);
         musicLabel = new Label();
-        musicLabel.setTranslateX(68);
-        musicLabel.setTranslateY(420);
+        musicLabel.setTranslateX(60);
+        musicLabel.setTranslateY(455);
         musicLabel.setGraphic(musicView);
 
         //Hearts only in Campaign
@@ -109,7 +116,6 @@ public class RightPanel extends GridPane {
             heart = new Image("file:files/hearts/3heart.png", 90, 30, false, false);
             currentHeartView = new ImageView(heart);
             heartLabel = new Label();
-            heartLabel.setTranslateX(8);
             heartLabel.setGraphic(currentHeartView);
             add(heartLabel,0,2);
         }
@@ -118,9 +124,9 @@ public class RightPanel extends GridPane {
         timerLabel.setTextFill(Color.WHITE);
         timerLabel.setFont(font);
         timerLabel.setTranslateY(200);
-        timerLabel.setTranslateX(4);
+        timerLabel.setTranslateX(8);
 
-        add(timerLabel, 0, 3);
+        add(timerLabel, 0, 4);
 
         add(levelLabel,0,1);
 
@@ -138,6 +144,9 @@ public class RightPanel extends GridPane {
 
         menuView.setOnMouseClicked(e -> MainMenuClicked(e));
         add(menuView,0,0);
+
+       // timer = new Thread(task);
+
     }
 
     public void soundLabelClicked(){
@@ -207,6 +216,7 @@ public class RightPanel extends GridPane {
                 new KeyFrame(Duration.seconds(STARTTIME+1),
                         new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
+
     }
 
     public void pauseClock(){
@@ -214,7 +224,7 @@ public class RightPanel extends GridPane {
         System.out.println(seconds);
         timeline.stop();
 
-        timeSeconds.set(STARTTIME + seconds);
+        timeSeconds.set(STARTTIME);
         timeline = null;
       //  timeline2 = null;
         /*timeline = new Timeline();
@@ -224,15 +234,56 @@ public class RightPanel extends GridPane {
     }
 
     public void resumeClock(){
-        timeSeconds.set(STARTTIME + seconds);
+        timeSeconds.set(STARTTIME);
         timeline = new Timeline();
         timeline.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(STARTTIME + seconds),
+                new KeyFrame(Duration.seconds(STARTTIME),
                         new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
+
     }
 
     public void setSTARTTIME(Integer STARTTIME) {
         RightPanel.STARTTIME = STARTTIME;
     }
+
+    public int getTimeSeconds() {
+        return timeSeconds.get();
+    }
+
+    public IntegerProperty timeSecondsProperty() {
+        return timeSeconds;
+    }
+
+    public void startTask(){
+        timer = new Thread(task);
+        timer.start();
+    }
+
+    public void gameIsOver(){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("2");
+                mainProgram.gameOver();
+                audioPlayer.playGameOverSound();
+                audioPlayer.stopMusic();
+                timer = null;
+                task = null;
+            }
+        });
+
+    }
+
+    Task<Void> task = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            System.out.println("orangutang");
+
+            gameIsOver();
+            return null;
+        }
+
+    };
 }
