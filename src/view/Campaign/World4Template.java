@@ -39,7 +39,7 @@ public class World4Template extends World1Template {
     }
 
     public void setupGhost() throws FileNotFoundException {
-        ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
+        ghost = new Image("file:files/god_mob2.png", squareSize, squareSize, false, false);
 
 
         imageView.setImage(ghost);
