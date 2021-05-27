@@ -22,10 +22,12 @@ public class Menu extends Pane {
     private Image helpResize;
     private Image mazegen;
     private AudioPlayer audioPlayer;
+    private RightPanel panel;
 
-    public Menu(MainProgram mainProgram, AudioPlayer audioPlayer){
+    public Menu(MainProgram mainProgram, AudioPlayer audioPlayer, RightPanel panel){
         this.mainProgram = mainProgram;
         this.audioPlayer = audioPlayer;
+        this.panel = panel;
         setBackground();
         setupImages();
         addButtons();
@@ -72,6 +74,7 @@ public class Menu extends Pane {
             try {
                 mainProgram.changeToCampaign();
                 audioPlayer.playLevelMusic("forest");
+                panel.setTheTime(25);
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }

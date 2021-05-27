@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.DigitalClock;
 import model.TimeThread;
+import model.TotalTime;
 import view.AudioPlayer;
 
 import java.io.FileNotFoundException;
@@ -74,12 +75,14 @@ public class RightPanel extends GridPane {
 
     private AudioPlayer audioPlayer;
     private TimeThread time;
+    private TotalTime totTime;
 
 
-    public RightPanel(MainProgram mainProgram, String gameMode, AudioPlayer audioPlayer, TimeThread time) throws FileNotFoundException {
+    public RightPanel(MainProgram mainProgram, String gameMode, AudioPlayer audioPlayer, TimeThread time, TotalTime totTime) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.gameMode = gameMode;
         this.audioPlayer = audioPlayer;
+        this.totTime = totTime;
         this.time = time;
 
         soundOn = true;
@@ -225,13 +228,17 @@ public class RightPanel extends GridPane {
         System.out.println(seconds);
         timeline.stop();
 
-        timeSeconds.set(STARTTIME);
+        timeSeconds.set(seconds);
         timeline = null;
       //  timeline2 = null;
         /*timeline = new Timeline();
         timeline.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(STARTTIME+1),
                         new KeyValue(timeSeconds, 0)));*/
+    }
+
+    public void setTheTime(int timesec){
+        timeSeconds.set(timesec);
     }
 
     public void resumeClock(){
@@ -270,8 +277,10 @@ public class RightPanel extends GridPane {
                 mainProgram.gameOver();
                 audioPlayer.playGameOverSound();
                 audioPlayer.stopMusic();
-                timer = null;
-                task = null;
+                totTime.setGameOver(true);
+              //  timer = null;
+              //  task = null;
+
             }
         });
 

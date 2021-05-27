@@ -14,6 +14,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
 import model.TimeThread;
+import model.TotalTime;
 import view.AudioPlayer;
 import view.Menu.RightPanel;
 
@@ -53,11 +54,12 @@ public class World1Template extends GridPane {
     private boolean gameStarted;
     private boolean startNotClickedOnce = true;
     private int world;
-    private int seconds = 15;
+    private int seconds = 25;
 
     private RightPanel rightPanel;
     private AudioPlayer audioPlayer;
     private TimeThread time;
+    private TotalTime totTime;
 
     //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
     public World1Template(int[][] level, int currentLevel, int heartCrystals, MainProgram mainProgram, RightPanel rightPanel, int world, AudioPlayer audioPlayer, int seconds) throws FileNotFoundException {
@@ -77,6 +79,8 @@ public class World1Template extends GridPane {
         setupBorders();
         setupLevel();
         rightPanel.setSTARTTIME(seconds);
+
+        totTime = new TotalTime(false);
 
     }
     public void setBackground(){
@@ -347,8 +351,14 @@ public class World1Template extends GridPane {
         audioPlayer.playGameOverSound();
         audioPlayer.stopMusic();
         mainProgram.gameOver();
+        rightPanel.pauseClock();
+        gameStarted = true;
+        time.setGameOver(true);
+        totTime.setGameOver(true);
         time = null;
+
     }
+
 
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
@@ -389,11 +399,15 @@ public class World1Template extends GridPane {
             time = new TimeThread(seconds, rightPanel);
             time.setGameOver(false);
             time.start();
+
         }else if (startNotClickedOnce){
             rightPanel.runClock();
             time = new TimeThread(seconds, rightPanel);
             time.setGameOver(false);
             time.start();
+
+            totTime = new TotalTime(false);
+            totTime.start();
         }
 
 
