@@ -267,6 +267,12 @@ public class World3Template extends World1Template {
             ghost2V.setImage(ghost);
             ghost1V.setImage(ghost);
 
+            ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost4V.setOnMouseEntered(e -> enteredGhost(e));
+
+
             add(ghost4V, 8, 11);
             add(ghost1V, 8, 3);
             add(ghost2V, 8, 8);
@@ -321,6 +327,8 @@ public class World3Template extends World1Template {
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
             animation.play();
+
+
 
         }
 
@@ -391,6 +399,11 @@ public class World3Template extends World1Template {
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
             animation.play();
+
+            ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost4V.setOnMouseEntered(e -> enteredGhost(e));
 
 
             }
