@@ -365,6 +365,7 @@ public class World1Template extends GridPane {
             audioPlayer.playGoalSound();
             nextLevel();
             rightPanel.pauseClock();
+            rightPanel.setTheTime(seconds);
             gameStarted = true;
             time.setGameOver(true);
             time = null;
