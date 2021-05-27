@@ -38,7 +38,7 @@ public class World5Template extends World1Template {
     }
     public void initialize() {
 
-        ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
+        ghost = new Image("file:files/mob_egypt.png", squareSize, squareSize, false, false);
 
         if (currentLevel==2){
             ImageView ghost3V = new ImageView();
