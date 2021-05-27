@@ -167,8 +167,12 @@ public class World1Template extends GridPane {
         start = new Image("file:files/" + folder + "/start.png", squareSize, squareSize, false, false);
         pickAxeImage = new Image("file:files/items/pickaxe.png", squareSize, squareSize, false, false);
         heart = new Image("file:files/items/heart.png", squareSize, squareSize, false, false);
-        breakableWall = new Image("file:files/breakablewall.png", squareSize, squareSize, false, false);
-
+        if (value == 3) {
+            breakableWall = new Image("file:files/cloud/breakablewall.png", squareSize, squareSize, false, false);
+        }
+        else {
+            breakableWall = new Image("file:files/breakablewall.png", squareSize, squareSize, false, false);
+        }
         if(value!=5){
             border = new Image("file:files/" + folder + "/border.png", squareSize, squareSize, false, false);
             wall = new Image("file:files/" + folder + "/wall.png", squareSize, squareSize, false, false);
