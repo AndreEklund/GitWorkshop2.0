@@ -278,6 +278,7 @@ public class RightPanel extends GridPane {
                 audioPlayer.playGameOverSound();
                 audioPlayer.stopMusic();
                 totTime.setGameOver(true);
+                removePickaxe();
               //  timer = null;
               //  task = null;
 
