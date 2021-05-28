@@ -161,7 +161,7 @@ public class MainProgram extends Application {
     }
     public void changeToCampaign() throws FileNotFoundException {
 
-        world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel, 0, audioPlayer, 20);
+        world1Template = new World3Template(world3Maps.getLevel34(), 5, 3, this, rightPanel, 2, audioPlayer);
 
         mainPaneCampaign.setCenter(world1Template);
         mainWindow.setScene(campaignScene);
