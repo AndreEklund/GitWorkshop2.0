@@ -321,6 +321,11 @@ public class World4Template extends World1Template {
             animation.setPath(rectangle);
             animation.play();
 
+            ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost4V.setOnMouseEntered(e -> enteredGhost(e));
+
         }
 
         else if (currentLevel==6){
@@ -386,6 +391,11 @@ public class World4Template extends World1Template {
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
             animation.play();
+
+            ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost4V.setOnMouseEntered(e -> enteredGhost(e));
 
         }
     }
