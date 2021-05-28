@@ -74,7 +74,7 @@ public class Menu extends Pane {
             try {
                 mainProgram.changeToCampaign();
                 audioPlayer.playLevelMusic("forest");
-                panel.setTheTime(20);
+                panel.setTheTime(25);
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
