@@ -1,4 +1,4 @@
-package model;
+package outdatedClasses;
 
 public class Player {
 

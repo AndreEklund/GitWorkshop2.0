@@ -39,7 +39,6 @@ public class World1Template extends GridPane {
     private Image goal;
     private Image diamond;
     private Image start;
-    private Image ghost;
     private Image heart;
     private Image breakableWall;
     private boolean startButtonPressed;
@@ -140,7 +139,6 @@ public class World1Template extends GridPane {
     }
     public void setupImages(int value){
 
-
         String folder = "";
 
         if (value == 0) {
@@ -186,7 +184,6 @@ public class World1Template extends GridPane {
         wallView.setFitHeight(squareSize);
         wallView.setFitWidth(squareSize);
         label.setGraphic(wallView);
-        //label.setStyle("-fx-border-color: grey; ");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
@@ -197,7 +194,6 @@ public class World1Template extends GridPane {
         pathView.setFitHeight(squareSize);
         pathView.setFitWidth(squareSize);
         label.setGraphic(pathView);
-        //label.setStyle("-fx-border-color: grey;");
         return label;
     }
     private Label getBorders() {
@@ -206,7 +202,6 @@ public class World1Template extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
@@ -226,7 +221,6 @@ public class World1Template extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> {
             try {
                 enteredGoal();
@@ -242,7 +236,6 @@ public class World1Template extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseClicked(e -> startLevel());
         return label;
     }
@@ -361,7 +354,6 @@ public class World1Template extends GridPane {
 
     }
 
-
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
             audioPlayer.playGoalSound();
@@ -408,7 +400,6 @@ public class World1Template extends GridPane {
             time.setGameOver(false);
             time.start();
 
-
         }else if (startNotClickedOnce){
             rightPanel.runClock();
             time = new TimeThread(seconds, rightPanel);
@@ -416,7 +407,6 @@ public class World1Template extends GridPane {
             time.start();
 
         }
-
         totalTimeStarted = true;
         startNotClickedOnce = false;
         audioPlayer.playStartSound();

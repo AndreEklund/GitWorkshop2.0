@@ -73,8 +73,6 @@ public class World3Template extends World1Template {
 
         imageView.setOnMouseEntered(e -> enteredWall(e));
 
-
-
         initialize();
     }
 
@@ -91,12 +89,9 @@ public class World3Template extends World1Template {
             rectangle.setY(65);
             rectangle.setX(-147);
 
-
             Rectangle rectangle2 = new Rectangle(84,123);
             rectangle2.setY(65);
             rectangle2.setX(-147);
-
-
 
             animation = new PathTransition();
             animation.setNode(ghost3V);
@@ -112,11 +107,8 @@ public class World3Template extends World1Template {
             animation2.setPath(rectangle2);
             animation2.play();
 
-
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
-
             ghost3V.setOnMouseEntered(e -> enteredGhost(e));
-
 
         }
 
@@ -133,7 +125,6 @@ public class World3Template extends World1Template {
             Rectangle rectangle = new Rectangle(125,120);
             rectangle.setY(65);
             rectangle.setX(-147);
-
 
             Rectangle rectangle1 = new Rectangle(210,125);
             rectangle1.setY(190);
@@ -153,7 +144,6 @@ public class World3Template extends World1Template {
             animation2.setPath(rectangle1);
             animation2.play();
 
-
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
 
@@ -165,17 +155,14 @@ public class World3Template extends World1Template {
           ImageView ghost3V = new ImageView();
           ImageView ghost5V = new ImageView();
 
-
           ghost1V.setImage(ghost);
           ghost2V.setImage(ghost);
           ghost3V.setImage(ghost);
           ghost4V.setImage(ghost);
           ghost5V.setImage(ghost);
 
-
           add(ghost2V,15,4);
           add(ghost4V,10,4);
-
           add(ghost1V,10,1);
           add(ghost3V,15,1);
           add(ghost5V,12,1);
@@ -184,7 +171,6 @@ public class World3Template extends World1Template {
             rectangle.setY(190);
             rectangle.setX(-230);
 
-
             Rectangle rectangle1 = new Rectangle(125,83);
             rectangle1.setY(190);
             rectangle1.setX(-230);
@@ -192,7 +178,6 @@ public class World3Template extends World1Template {
             Rectangle rectangle2 = new Rectangle(0,83);
             rectangle2.setY(105);
             rectangle2.setX(-232);
-
 
             Rectangle rectangle3 = new Rectangle(0,83);
             rectangle3.setY(105);
@@ -220,7 +205,6 @@ public class World3Template extends World1Template {
             animation4.setAutoReverse(true);
             animation4.play();
 
-
             animation5 = new PathTransition();
             animation5.setNode(ghost5V);
             animation5.setDuration(Duration.seconds(2));
@@ -247,13 +231,11 @@ public class World3Template extends World1Template {
             animation2.setAutoReverse(true);
             animation2.play();
 
-
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
             ghost3V.setOnMouseEntered(e -> enteredGhost(e));
             ghost4V.setOnMouseEntered(e -> enteredGhost(e));
             ghost5V.setOnMouseEntered(e -> enteredGhost(e));
-
 
         }
         else if(currentLevel==5) {
@@ -272,12 +254,10 @@ public class World3Template extends World1Template {
             ghost3V.setOnMouseEntered(e -> enteredGhost(e));
             ghost4V.setOnMouseEntered(e -> enteredGhost(e));
 
-
             add(ghost4V, 8, 11);
             add(ghost1V, 8, 3);
             add(ghost2V, 8, 8);
             add(ghost3V, 8, 12);
-
 
             Rectangle rectangle = new Rectangle(83, 125);
             rectangle.setY(65);
@@ -294,7 +274,6 @@ public class World3Template extends World1Template {
             Rectangle rectangle3 = new Rectangle(400, 0);
             rectangle3.setY(20);
             rectangle3.setX(-150);
-
 
             animation4 = new PathTransition();
             animation4.setNode(ghost4V);
@@ -328,8 +307,6 @@ public class World3Template extends World1Template {
             animation.setPath(rectangle);
             animation.play();
 
-
-
         }
 
             else if (currentLevel==6){
@@ -349,8 +326,6 @@ public class World3Template extends World1Template {
             add(ghost1V, 7, 6);
             add(ghost2V, 8, 2);
 
-
-
             Rectangle rectangle = new Rectangle(83, 125);
             rectangle.setY(65);
             rectangle.setX(-150);
@@ -366,7 +341,6 @@ public class World3Template extends World1Template {
             Rectangle rectangle3 = new Rectangle(170, 87);
             rectangle3.setY(20);
             rectangle3.setX(20);
-
 
             animation4 = new PathTransition();
             animation4.setNode(ghost4V);
@@ -405,11 +379,7 @@ public class World3Template extends World1Template {
             ghost3V.setOnMouseEntered(e -> enteredGhost(e));
             ghost4V.setOnMouseEntered(e -> enteredGhost(e));
 
-
             }
-
-
-
         }
 /*
         ghost3V.setImage(ghost);

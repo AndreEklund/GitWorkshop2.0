@@ -16,7 +16,6 @@ public class TimeThread extends Thread {
     }
 
     public void run() {
-        System.out.println("vi kör");
         while (!gameOver) {
             try {
                 Thread.sleep(1000);

@@ -16,7 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import model.DigitalClock;
+import outdatedClasses.DigitalClock;
 import model.TimeThread;
 import model.TotalTime;
 import view.AudioPlayer;
@@ -31,8 +31,6 @@ public class RightPanel extends GridPane {
      */
 
     private MainProgram mainProgram;
-    private DigitalClock clock = new DigitalClock();
-    private boolean running = false;
     private String gameMode;
     private int seconds;
 
@@ -61,7 +59,6 @@ public class RightPanel extends GridPane {
     private ImageView musicView;
     private Label musicLabel;
     private boolean musicOn;
-    private boolean gameOver = false;
     private boolean timerIsStartedOnce = false;
 
     private Image emptySprite;
@@ -69,12 +66,10 @@ public class RightPanel extends GridPane {
 
     private static Integer STARTTIME = 15;
     private Timeline timeline = new Timeline();
-    private Timeline timeline2;
     private Label timerLabel = new Label();
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     private IntegerProperty stackedSeconds = new SimpleIntegerProperty();
     private Font font = Font.loadFont("file:files/fonts/PressStart2P.ttf", 35);
-    private int checkSeconds = timeSeconds.getValue().intValue();
 
     private AudioPlayer audioPlayer;
     private TimeThread time;
@@ -136,9 +131,7 @@ public class RightPanel extends GridPane {
         timerLabel.setTranslateX(8);
 
         add(timerLabel, 0, 4);
-
         add(levelLabel,0,1);
-
         add(pickaxeLabel, 0, 3);
 
         soundLabel.setOnMouseClicked(e -> soundLabelClicked());
@@ -150,7 +143,6 @@ public class RightPanel extends GridPane {
         menuView.setOnMouseClicked(e -> MainMenuClicked(e));
         add(menuView,0,0);
 
-       // timer = new Thread(task);
         totTime = new TotalTime(false);
 
     }
@@ -208,36 +200,26 @@ public class RightPanel extends GridPane {
 
 
     private void MainMenuClicked(MouseEvent e){
-        System.out.println("Main Menu clicked");
         mainProgram.changeToMenu();
         audioPlayer.playButtonSound();
         audioPlayer.stopMusic();
-
     }
 
     public void runClock() {
-        System.out.println("runClock");
         timeSeconds.set(STARTTIME);
 
         timeline.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(STARTTIME),
                         new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
-
     }
 
     public void pauseClock(){
         seconds = timeSeconds.getValue().intValue();
-        System.out.println(seconds);
         timeline.stop();
 
         timeSeconds.set(seconds);
         timeline = null;
-      //  timeline2 = null;
-        /*timeline = new Timeline();
-        timeline.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(STARTTIME+1),
-                        new KeyValue(timeSeconds, 0)));*/
     }
 
     public void setTheTime(int timesec){
@@ -273,15 +255,11 @@ public class RightPanel extends GridPane {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println("2");
                 mainProgram.gameOver();
                 audioPlayer.playGameOverSound();
                 audioPlayer.stopMusic();
                 totTime.setGameOver(true);
                 removePickaxe();
-              //  timer = null;
-              //  task = null;
-
             }
         });
 
@@ -290,7 +268,6 @@ public class RightPanel extends GridPane {
     Task<Void> task = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
-            System.out.println("orangutang");
 
             gameIsOver();
             return null;

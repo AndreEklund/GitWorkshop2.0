@@ -1,4 +1,4 @@
-package model;
+package outdatedClasses;
 
 import javafx.geometry.VPos;
 import javafx.scene.Group;
