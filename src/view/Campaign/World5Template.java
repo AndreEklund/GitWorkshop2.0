@@ -207,51 +207,26 @@ public class World5Template extends World1Template {
             ghost2V.setImage(ghost);
             ghost1V.setImage(ghost);
 
-            add(ghost4V, 8, 10);
-            add(ghost3V, 8, 6);
-
             add(ghost1V, 7, 6);
-            add(ghost2V, 8, 2);
+            add(ghost2V, 6, 3);
+            add(ghost3V, 16, 0);
+            add(ghost4V, 17, 10);
 
-            Rectangle rectangle = new Rectangle(83, 125);
-            rectangle.setY(65);
+            Rectangle rectangle = new Rectangle(100, 100);
+            rectangle.setY(80);
             rectangle.setX(-150);
 
-            Rectangle rectangle1 = new Rectangle(0, 40);
-            rectangle1.setY(65);
+            Rectangle rectangle1 = new Rectangle(100, 0);
+            rectangle1.setY(80);
             rectangle1.setX(-150);
 
-            Rectangle rectangle2 = new Rectangle(170, 87);
-            rectangle2.setY(20);
-            rectangle2.setX(20);
+            Rectangle rectangle2 = new Rectangle(0, 450);
+            rectangle2.setY(80);
+            rectangle2.setX(17);
 
-            Rectangle rectangle3 = new Rectangle(170, 87);
-            rectangle3.setY(20);
-            rectangle3.setX(20);
-
-            animation4 = new PathTransition();
-            animation4.setNode(ghost4V);
-            animation4.setDuration(Duration.seconds(3));
-            animation4.setAutoReverse(true);
-            animation4.setCycleCount(Animation.INDEFINITE);
-            animation4.setPath(rectangle3);
-            animation4.play();
-
-            animation3 = new PathTransition();
-            animation3.setNode(ghost3V);
-            animation3.setDuration(Duration.seconds(2.5));
-            animation3.setAutoReverse(true);
-            animation3.setCycleCount(Animation.INDEFINITE);
-            animation3.setPath(rectangle2);
-            animation3.play();
-
-            animation2 = new PathTransition();
-            animation2.setNode(ghost2V);
-            animation2.setDuration(Duration.seconds(1.5));
-            animation2.setAutoReverse(true);
-            animation2.setCycleCount(Animation.INDEFINITE);
-            animation2.setPath(rectangle1);
-            animation2.play();
+            Rectangle rectangle3 = new Rectangle(70, 130);
+            rectangle3.setY(80);
+            rectangle3.setX(-150);
 
             animation = new PathTransition();
             animation.setNode(ghost1V);
@@ -261,6 +236,28 @@ public class World5Template extends World1Template {
             animation.setPath(rectangle);
             animation.play();
 
+            animation2 = new PathTransition();
+            animation2.setNode(ghost2V);
+            animation2.setDuration(Duration.seconds(2.5));
+            animation2.setAutoReverse(true);
+            animation2.setCycleCount(Animation.INDEFINITE);
+            animation2.setPath(rectangle1);
+            animation2.play();
+
+            animation3 = new PathTransition();
+            animation3.setNode(ghost3V);
+            animation3.setDuration(Duration.seconds(2));
+            animation3.setAutoReverse(true);
+            animation3.setCycleCount(Animation.INDEFINITE);
+            animation3.setPath(rectangle2);
+            animation3.play();
+
+            animation4 = new PathTransition();
+            animation4.setNode(ghost4V);
+            animation4.setDuration(Duration.seconds(3));
+            animation4.setCycleCount(Animation.INDEFINITE);
+            animation4.setPath(rectangle3);
+            animation4.play();
         }
     }
 }
