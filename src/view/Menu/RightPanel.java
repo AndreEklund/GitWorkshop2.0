@@ -220,7 +220,7 @@ public class RightPanel extends GridPane {
         timeSeconds.set(STARTTIME);
 
         timeline.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(STARTTIME+1),
+                new KeyFrame(Duration.seconds(STARTTIME),
                         new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
 
