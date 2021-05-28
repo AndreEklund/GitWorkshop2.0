@@ -1,4 +1,4 @@
-package model;
+package outdatedClasses;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

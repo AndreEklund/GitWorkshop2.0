@@ -128,7 +128,6 @@ public class World2Template extends World1Template {
                 10.5,650.0);
 
 
-
         animation3 = new PathTransition();
         animation3.setNode(ghost3V);
         animation3.setDuration(Duration.seconds(4));
@@ -183,7 +182,6 @@ public class World2Template extends World1Template {
         animation.setPath(line);
         animation.setCycleCount(PathTransition.INDEFINITE);
         animation.play();
-
 
         ghost1V.setOnMouseEntered(e -> enteredGhost(e));
         ghost2V.setOnMouseEntered(e -> enteredGhost(e));

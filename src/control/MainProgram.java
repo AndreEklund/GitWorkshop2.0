@@ -2,8 +2,6 @@ package control;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Camera;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 
@@ -15,7 +13,6 @@ import javafx.stage.Stage;
 import model.Maps.*;
 
 import model.MazeGeneration.GenerateNextLevel;
-import model.MapCreator;
 import view.AudioPlayer;
 import view.Campaign.*;
 import view.GameOverScreen;
@@ -60,20 +57,14 @@ public class MainProgram extends Application {
     private GameOverScreen gameOverScreen;
     private Image cursorImage;
 
-
     @Override
-
     public void start(Stage primaryStage) throws Exception{
-
-
 
         //En klass som spelar alla ljud/musik
         audioPlayer = new AudioPlayer();
         audioPlayer.playIntroMusic();
 
-        //
         rightPanel = new RightPanel(this, "11", audioPlayer, null);
-
         rightPanel.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         //Menu och Intro scenes
@@ -90,48 +81,28 @@ public class MainProgram extends Application {
         mainPaneRandomMaze = new BorderPane();
         mainPaneCampaign = new BorderPane();
         introAnimation = new WorldIntroAnimation();
-        //mainPaneCampaign.getChildren().add(introAnimation);
 
         mainWindow = primaryStage;
 
-
-      //  mazeGenerator = new MazeGenerator(5, true);
         cursorImage = new Image("file:files/imagecursor.png");
 
-
-
         mainWindow.setTitle("Mazegen");
-        //mainWindow.initStyle(StageStyle.UTILITY);
         mainWindow.setResizable(false);
         mainWindow.setOnCloseRequest(windowEvent -> System.exit(0));
-
 
         world3Maps = new World3Maps();
         world1Maps = new World1Maps();
         world4Maps = new World4Maps();
 
-        //generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel);
-
         mainPaneCampaign.setRight(rightPanel);
-
 
         rightPnlRndm = new RightPanel(this, "Random", audioPlayer, null);
         rightPnlRndm.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        //mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
-        MapCreator mapCreator = new MapCreator();
-
-        //Mobmazelevel mobmazelevel = new Mobmazelevel();
-        //mainPaneCampaign.setCenter(mobmazelevel);
-
-
-
-        //mainPaneRandomMaze.setCenter(mapTemplate);
         mainPaneRandomMaze.setRight(rightPnlRndm);
 
         campaignScene = new Scene(mainPaneCampaign, 800, 600);
         randomScene = new Scene(mainPaneRandomMaze, 800, 600);
-
 
         mainWindow.setScene(introScene);
         mainWindow.show();
@@ -156,7 +127,6 @@ public class MainProgram extends Application {
         generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel, dimension);
         mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         mainPaneRandomMaze.setCenter(mapTemplate);
-       // mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
         mainWindow.setScene(randomScene);
     }
     public void changeToCampaign() throws FileNotFoundException {

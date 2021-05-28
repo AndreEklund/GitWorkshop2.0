@@ -110,7 +110,6 @@ public class Intro extends Pane {
         ft4.setToValue(1);
         ft4.play();
 
-
     }
 
 }

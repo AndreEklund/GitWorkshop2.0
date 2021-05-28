@@ -1,4 +1,4 @@
-package model;
+package outdatedClasses;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;

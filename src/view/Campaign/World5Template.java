@@ -29,7 +29,6 @@ public class World5Template extends World1Template {
  
         super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer, 90);
 
-      
         squareSize = 600/(level.length+2);
         this.currentLevel = currentLevel;
 
@@ -41,6 +40,7 @@ public class World5Template extends World1Template {
         ghost = new Image("file:files/mob_egypt.png", squareSize, squareSize, false, false);
 
         if (currentLevel==2){
+
             ImageView ghost3V = new ImageView();
             ImageView ghost1V = new ImageView();
             ghost3V.setImage(ghost);
@@ -52,12 +52,9 @@ public class World5Template extends World1Template {
             rectangle.setY(65);
             rectangle.setX(-150);
 
-
             Rectangle rectangle2 = new Rectangle(97,280);
             rectangle2.setY(65);
             rectangle2.setX(-150);
-
-
 
             animation = new PathTransition();
             animation.setNode(ghost3V);
@@ -73,11 +70,8 @@ public class World5Template extends World1Template {
             animation2.setPath(rectangle2);
             animation2.play();
 
-
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
-
             ghost3V.setOnMouseEntered(e -> enteredGhost(e));
-
 
         }
 
@@ -94,7 +88,6 @@ public class World5Template extends World1Template {
             Rectangle rectangle = new Rectangle(270,100);
             rectangle.setY(50);
             rectangle.setX(-150);
-
 
             Rectangle rectangle1 = new Rectangle(100,100);
             rectangle1.setY(80);
@@ -114,12 +107,12 @@ public class World5Template extends World1Template {
             animation2.setPath(rectangle1);
             animation2.play();
 
-
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
 
         }
         else if (currentLevel == 4 ){
+
             ImageView ghost1V = new ImageView();
             ImageView ghost2V = new ImageView();
 
@@ -132,7 +125,6 @@ public class World5Template extends World1Template {
             Rectangle rectangle = new Rectangle(132,100);
             rectangle.setY(50);
             rectangle.setX(-150);
-
 
             Rectangle rectangle1 = new Rectangle(100,100);
             rectangle1.setY(80);
@@ -152,10 +144,8 @@ public class World5Template extends World1Template {
             animation2.setPath(rectangle1);
             animation2.play();
 
-
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
-
 
         }
         else if(currentLevel==5) {
@@ -170,7 +160,6 @@ public class World5Template extends World1Template {
             add(ghost1V, 12, 8);
             add(ghost2V, 14, 0);
             //add(ghost3V, 8, 12);
-
 
             Rectangle rectangle = new Rectangle(132, 200);
             rectangle.setY(80);
@@ -224,8 +213,6 @@ public class World5Template extends World1Template {
             add(ghost1V, 7, 6);
             add(ghost2V, 8, 2);
 
-
-
             Rectangle rectangle = new Rectangle(83, 125);
             rectangle.setY(65);
             rectangle.setX(-150);
@@ -241,7 +228,6 @@ public class World5Template extends World1Template {
             Rectangle rectangle3 = new Rectangle(170, 87);
             rectangle3.setY(20);
             rectangle3.setX(20);
-
 
             animation4 = new PathTransition();
             animation4.setNode(ghost4V);
@@ -275,10 +261,6 @@ public class World5Template extends World1Template {
             animation.setPath(rectangle);
             animation.play();
 
-
         }
-
-
-
     }
 }
