@@ -308,7 +308,6 @@ public class World1Template extends GridPane {
         if (startButtonPressed) {
 
             heartCrystals--;
-            System.out.println("Hearts left: " + heartCrystals);
             rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
 
             if (heartCrystals == 0) {
@@ -331,7 +330,6 @@ public class World1Template extends GridPane {
         if (startButtonPressed) {
             audioPlayer.playDeathSound();
             heartCrystals--;
-            System.out.println("spöke träffat");
             rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
 
             if (heartCrystals == 0) {

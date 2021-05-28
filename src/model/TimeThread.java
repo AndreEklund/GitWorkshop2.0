@@ -21,7 +21,6 @@ public class TimeThread extends Thread {
                 Thread.sleep(1000);
                 if (seconds > 0) {
                     seconds--;
-                    System.out.println(seconds);
                 }
                 if (seconds ==0) {
                    // gameOver = true;
