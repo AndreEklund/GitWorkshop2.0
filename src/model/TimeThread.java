@@ -18,24 +18,23 @@ public class TimeThread extends Thread {
     public void run() {
         while (!gameOver) {
             try {
+                Thread.sleep(1000);
                 if (seconds > 0) {
                     seconds--;
                 }
-                Thread.sleep(1000);
-
                 if (seconds == 5){
                     panel.fiveSecLeft();
                 }
                 if (seconds ==0) {
+                    panel.startTask();
                     gameOver = true;
-                   // panel.startTask();
                 }
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        panel.startTask();
+
     }
 
     public int getSeconds() {
