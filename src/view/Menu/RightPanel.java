@@ -293,7 +293,7 @@ public class RightPanel extends GridPane {
     }
 
     public void fiveSecLeft() {
-        audioPlayer.playTickingSound();
+        audioPlayer.playTimeLeftSound();
         timerLabel.setStyle("-fx-text-fill: red;");
     }
 
