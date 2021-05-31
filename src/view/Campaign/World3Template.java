@@ -56,6 +56,7 @@ public class World3Template extends World1Template {
         this.audioPlayer = audioPlayer;
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         rightPanel.setSTARTTIME(60);
+        rightPanel.resetTimerLabel();
         setupGhost();
 
     }

@@ -59,6 +59,7 @@ public class World2Template extends World1Template {
         }
         time = new TimeThread(35, rightPanel);
         rightPanel.setSTARTTIME(35);
+        rightPanel.resetTimerLabel();
     }
     public void setupGhost() {
         ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
