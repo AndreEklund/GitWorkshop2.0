@@ -62,6 +62,10 @@ public class AudioPlayer {
     private Media timeLeftMedia;
     private MediaPlayer timeLeftMediaPlayer;
 
+    private File mobSound;
+    private Media mobSoundMedia;
+    private MediaPlayer mobSoundMediaPlayer;
+
     public AudioPlayer() {
         setupAudioFiles();
     }
@@ -117,6 +121,10 @@ public class AudioPlayer {
         timeLeftSound = new File("files/sounds/timeLeft.mp3");
         timeLeftMedia = new Media(timeLeftSound.toURI().toString());
         timeLeftMediaPlayer = new MediaPlayer(timeLeftMedia);
+
+        mobSound = new File("files/sounds/mobsound.mp3");
+        mobSoundMedia = new Media(mobSound.toURI().toString());
+        mobSoundMediaPlayer = new MediaPlayer(mobSoundMedia);
 
     }
 
@@ -206,6 +214,10 @@ public class AudioPlayer {
     public void playTimeLeftSound() {
         timeLeftMediaPlayer.play();
         timeLeftMediaPlayer.seek(Duration.ZERO);
+    }
+    public void playMobSound(){
+        mobSoundMediaPlayer.play();
+        mobSoundMediaPlayer.seek(Duration.ZERO);
     }
 
     public void muteMusic(boolean mute){

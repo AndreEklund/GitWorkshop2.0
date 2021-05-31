@@ -328,7 +328,9 @@ public class World1Template extends GridPane {
         fade.setToValue(10);
         fade.play();
 
+
         if (startButtonPressed) {
+            audioPlayer.playMobSound();
             audioPlayer.playDeathSound();
             heartCrystals--;
             rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
