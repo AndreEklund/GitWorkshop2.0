@@ -79,6 +79,8 @@ public class World1Template extends GridPane {
         setupBorders();
         setupLevel();
         rightPanel.setSTARTTIME(seconds);
+        rightPanel.resetTimerLabel();
+
 
         totTime = new TotalTime(false);
         time = null;
@@ -357,6 +359,7 @@ public class World1Template extends GridPane {
 
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
+            audioPlayer.stopClockSound();
             audioPlayer.playGoalSound();
             nextLevel();
             rightPanel.pauseClock();

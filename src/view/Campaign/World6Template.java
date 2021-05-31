@@ -51,6 +51,7 @@ public class World6Template extends World1Template implements Runnable {
         Thread animationTimer = new Thread(this);
         animationTimer.start();
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+        rightPanel.resetTimerLabel();
         initialize();
 
     }

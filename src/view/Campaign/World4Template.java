@@ -35,6 +35,7 @@ public class World4Template extends World1Template {
         squareSize = 600/(level.length+2);
 
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+        rightPanel.resetTimerLabel();
         setupGhost();
     }
 

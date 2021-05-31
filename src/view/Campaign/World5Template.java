@@ -33,6 +33,7 @@ public class World5Template extends World1Template {
         this.currentLevel = currentLevel;
 
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
+        rightPanel.resetTimerLabel();
         initialize();
     }
     public void initialize() {

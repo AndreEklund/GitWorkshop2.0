@@ -299,5 +299,6 @@ public class RightPanel extends GridPane {
 
     public void resetTimerLabel(){
         timerLabel.setStyle("-fx-text-fill: white;");
+        audioPlayer.stopClockSound();
     }
 }
