@@ -197,4 +197,7 @@ public class AudioPlayer {
     public void muteMusic(boolean mute){
         currentSongPlayer.setMute(mute);
     }
+
+    public void playTickingSound() {
+    }
 }
