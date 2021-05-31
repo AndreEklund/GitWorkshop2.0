@@ -29,7 +29,7 @@ public class World3Template extends World1Template {
 
 
     /**
-     * Author André Eklund
+     * Author Filip Örnling
      */
 
     private Image ghost;
