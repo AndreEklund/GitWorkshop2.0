@@ -248,8 +248,10 @@ public class RightPanel extends GridPane {
     public void startTask(){
 
         timer = null;
+
         timer = new Thread(startNewTask());
         timer.start();
+
     }
 
     public void gameIsOver(){
@@ -263,6 +265,7 @@ public class RightPanel extends GridPane {
                 audioPlayer.stopMusic();
                 totTime.setGameOver(true);
                 removePickaxe();
+                System.out.println("helloo");
             }
         });
 

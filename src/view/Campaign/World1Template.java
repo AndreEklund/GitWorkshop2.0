@@ -81,6 +81,7 @@ public class World1Template extends GridPane {
         rightPanel.setSTARTTIME(seconds);
 
         totTime = new TotalTime(false);
+        time = null;
 
     }
     public void setBackground(){
