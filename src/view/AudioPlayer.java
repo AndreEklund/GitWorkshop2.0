@@ -4,6 +4,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import javax.print.attribute.standard.MediaSize;
 import java.io.File;
 
 public class AudioPlayer {
@@ -57,6 +58,10 @@ public class AudioPlayer {
     private Media worldIntroMedia;
     private MediaPlayer worldIntroMediaPlayer;
 
+    private File timeLeftSound;
+    private Media timeLeftMedia;
+    private MediaPlayer timeLeftMediaPlayer;
+
     public AudioPlayer() {
         setupAudioFiles();
     }
@@ -108,6 +113,10 @@ public class AudioPlayer {
         currentSong = new File("files/music/forest.mp3");
         currentMedia = new Media(currentSong.toURI().toString());
         currentSongPlayer = new MediaPlayer(currentMedia);
+
+        timeLeftSound = new File("files/sounds/timeLeft.mp3");
+        timeLeftMedia = new Media(timeLeftSound.toURI().toString());
+        timeLeftMediaPlayer = new MediaPlayer(timeLeftMedia);
 
     }
 
@@ -176,6 +185,7 @@ public class AudioPlayer {
         goalPlayer.setMute(mute);
         diamondPlayer.setMute(mute);
         worldIntroMediaPlayer.setMute(mute);
+        timeLeftMediaPlayer.setMute(mute);
     }
     public void playIntroMusic() {
         introMediaPlayer.play();
@@ -193,11 +203,12 @@ public class AudioPlayer {
         worldIntroMediaPlayer.play();
         worldIntroMediaPlayer.seek(Duration.ZERO);
     }
+    public void playTimeLeftSound() {
+        timeLeftMediaPlayer.play();
+        timeLeftMediaPlayer.seek(Duration.ZERO);
+    }
 
     public void muteMusic(boolean mute){
         currentSongPlayer.setMute(mute);
-    }
-
-    public void playTickingSound() {
     }
 }
