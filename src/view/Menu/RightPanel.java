@@ -246,7 +246,9 @@ public class RightPanel extends GridPane {
     }
 
     public void startTask(){
-        timer = new Thread(task);
+
+        timer = null;
+        timer = new Thread(startNewTask());
         timer.start();
     }
 
@@ -255,6 +257,7 @@ public class RightPanel extends GridPane {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+
                 mainProgram.gameOver();
                 audioPlayer.playGameOverSound();
                 audioPlayer.stopMusic();
@@ -264,16 +267,19 @@ public class RightPanel extends GridPane {
         });
 
     }
+    public Task startNewTask() {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
 
-    Task<Void> task = new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
+                gameIsOver();
+                return null;
+            }
+        };
+        return task;
+    }
 
-            gameIsOver();
-            return null;
-        }
 
-    };
 
     public void setGameOver(boolean b) {
         totTime.setGameOver(true);
@@ -281,5 +287,14 @@ public class RightPanel extends GridPane {
 
     public void setTimerIsStarted(boolean timerIsStartedOnce) {
         this.timerIsStartedOnce = timerIsStartedOnce;
+    }
+
+    public void fiveSecLeft() {
+        audioPlayer.playTickingSound();
+        timerLabel.setStyle("-fx-text-fill: red;");
+    }
+
+    public void resetTimerLabel(){
+        timerLabel.setStyle("-fx-text-fill: white;");
     }
 }
