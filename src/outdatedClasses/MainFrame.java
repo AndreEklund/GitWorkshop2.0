@@ -64,7 +64,7 @@ public class MainFrame {
         buttons = new JButton[nbrOfBtns];
 
         for (int i= 0; i < buttons.length; i++) {
-            buttons[i] = new JButton(new ImageIcon("files/wall.jpg"));
+            //buttons[i] = new JButton(new ImageIcon("files/walls.jpg"));
             buttons[i].setBorderPainted(false);
             buttons[i].setFocusPainted(false);
             buttons[i].setContentAreaFilled(false);
@@ -85,7 +85,7 @@ public class MainFrame {
 
             if (lastBtnPressed == button) {
                 lastBtnPressed.setIcon(null);
-                lastBtnPressed.setIcon(new ImageIcon("files/red.jpg"));
+                lastBtnPressed.setIcon(new ImageIcon("files/redsad.jpg"));
                 lastBtnPressed.removeMouseListener(m1);
                 lastBtnPressed.addMouseListener(new MouseHandler2());
                 lastBtnPressed.setName("Win");

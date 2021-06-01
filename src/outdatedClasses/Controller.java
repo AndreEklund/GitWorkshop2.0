@@ -1,7 +1,5 @@
 package outdatedClasses;
 
-import model.*;
-
 import java.io.*;
 import java.util.*;
 
