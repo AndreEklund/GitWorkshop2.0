@@ -28,7 +28,7 @@ public class MainProgram extends Application {
 
     /**
      * Author André Eklund
-     * Edit Filip Örnling, Viktor Näslund
+     * Edit Filip Örnling, Viktor Näslund, Benny Petersson
      */
     private Stage mainWindow;
     private BorderPane mainPaneRandomMaze;
@@ -58,7 +58,7 @@ public class MainProgram extends Application {
     private Image cursorImage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
         //En klass som spelar alla ljud/musik
         audioPlayer = new AudioPlayer();
@@ -75,7 +75,7 @@ public class MainProgram extends Application {
         introScene = new Scene(intro, 800, 600);
         menuScene = new Scene(menu, 800, 600);
         helpScene = new Scene(help, 800, 600);
-        chooseDimensionScene = new Scene(chooseDimension,800,600);
+        chooseDimensionScene = new Scene(chooseDimension, 800, 600);
 
         //BorderPane för levels
         mainPaneRandomMaze = new BorderPane();
@@ -93,6 +93,7 @@ public class MainProgram extends Application {
         world3Maps = new World3Maps();
         world1Maps = new World1Maps();
         world4Maps = new World4Maps();
+
 
         mainPaneCampaign.setRight(rightPanel);
 
@@ -115,20 +116,23 @@ public class MainProgram extends Application {
         randomScene.setCursor(new ImageCursor(cursorImage));
     }
 
-    public void changeToMapTemplate(){
+    public void changeToMapTemplate() {
         mainPaneRandomMaze.setCenter(mapTemplate);
     }
-    public void changeToMenu(){
+
+    public void changeToMenu() {
         mainWindow.setScene(menuScene);
         System.out.println("MENU");
     }
+
     public void changeToRandomize(int dimension) throws FileNotFoundException {
         mazeGenerator = new MazeGenerator(dimension, true);
         generateNextLevel = new GenerateNextLevel(this, mainPaneRandomMaze, mazeGenerator, rightPanel, dimension);
-        mapTemplate = new MapTemplate(mazeGenerator.getMaze(),this, generateNextLevel);
+        mapTemplate = new MapTemplate(mazeGenerator.getMaze(), this, generateNextLevel);
         mainPaneRandomMaze.setCenter(mapTemplate);
         mainWindow.setScene(randomScene);
     }
+
     public void changeToCampaign() throws FileNotFoundException {
 
         world1Template = new World1Template(world1Maps.getLevel11(), 1, 3, this, rightPanel, 0, audioPlayer, 25);
@@ -139,13 +143,15 @@ public class MainProgram extends Application {
         mainPaneCampaign.getChildren().add(introAnimation);
         introAnimation.setDisable(true);
     }
-    public void chooseDimension(){
+
+    public void chooseDimension() {
         mainWindow.setScene(chooseDimensionScene);
     }
 
-    public void changeToHelp(){
+    public void changeToHelp() {
         mainWindow.setScene(helpScene);
     }
+
     public void gameOver() {
         gameOverScreen = new GameOverScreen(this);
         mainPaneCampaign.getChildren().add(gameOverScreen);
@@ -162,24 +168,21 @@ public class MainProgram extends Application {
             rightPanel.changeLevelCounter("12");
             mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel12(), 2, heartCrystals, this, rightPanel, 0, audioPlayer, 25));
 
-        }
-        else if (level == 2) {
+        } else if (level == 2) {
             rightPanel.changeLevelCounter("13");
             mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel13(), 3, heartCrystals, this, rightPanel, 0, audioPlayer, 25));
-        }
-        else if (level == 3) {
+        } else if (level == 3) {
             rightPanel.changeLevelCounter("14");
             mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel14(), 4, heartCrystals, this, rightPanel, 0, audioPlayer, 25));
-        }
-        else if (level == 4) {
+        } else if (level == 4) {
             rightPanel.changeLevelCounter("15");
             mainPaneCampaign.setCenter(new World1Template(world1Maps.getLevel15(), 5, heartCrystals, this, rightPanel, 0, audioPlayer, 25));
-        }
-        else if (level == 5) {
+        } else if (level == 5) {
             nextWorld2Level(1, heartCrystals);
         }
 
     }
+
     public void nextWorld2Level(int level, int heartCrystals) throws FileNotFoundException, InterruptedException {
 
         World2Maps world2Maps = new World2Maps();
@@ -191,27 +194,23 @@ public class MainProgram extends Application {
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
             audioPlayer.playWorldIntroSound();
-        }
-        else if (level == 2) {
+        } else if (level == 2) {
             rightPanel.changeLevelCounter("22");
             mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel22(), 3, heartCrystals, this, rightPanel, 1, audioPlayer, false, rightPanel));
-        }
-        else if (level == 3) {
+        } else if (level == 3) {
             rightPanel.changeLevelCounter("23");
             mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel23(), 4, heartCrystals, this, rightPanel, 1, audioPlayer, false, rightPanel));
-        }
-        else if (level == 4) {
+        } else if (level == 4) {
             rightPanel.changeLevelCounter("24");
             mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel24(), 5, heartCrystals, this, rightPanel, 1, audioPlayer, false, rightPanel));
-        }
-        else if (level == 5) {
+        } else if (level == 5) {
             rightPanel.changeLevelCounter("25");
             mainPaneCampaign.setCenter(new World2Template(world2Maps.getLevel25(), 6, heartCrystals, this, rightPanel, 1, audioPlayer, true, rightPanel));
-        }
-        else if (level == 6) {
+        } else if (level == 6) {
             nextWorld3Level(1, heartCrystals);
         }
     }
+
     public void nextWorld3Level(int level, int heartCrystals) throws FileNotFoundException, InterruptedException {
 
         World3Maps world3Maps = new World3Maps();
@@ -225,27 +224,23 @@ public class MainProgram extends Application {
             audioPlayer.playWorldIntroSound();
             audioPlayer.stopMusic();
             audioPlayer.playLevelMusic("lava");
-        }
-        else if (level == 2) {
+        } else if (level == 2) {
             rightPanel.changeLevelCounter("32");
             mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel32(), 3, heartCrystals, this, rightPanel, 2, audioPlayer));
-        }
-        else if (level == 3) {
+        } else if (level == 3) {
             rightPanel.changeLevelCounter("33");
             mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel33(), 4, heartCrystals, this, rightPanel, 2, audioPlayer));
-        }
-        else if (level == 4) {
+        } else if (level == 4) {
             rightPanel.changeLevelCounter("34");
             mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel34(), 5, heartCrystals, this, rightPanel, 2, audioPlayer));
-        }
-        else if (level == 5) {
+        } else if (level == 5) {
             rightPanel.changeLevelCounter("35");
             mainPaneCampaign.setCenter(new World3Template(world3Maps.getLevel35(), 6, heartCrystals, this, rightPanel, 2, audioPlayer));
-        }
-        else if (level == 6) {
+        } else if (level == 6) {
             nextWorld4Level(1, heartCrystals);
         }
     }
+
     public void nextWorld4Level(int level, int heartCrystals) throws FileNotFoundException, InterruptedException {
 
         World4Maps world4Maps = new World4Maps();
@@ -259,27 +254,23 @@ public class MainProgram extends Application {
             audioPlayer.playWorldIntroSound();
             audioPlayer.stopMusic();
             audioPlayer.playLevelMusic("heaven");
-        }
-        else if (level == 2) {
+        } else if (level == 2) {
             rightPanel.changeLevelCounter("42");
             mainPaneCampaign.setCenter(new World4Template(world4Maps.getLevel42(), 3, heartCrystals, this, rightPanel, 3, audioPlayer));
-        }
-        else if (level == 3) {
+        } else if (level == 3) {
             rightPanel.changeLevelCounter("43");
             mainPaneCampaign.setCenter(new World4Template(world4Maps.getLevel43(), 4, heartCrystals, this, rightPanel, 3, audioPlayer));
-        }
-        else if (level == 4) {
+        } else if (level == 4) {
             rightPanel.changeLevelCounter("44");
             mainPaneCampaign.setCenter(new World4Template(world4Maps.getLevel44(), 5, heartCrystals, this, rightPanel, 3, audioPlayer));
-        }
-        else if (level == 5) {
+        } else if (level == 5) {
             rightPanel.changeLevelCounter("45");
             mainPaneCampaign.setCenter(new World4Template(world4Maps.getLevel45(), 6, heartCrystals, this, rightPanel, 3, audioPlayer));
-        }
-        else if (level == 6) {
+        } else if (level == 6) {
             nextWorld5Level(1, heartCrystals);
         }
     }
+
     public void nextWorld5Level(int level, int heartCrystals) throws FileNotFoundException, InterruptedException {
 
         World5Maps world5Maps = new World5Maps();
@@ -293,27 +284,23 @@ public class MainProgram extends Application {
             audioPlayer.playWorldIntroSound();
             audioPlayer.stopMusic();
             audioPlayer.playLevelMusic("egypt");
-        }
-        else if (level == 2) {
+        } else if (level == 2) {
             rightPanel.changeLevelCounter("52");
             mainPaneCampaign.setCenter(new World5Template(world5Maps.getLevel52(), 3, heartCrystals, this, rightPanel, 4, audioPlayer));
-        }
-        else if (level == 3) {
+        } else if (level == 3) {
             rightPanel.changeLevelCounter("53");
             mainPaneCampaign.setCenter(new World5Template(world5Maps.getLevel53(), 4, heartCrystals, this, rightPanel, 4, audioPlayer));
-        }
-        else if (level == 4) {
+        } else if (level == 4) {
             rightPanel.changeLevelCounter("54");
             mainPaneCampaign.setCenter(new World5Template(world5Maps.getLevel54(), 5, heartCrystals, this, rightPanel, 4, audioPlayer));
-        }
-        else if (level == 5) {
+        } else if (level == 5) {
             rightPanel.changeLevelCounter("55");
             mainPaneCampaign.setCenter(new World5Template(world5Maps.getLevel55(), 6, heartCrystals, this, rightPanel, 4, audioPlayer));
-        }
-        else if (level == 6) {
+        } else if (level == 6) {
             nextWorld6Level(1, heartCrystals);
         }
     }
+
     public void nextWorld6Level(int level, int heartCrystals) throws FileNotFoundException, InterruptedException {
 
         World6Maps world6Maps = new World6Maps();
@@ -325,22 +312,21 @@ public class MainProgram extends Application {
             mainPaneCampaign.getChildren().add(introAnimation);
             introAnimation.setDisable(true);
             audioPlayer.playWorldIntroSound();
-        }
-        else if (level == 2) {
+        } else if (level == 2) {
             rightPanel.changeLevelCounter("62");
             mainPaneCampaign.setCenter(new World6Template(world6Maps.getLevel62(), 3, heartCrystals, this, rightPanel, 4, audioPlayer));
-        }
-        else if (level == 3) {
+        } else if (level == 3) {
             rightPanel.changeLevelCounter("63");
             mainPaneCampaign.setCenter(new World6Template(world6Maps.getLevel63(), 4, heartCrystals, this, rightPanel, 4, audioPlayer));
-        }
-        else if (level == 4) {
+        } else if (level == 4) {
             rightPanel.changeLevelCounter("64");
             mainPaneCampaign.setCenter(new World6Template(world6Maps.getLevel64(), 5, heartCrystals, this, rightPanel, 4, audioPlayer));
-        }
-        else if (level == 5) {
+        } else if (level == 5) {
             rightPanel.changeLevelCounter("65");
             mainPaneCampaign.setCenter(new World6Template(world6Maps.getLevel65(), 5, heartCrystals, this, rightPanel, 4, audioPlayer));
+        } else if (level == 6) {
+            rightPanel.changeLevelCounter("66");
+            mainPaneCampaign.setCenter(new World6Template(world6Maps.getLevel66(), 7, heartCrystals, this, rightPanel, 4, audioPlayer));
         }
     }
 }

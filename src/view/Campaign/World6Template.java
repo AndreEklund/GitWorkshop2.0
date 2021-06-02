@@ -573,6 +573,43 @@ public class World6Template extends World1Template implements Runnable {
             animation4.setPath(rectangle3);
             animation4.play();
         }
+        else if (currentLevel == 7){
+
+            ImageView ghost1V = new ImageView();
+            ImageView ghost2V = new ImageView();
+
+            ghost1V.setImage(ghost);
+            ghost2V.setImage(ghost);
+
+            add(ghost1V,7,6);
+            add(ghost2V,6,3);
+
+            Rectangle rectangle = new Rectangle(100,100);
+            rectangle.setY(80);
+            rectangle.setX(-150);
+
+            Rectangle rectangle1 = new Rectangle(100,0);
+            rectangle1.setY(80);
+            rectangle1.setX(-150);
+
+            animation = new PathTransition();
+            animation.setNode(ghost1V);
+            animation.setDuration(Duration.seconds(1.5));
+            animation.setCycleCount(Animation.INDEFINITE);
+            animation.setPath(rectangle);
+            animation.play();
+
+            animation2 = new PathTransition();
+            animation2.setNode(ghost2V);
+            animation2.setDuration(Duration.seconds(1.5));
+            animation2.setCycleCount(Animation.INDEFINITE);
+            animation2.setPath(rectangle1);
+            animation2.play();
+
+            ghost1V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+
+        }
     }
 
 
