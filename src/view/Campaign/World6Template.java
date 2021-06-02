@@ -6,10 +6,12 @@ import javafx.animation.PathTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import view.AudioPlayer;
 import view.Menu.RightPanel;
 
+import javax.lang.model.element.AnnotationMirror;
 import java.io.FileNotFoundException;
 
 public class World6Template extends World1Template implements Runnable {
@@ -578,24 +580,37 @@ public class World6Template extends World1Template implements Runnable {
 
             ImageView ghost1V = new ImageView();
             ImageView ghost2V = new ImageView();
+            ImageView ghost3V = new ImageView();
+            ImageView ghost4V= new ImageView();
 
             ghost1V.setImage(ghost);
             ghost2V.setImage(ghost);
+            ghost3V.setImage(ghost);
+            ghost4V.setImage(ghost);
 
-            add(ghost1V,7,6);
-            add(ghost2V,6,3);
+            add(ghost1V,17,10);
+            add(ghost2V,7,4);
+            add(ghost3V,17,10);
+            add(ghost4V,14,4);
 
             Rectangle rectangle = new Rectangle(100,100);
             rectangle.setY(80);
             rectangle.setX(-150);
 
-            Rectangle rectangle1 = new Rectangle(100,0);
+            Rectangle rectangle1 = new Rectangle(100,200);
             rectangle1.setY(80);
             rectangle1.setX(-150);
 
+            Circle circle=new Circle(100,100,100);
+            circle.setCenterX(-150);
+            circle.setCenterY(80);
+
+            Circle circle1=new Circle(80,80,80);
+
             animation = new PathTransition();
             animation.setNode(ghost1V);
-            animation.setDuration(Duration.seconds(1.5));
+            animation.setDuration(Duration.seconds(2.5));
+            animation.setAutoReverse(true);
             animation.setCycleCount(Animation.INDEFINITE);
             animation.setPath(rectangle);
             animation.play();
@@ -607,8 +622,24 @@ public class World6Template extends World1Template implements Runnable {
             animation2.setPath(rectangle1);
             animation2.play();
 
+            animation3=new PathTransition();
+            animation3.setNode(ghost3V);
+            animation3.setDuration(Duration.seconds(3.5));
+            animation3.setCycleCount(Animation.INDEFINITE);
+            animation3.setPath(circle);
+            animation3.play();
+
+            animation4=new PathTransition();
+            animation4.setNode(ghost4V);
+            animation4.setDuration(Duration.seconds(1.5));
+            animation4.setCycleCount(Animation.INDEFINITE);
+            animation4.setPath(circle1);
+            animation4.play();
+
             ghost1V.setOnMouseEntered(e -> enteredGhost(e));
             ghost2V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost3V.setOnMouseEntered(e -> enteredGhost(e));
+            ghost4V.setOnMouseEntered(e -> enteredGhost(e));
 
         }
     }
