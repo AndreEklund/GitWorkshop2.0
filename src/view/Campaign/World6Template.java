@@ -16,6 +16,7 @@ public class World6Template extends World1Template implements Runnable {
 
     /**
      * Author Filip Örnling
+     * Edit Benny Petersson
      */
     private Image ghost;
 
