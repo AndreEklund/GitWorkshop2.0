@@ -14,7 +14,7 @@ import view.Menu.RightPanel;
 import javax.lang.model.element.AnnotationMirror;
 import java.io.FileNotFoundException;
 
-public class World6Template extends World1Template implements Runnable {
+public class World6Template extends World1Template {
 
     /**
      * Author Filip Örnling
@@ -51,8 +51,6 @@ public class World6Template extends World1Template implements Runnable {
         super(level, currentLevel, heartCrystals, mainProgram, rightPanel, worldImage, audioPlayer, 99);
         squareSize = 600/(level.length+2);
         this.currentLevel = currentLevel;
-        Thread animationTimer = new Thread(this);
-        animationTimer.start();
         rightPanel.changeHeartCounter(String.valueOf(heartCrystals));
         rightPanel.resetTimerLabel();
         initialize();
@@ -645,14 +643,5 @@ public class World6Template extends World1Template implements Runnable {
     }
 
 
-    @Override
-    public void run() {
-        while (true){
-            if (currentLevel==3&&animation.getTotalDuration()==Duration.seconds(4)){
-                System.out.println("it works");
 
-
-            }
-        }
-    }
 }//Class
