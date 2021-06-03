@@ -26,7 +26,8 @@ import java.io.FileNotFoundException;
 public class RightPanel extends GridPane {
 
     /**
-     * Author Filip Örnling
+     * @author Filip Örnling
+     * @edit Viktor Näslund, Sebastian Helin
      */
 
     private MainProgram mainProgram;
@@ -74,7 +75,14 @@ public class RightPanel extends GridPane {
     private TimeThread time;
     private TotalTime totTime;
 
-
+    /**
+     * Instansierar objekten och lägger till bilder och labels på scenen
+     * @param mainProgram Huvudprogrammet
+     * @param gameMode Kollar ifall användaren valt randomized eller kampanjläge
+     * @param audioPlayer Klass som spelar upp ljud & musik
+     * @param time En tråd som räknar hur många sekunder spelaren har på sig
+     * @throws FileNotFoundException
+     */
     public RightPanel(MainProgram mainProgram, String gameMode, AudioPlayer audioPlayer, TimeThread time) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.gameMode = gameMode;
@@ -145,7 +153,9 @@ public class RightPanel extends GridPane {
         totTime = new TotalTime(false);
 
     }
-
+    /**
+     * Slår på/av spelljud
+     */
     public void soundLabelClicked(){
         if(soundOn){
             soundImage = new Image("file:files/soundbuttons/soundoff.png", 30,30,false,false);
@@ -159,7 +169,9 @@ public class RightPanel extends GridPane {
         soundView.setImage(soundImage);
         soundLabel.setGraphic(soundView);
     }
-
+    /**
+     * Slår på/av musik
+     */
     public void musicLabelClicked(){
         if(musicOn){
             musicImage = new Image("file:files/soundbuttons/musicoff.png",30,30,false,false);
@@ -173,37 +185,48 @@ public class RightPanel extends GridPane {
         musicView.setImage(musicImage);
         musicLabel.setGraphic(musicView);
     }
-
+    /**
+     * Sätter en ny bild beroende på om man plockar upp/tappar ett liv
+     * @param number
+     */
     public void changeHeartCounter(String number){
         heart = new Image("file:files/hearts/" + number + "heart.png", 90, 30, false, false);
         currentHeartView.setImage(heart);
         heartLabel.setGraphic(currentHeartView);
-
     }
-
+    /**
+     * Sätter bilden på yxan i en label
+     */
     public void addPickaxe(){
         pickaxeLabel.setGraphic(pickaxeView);
     }
+    /**
+     * Tar bort yxan när man plcokat upp den
+     */
     public void removePickaxe(){
         pickaxeLabel.setGraphic(emptyView);
     }
-
-
-
+    /**
+     * Byter bild beroende vilken nivå man befinner sig på
+     * @param number
+     */
     public void changeLevelCounter(String number){
         levelNumber = new Image("file:files/levelcounter/" + number + ".png", 90, 30, false, false);
         currentLevelView.setImage(levelNumber);
         levelLabel.setGraphic(currentLevelView);
     }
-
-
-
+    /**
+     * Byter scen till menyn
+     * @param e
+     */
     private void MainMenuClicked(MouseEvent e){
         mainProgram.changeToMenu();
         audioPlayer.playButtonSound();
         audioPlayer.stopMusic();
     }
-
+    /**
+     * Startar den visuella klockan i GUIt
+     */
     public void runClock() {
         timeSeconds.set(STARTTIME);
 
@@ -212,7 +235,9 @@ public class RightPanel extends GridPane {
                         new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
     }
-
+    /**
+     * Pausar klockan vid avancemang till ny nivå
+     */
     public void pauseClock(){
         seconds = timeSeconds.getValue().intValue();
         timeline.stop();
@@ -220,11 +245,16 @@ public class RightPanel extends GridPane {
         timeSeconds.set(seconds);
         timeline = null;
     }
-
+    /**
+     * Sätter tiden som visuella klockan ska visa
+     * @param timesec
+     */
     public void setTheTime(int timesec){
         timeSeconds.set(timesec);
     }
-
+    /**
+     * Kör igång klockan när spelaren trycker på startknappen
+     */
     public void resumeClock(){
         timeSeconds.set(STARTTIME);
         timeline = new Timeline();
@@ -234,25 +264,34 @@ public class RightPanel extends GridPane {
         timeline.playFromStart();
 
     }
-
+    /**
+     * En setter som finns i varje maptemplate för att bestämma antal sekunder spelaren
+     * har på sig
+     * @param STARTTIME
+     */
     public void setSTARTTIME(Integer STARTTIME) {
         RightPanel.STARTTIME = STARTTIME;
     }
-
+    /**
+     * Startar en tråd som räknar den totala tiden
+     */
     public void startTotalTimer(){
         if (!timerIsStartedOnce)
         totTime.start();
     }
-
+    /**
+     * Startar en task för Game Over
+     */
     public void startTask(){
-
         timer = null;
 
         timer = new Thread(startNewTask());
         timer.start();
-
     }
-
+    /**
+     * Tasks run-metod som sätter den totala tiden det tog att spela
+     * Pausar musik & visar Game Over texten
+     */
     public void gameIsOver(){
 
         Platform.runLater(new Runnable() {
@@ -264,11 +303,13 @@ public class RightPanel extends GridPane {
                 audioPlayer.stopMusic();
                 totTime.setGameOver(true);
                 removePickaxe();
-                System.out.println("helloo");
             }
         });
-
     }
+    /**
+     * Skapar en task vid gameOver
+     * @return
+     */
     public Task startNewTask() {
         Task<Void> task = new Task<Void>() {
             @Override
@@ -280,22 +321,30 @@ public class RightPanel extends GridPane {
         };
         return task;
     }
-
-
-
+    /**
+     * Setter för Tråden att veta när det blir GameOver
+     * @param b
+     */
     public void setGameOver(boolean b) {
-        totTime.setGameOver(true);
+        totTime.setGameOver(b);
     }
-
+    /**
+     * Setter för att kontrollera om tiden har startat
+     * @param timerIsStartedOnce
+     */
     public void setTimerIsStarted(boolean timerIsStartedOnce) {
         this.timerIsStartedOnce = timerIsStartedOnce;
     }
-
+    /**
+     * Om spelaren har 5 sekunder kvar kallas denna metod från tråden
+     */
     public void fiveSecLeft() {
         audioPlayer.playTimeLeftSound();
         timerLabel.setStyle("-fx-text-fill: red;");
     }
-
+    /**
+     * Nollställer textens färg till vit och stoppar klockljudet
+     */
     public void resetTimerLabel(){
         timerLabel.setStyle("-fx-text-fill: white;");
         audioPlayer.stopClockSound();
