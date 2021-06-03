@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 
 /**
  * @author Filip Örnling
- * @edit Benny Pettersson
  */
 
 public class World6Template extends World1Template {
@@ -69,7 +68,7 @@ public class World6Template extends World1Template {
 
     public void initialize() {
 
-        ghost = new Image("file:files/mob_egypt.png", squareSize, squareSize, false, false);
+        ghost = new Image("file:files/space_mob3.png", squareSize, squareSize, false, false);
 
         if (currentLevel==2){
 
