@@ -2,6 +2,10 @@ package model.Maps;
 
 public class World3Maps {
 
+    /**
+     * @author Filip Örnling
+     */
+
     private int[][] level31 = {{0, 4, 1, 1, 1, 1, 1, 1,1,1,4,3},
                                {0, 1, 0, 0, 0, 0, 0, 0,0,0,0,0},
                                {0, 1, 0, 1, 1, 1, 4, 0,0,0,0,0},
