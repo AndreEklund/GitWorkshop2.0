@@ -14,6 +14,12 @@ import java.io.FileNotFoundException;
 
 public class World4Template extends World1Template {
 
+
+    /**
+     * @author Filip Örnling
+     */
+
+
     private Image ghost;
     private Image largeGhost;
 
