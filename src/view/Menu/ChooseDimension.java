@@ -10,7 +10,7 @@ import view.AudioPlayer;
 import java.io.FileNotFoundException;
 
 /**
- * @author: Viktor Näslund
+ * @author Viktor Näslund
  */
 
 public class ChooseDimension extends Pane {

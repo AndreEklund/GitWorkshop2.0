@@ -22,13 +22,12 @@ import view.AudioPlayer;
 
 import java.io.FileNotFoundException;
 
+/**
+ * @author Filip Örnling
+ * @edit Viktor Näslund, Sebastian Helin
+ */
 
 public class RightPanel extends GridPane {
-
-    /**
-     * @author Filip Örnling
-     * @edit Viktor Näslund, Sebastian Helin
-     */
 
     private MainProgram mainProgram;
     private String gameMode;
