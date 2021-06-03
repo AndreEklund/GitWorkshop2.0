@@ -77,6 +77,13 @@ public class World3Template extends World1Template {
         initialize();
     }
 
+    /**
+     * Metoden initialize instansierar olika antal ImageView objekt beroende på vilken bana som spelas
+     * Metoden initialize instansierar även olika antal rectanglar i olika former beroende på bana
+     * Metoden kopplar sedan samman ImageView objekt och rectanglar för att skapa animationer
+     * Animationerna kan gå i olika hastigheter
+     */
+
     public void initialize() {
         if (currentLevel==2){
             ImageView ghost3V = new ImageView();
@@ -382,19 +389,7 @@ public class World3Template extends World1Template {
 
             }
         }
-/*
-        ghost3V.setImage(ghost);
-        ghost4V.setImage(ghost);
-        ghost5V.setImage(ghost);
-        ghost6V.setImage(ghost);
 
-
-        add(ghost3V,8,0);
-        add(ghost4V, 1, 0);
-        add(ghost5V, 2, 0);
-        add(ghost6V, 3, 0);
-
-*/
 
 
 

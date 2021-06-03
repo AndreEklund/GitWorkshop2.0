@@ -54,6 +54,12 @@ public class World4Template extends World1Template {
         initialize();
     }
 
+    /**
+     * Metoden initialize instansierar olika antal ImageView objekt beroende på vilken bana som spelas
+     * Metoden initialize instansierar även olika antal rectanglar i olika former beroende på bana
+     * Metoden kopplar sedan samman ImageView objekt och rectanglar för att skapa animationer
+     * Animationerna kan gå i olika hastigheter
+     */
 
     public void initialize() {
         if (currentLevel==2){
