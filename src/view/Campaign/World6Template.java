@@ -14,11 +14,14 @@ import view.Menu.RightPanel;
 import javax.lang.model.element.AnnotationMirror;
 import java.io.FileNotFoundException;
 
+/**
+ * @author Filip Örnling
+ * @edit Benny Pettersson
+ */
+
 public class World6Template extends World1Template {
 
-    /**
-     * @author Filip Örnling
-     */
+
     private Image ghost;
 
     private int squareSize;

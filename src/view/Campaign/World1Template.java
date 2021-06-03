@@ -19,13 +19,15 @@ import view.Menu.RightPanel;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * @author André Eklund
+ * @edit Filip Örnling, Sebastian Helin, Viktor Näslund
+ */
+
 public class World1Template extends GridPane {
 
 
-    /**
-     * @author André Eklund
-     * @edit Filip Örnling, Sebastian Helin, Viktor Näslund
-     */
+
     private MainProgram mainProgram;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
