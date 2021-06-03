@@ -9,7 +9,7 @@ import view.AudioPlayer;
 import java.io.FileNotFoundException;
 
 /**
- * Author: Viktor Näslund
+ * @author: Viktor Näslund
  */
 
 public class Menu extends Pane {
@@ -24,6 +24,13 @@ public class Menu extends Pane {
     private AudioPlayer audioPlayer;
     private RightPanel panel;
 
+    /**
+     * Konstruktor som tar emot mainProgram, audioPlayer och panel
+     * Kör sedan metoder för att länka Image-objekten med png-filer
+     * @param mainProgram tas emot och sätts
+     * @param audioPlayer tas emot och sätts
+     * @param panel tas emot och sätts
+     */
     public Menu(MainProgram mainProgram, AudioPlayer audioPlayer, RightPanel panel){
         this.mainProgram = mainProgram;
         this.audioPlayer = audioPlayer;
@@ -33,6 +40,9 @@ public class Menu extends Pane {
         addButtons();
     }
 
+    /**
+     * Metod som länkar Image-objekten till png-filer
+     */
     public void setupImages(){
         mazegen = new Image("file:files/texts/MazegenTitel.png", 800, 600, false,false);
         campaign = new Image("file:files/texts/Campaign.png", 250, 30, false, false);
@@ -43,6 +53,9 @@ public class Menu extends Pane {
         helpResize = new Image("file:files/texts/Help.png", 255, 33, false, false);
     }
 
+    /**
+     * Metod som sätter bakgrundsbilden
+     */
     public void setBackground(){
         BackgroundImage menuBackground = new BackgroundImage(new Image("file:files/MenuBackground.jpg",800,600,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -50,6 +63,10 @@ public class Menu extends Pane {
         this.setBackground(new Background(menuBackground));
     }
 
+    /**
+     * Metod som lägger till klickbara ImageViews i scenen
+     * Imageviews förstoras när man hovrar och byter scen när man klickar på dem
+     */
     public void addButtons(){
         ImageView mazegenView = new ImageView(mazegen);
         mazegenView.setStyle("fx-background-color: transparent;");

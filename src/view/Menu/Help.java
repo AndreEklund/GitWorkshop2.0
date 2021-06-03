@@ -12,7 +12,7 @@ import javafx.util.Duration;
 import view.AudioPlayer;
 
 /**
- * Author: Viktor Näslund
+ * @author: Viktor Näslund
  */
 
 public class Help extends VBox {
@@ -21,6 +21,11 @@ public class Help extends VBox {
     private Image pressMouse;
     private AudioPlayer audioPlayer;
 
+    /**
+     * Konstruktor som skapar pressMouse-objektet för animation och tar emot mainProgram och audioPlayer
+     * @param mainProgram tas emot och instansvariabeln sätts
+     * @param audioPlayer tas emot och instansvariabeln sätts
+     */
     public Help(MainProgram mainProgram, AudioPlayer audioPlayer){
         pressMouse = new Image("file:files/menuImages/helppicmouse.png");
         this.mainProgram = mainProgram;
@@ -30,7 +35,9 @@ public class Help extends VBox {
         addListener();
     }
 
-
+    /**
+     * Metod som sätter bakgrundsbilden
+     */
     public void setBackground(){
         BackgroundImage myBI= new BackgroundImage(new Image("file:files/menuImages/helppicnew.png",800,600,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -38,6 +45,9 @@ public class Help extends VBox {
         this.setBackground(new Background(myBI));
     }
 
+    /**
+     * Metod som får pressMouseView-objektet att blinka genom en FadeTransition
+     */
     public void pressMouseAnimation(){
         ImageView pressMouseView = new ImageView(pressMouse);
         pressMouseView.setStyle("fx-background-color: transparent;");
@@ -53,6 +63,9 @@ public class Help extends VBox {
     }
 
 
+    /**
+     * Lägger till listener för knapptryck och skiftar scen till menyn
+     */
     public void addListener(){
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
