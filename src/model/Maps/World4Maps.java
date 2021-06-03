@@ -1,5 +1,8 @@
 package model.Maps;
 
+/**
+ * @author André Eklund, Sebastian Helin, Viktor Näslund, Filip Örnling
+ */
 public class World4Maps {
 
     private int[][] level41 = new int[][]{{7, 0, 0, 1, 1, 1, 1, 4, 1, 1, 1, 0, 0, 2},
@@ -77,7 +80,10 @@ public class World4Maps {
                                            {4, 1, 1, 1, 4, 0, 1, 0, 0, 0, 1, 0, 0, 1},
                                            {1, 0, 0, 0, 1, 0, 1, 4, 0, 1, 1, 4, 1, 1},
                                            {5, 1, 1, 1, 4, 0, 0, 1, 1, 4, 0, 0, 0, 2}};
-
+    /**
+     * Returnerar en array som representerar en nivå i spelet.
+     * @return returnerar en array av siffror.
+     */
     public int[][] getLevel41(){
         return level41;
     }

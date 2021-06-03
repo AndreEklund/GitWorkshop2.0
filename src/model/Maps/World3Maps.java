@@ -3,7 +3,7 @@ package model.Maps;
 public class World3Maps {
 
     /**
-     * @author Filip Örnling
+     * @author André Eklund, Sebastian Helin, Viktor Näslund, Filip Örnling
      */
 
     private int[][] level31 = {{0, 4, 1, 1, 1, 1, 1, 1,1,1,4,3},
@@ -72,6 +72,10 @@ public class World3Maps {
                                 {1, 1, 1, 1, 0, 0, 0, 1,1,1,1,2},};
 
 
+    /**
+     * Returnerar en array som representerar en nivå i spelet.
+     * @return returnerar en array av siffror.
+     */
     public int[][] getLevel31(){
         return level31;
     }
