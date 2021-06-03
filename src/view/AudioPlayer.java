@@ -3,9 +3,12 @@ package view;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-
-import javax.print.attribute.standard.MediaSize;
 import java.io.File;
+
+/**
+ * @author André Eklund
+ * @edit Viktor Näslund
+ */
 
 public class AudioPlayer {
 
@@ -66,9 +69,16 @@ public class AudioPlayer {
     private Media mobSoundMedia;
     private MediaPlayer mobSoundMediaPlayer;
 
+    /**
+     * Kör metoden som instanierar ljudfilerna.
+     */
     public AudioPlayer() {
         setupAudioFiles();
     }
+
+    /**
+     * Instansierar alla ljudfiler.
+     */
     public void setupAudioFiles() {
         diamondSound = new File("files/sounds/Diamond1.mp3");
         diamondMedia = new Media(diamondSound.toURI().toString());
@@ -128,6 +138,10 @@ public class AudioPlayer {
 
     }
 
+    /**
+     * Spelar musik baserad på given input.
+     * @param songToPlay Låten som ska spelas.
+     */
     public void playLevelMusic(String songToPlay) {
 
         String songName = songToPlay;
@@ -153,38 +167,75 @@ public class AudioPlayer {
         });
         currentSongPlayer.play();
     }
+
+    /**
+     * Spelar ett ljud när spelaren plockar upp en collectible.
+     */
     public void playCollectibleSound() {
         diamondPlayer.play();
         diamondPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när spelaren dör.
+     */
     public void playDeathSound() {
         deathPlayer.play();
         deathPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när spelrundan startas.
+     */
     public void playStartSound() {
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när spelaren går i mål.
+     */
     public void playGoalSound() {
         goalPlayer.play();
         goalPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när spelaren plockar upp ett liv.
+     */
     public void playHeartSound() {
         heartPlayer.play();
         heartPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när spelaren förstör en vägg.
+     */
     public void playBreakableWallSound() {
         breakableWallPlayer.play();
         breakableWallPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när spelaren plockar upp en yxa.
+     */
     public void playPickAxeSound() {
         pickAxeMediaPlayer.play();
         pickAxeMediaPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när det blir gameOver.
+     */
     public void playGameOverSound() {
         gameOverMediaPlayer.play();
         gameOverMediaPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * En metod som mutear alla speleffekters ljud.
+     * @param mute True om ljudet ska vara avstängt och false om ljudet ska vara på.
+     */
     public void muteSound(boolean mute) {
         breakableWallPlayer.setMute(mute);
         deathPlayer.setMute(mute);
@@ -195,34 +246,66 @@ public class AudioPlayer {
         worldIntroMediaPlayer.setMute(mute);
         timeLeftMediaPlayer.setMute(mute);
     }
+
+    /**
+     * Spelar ett ljud när spelet startas.
+     */
     public void playIntroMusic() {
         introMediaPlayer.play();
         introMediaPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Stänger av all musik.
+     */
     public void stopMusic() {
         currentSongPlayer.stop();
         introMediaPlayer.stop();
     }
+
+    /**
+     * Spelar ett ljud vid alla knapptryck i menyerna.
+     */
     public void playButtonSound() {
         buttonClickedMediaPlayer.play();
         buttonClickedMediaPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud vid varje ny värld.
+     */
     public void playWorldIntroSound() {
         worldIntroMediaPlayer.play();
         worldIntroMediaPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när det endast är fem sekunder kvar på timern.
+     */
     public void playTimeLeftSound() {
         timeLeftMediaPlayer.play();
         timeLeftMediaPlayer.seek(Duration.ZERO);
     }
+
+    /**
+     * Spelar ett ljud när spelaren kolliderar med en fiende.
+     */
     public void playMobSound(){
         mobSoundMediaPlayer.play();
         mobSoundMediaPlayer.seek(Duration.ZERO);
     }
 
+    /**
+     * En metod som mutear all musik .
+     * @param mute True om ljudet ska vara avstängt och false om ljudet ska vara på.
+     */
     public void muteMusic(boolean mute){
         currentSongPlayer.setMute(mute);
     }
+
+    /**
+     * Stänger av timerns ljud.
+     */
 
     public void stopClockSound() {
         timeLeftMediaPlayer.stop();
