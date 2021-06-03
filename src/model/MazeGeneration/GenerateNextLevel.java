@@ -8,6 +8,11 @@ import view.Menu.RightPanel;
 import java.io.FileNotFoundException;
 import java.util.Random;
 
+/**
+ * @author André Eklund
+ * @edit Viktor Näslund
+ */
+
 public class GenerateNextLevel {
 
     private MazeGenerator mazeGenerator;
@@ -15,6 +20,15 @@ public class GenerateNextLevel {
     private MainProgram mainProgram;
     private RightPanel rightPanel;
     private int dimension;
+
+    /**
+     * Initializes the objects.
+     * @param mainProgram Huvudprogrammet.
+     * @param mainPane En BorderPane.
+     * @param mazeGenerator Klassen som genererar labyrinter.
+     * @param rightPanel Panelen som visar information så som liv, tid, nivå osv.
+     * @param dimension Storleken på labyrinten som ska genereras.
+     */
 
     public GenerateNextLevel(MainProgram mainProgram, BorderPane mainPane, MazeGenerator mazeGenerator, RightPanel rightPanel, int dimension){
         this.dimension = dimension;
@@ -24,14 +38,16 @@ public class GenerateNextLevel {
         this.rightPanel = rightPanel;
     }
 
-
+    /**
+     * Genererar en ny labyrint och skickar det till GUIt.
+     * @throws FileNotFoundException
+     */
     public void generateNewMaze() throws FileNotFoundException {
         int currentMaze[][] = mazeGenerator.getMaze();
         MazeGenerator newMazegenerator = new MazeGenerator(dimension, false);
         int nextMaze[][] = newMazegenerator.getMaze();
         int col = 0;
 
-        //Ändra goal till start i nästa labyrint
         for (int i = 0; i < currentMaze.length; i++) {
             for (int j = 0; j < currentMaze[i].length; j++) {
                 if (currentMaze[i][j] == 3) {
@@ -46,6 +62,13 @@ public class GenerateNextLevel {
         mainPane.setCenter(new MapTemplate(checkStartAndGoalNeighbors(nextMaze), mainProgram, this));
         this.mazeGenerator = newMazegenerator;
     }
+
+    /**
+     * En metod som kollar arrayens siffror för att säkerställa att
+     * start och mål inte är instängda mellan siffror som representerar väggar.
+     * @param maze Arrayen som ska granskas.
+     * @return returnerar den modifierade arrayen.
+     */
     public int[][] checkStartAndGoalNeighbors(int[][] maze) {
 
         int wallCounterStart = 0;
