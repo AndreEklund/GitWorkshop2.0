@@ -27,7 +27,7 @@ public class MapTemplate extends GridPane {
 
 
     /**
-     * Author André Eklund
+     * @author André Eklund
      */
     private MainProgram mainProgram;
     private GenerateNextLevel generateNextLevel;
@@ -40,14 +40,10 @@ public class MapTemplate extends GridPane {
     private Image goal;
     private Image diamond;
     private Image start;
-    private Image ghost;
     private boolean startButtonPressed;
     private boolean allCollectiblesObtained;
     private int collectiblesObtained = 0;
-    private int squareSize;
-    private ImageView imageView = new ImageView();
-
-
+    private int squareSize;;
     private File diamondSound = new File("files/sounds/Diamond1.mp3");
     private Media diamondMedia = new Media(diamondSound.toURI().toString());
     private MediaPlayer diamondPlayer = new MediaPlayer(diamondMedia);
@@ -79,44 +75,18 @@ public class MapTemplate extends GridPane {
         setupBorders();
         setupLevel();
     }
-    public void setupGhost() throws FileNotFoundException {
-        ghost = new Image("file:files/ghost.png", squareSize, squareSize, false, false);
-
-        imageView.setImage(ghost);
-
-        imageView.setX(1);
-        imageView.setY(1);
-        imageView.setFitHeight(squareSize);
-        imageView.setFitWidth(squareSize);
-
-        imageView.setOnMouseEntered(e -> enteredWall(e));
-
-
-        add(imageView, 10, 10);
-        initialize();
-    }
-    public void initialize() {
-
-        Polyline line = new Polyline();
-        line.getPoints().addAll(
-                -100.0, -50.0,
-                -50.0, 100.0,
-                100.0, 200.0,
-                200.0, -150.0);
-
-        PathTransition path = new PathTransition();
-        path.setNode(imageView);
-        path.setDuration(Duration.seconds(10));
-        path.setPath(line);
-        path.setCycleCount(PathTransition.INDEFINITE);
-        path.play();
-    }
+    /**
+     * Sätter bakgrunden i fönstret.
+     */
     public void setBackground(){
         BackgroundImage menuBackground = new BackgroundImage(new Image("file:files/MenuBackground.jpg",800,600,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         this.setBackground(new Background(menuBackground));
     }
+    /**
+     * Skapar en ram runt spelplanen.
+     */
     public void setupBorders() {
         for (int i = 0; i < level.length + 1; i++) {
             add(getBorders(), i, 0);
@@ -131,6 +101,10 @@ public class MapTemplate extends GridPane {
             add(getBorders(), level.length + 1, i);
         }
     }
+    /**
+     * Omvandlar värdena i arrayen av siffror till olika grafiska komponenter baserat på vilken siffra en position har.
+     * Exempelvis så representerar 1:or väg, 0:or väggar, och 7:or hjärtan osv.
+     */
     public void setupLevel() {
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level.length; j++) {
@@ -153,6 +127,11 @@ public class MapTemplate extends GridPane {
             }
         }
     }
+    /**
+     * Instansierar de olika bilderna som används som grafik inuti spelet.
+     * Baserad på value så sätts bilderna till en specifik folder per värld.
+     * @param value Den aktuella världen.
+     */
     public void setupImages(int value){
 
         String folder = "";
@@ -187,6 +166,10 @@ public class MapTemplate extends GridPane {
         }
     }
 
+    /**
+     * En metod som skapar ett objekt av label som representerar en vägg.
+     * @return Returnerar en label.
+     */
     public Label getWall() {
         Label label = new Label();
         ImageView wallView = new ImageView(wall);
@@ -198,6 +181,10 @@ public class MapTemplate extends GridPane {
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
     }
+    /**
+     * En metod som skapar ett objekt av label som representerar en väg.
+     * @return Returnerar en label.
+     */
     private Label getPath() {
         Label label = new Label();
         ImageView pathView = new ImageView(path);
@@ -207,6 +194,10 @@ public class MapTemplate extends GridPane {
         //label.setStyle("-fx-border-color: grey;");
         return label;
     }
+    /**
+     * En metod som skapar ett objekt av label som representerar en border.
+     * @return Returnerar en label.
+     */
     private Label getBorders() {
         Label label = new Label();
         ImageView borderView = new ImageView(border);
@@ -218,6 +209,10 @@ public class MapTemplate extends GridPane {
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
     }
+    /**
+     * En metod som skapar ett objekt av label som representerar en förstörbar vägg.
+     * @return Returnerar en label.
+     */
     private Label getGoal() {
         Label label = new Label();
         ImageView borderView = new ImageView(goal);
@@ -234,6 +229,10 @@ public class MapTemplate extends GridPane {
         });
         return label;
     }
+    /**
+     * En metod som skapar ett objekt av label som representerar start.
+     * @return Returnerar en label.
+     */
     private Label getStart() {
         Label label = new Label();
         ImageView borderView = new ImageView(start);
@@ -244,6 +243,10 @@ public class MapTemplate extends GridPane {
         label.setOnMouseClicked(e -> startLevel());
         return label;
     }
+    /**
+     * En metod som skapar ett objekt av label som representerar en collectible.
+     * @return Returnerar en label.
+     */
     public Label addCollectible() {
         Label collectible = new Label();
         ImageView borderView = new ImageView(diamond);
@@ -258,6 +261,11 @@ public class MapTemplate extends GridPane {
         collectibles.add(collectible);
         return collectible;
     }
+
+    /**
+     * Om spelaren vidrör muspekaren vid en vägg avslutas spelrundan.
+     * @param e Används för att hitta rätt label.
+     */
     public void enteredWall(MouseEvent e) {
         Label label = (Label)e.getSource();
         FadeTransition fade = new FadeTransition();
@@ -273,6 +281,11 @@ public class MapTemplate extends GridPane {
             startButtonPressed = false;
         }
     }
+    /**
+     * Om spelrundan är aktiverad och spelaren har plockat upp alla collectibles startas nästa nivå.
+     * @throws FileNotFoundException
+     * @throws InterruptedException
+     */
     public void enteredGoal() throws FileNotFoundException, InterruptedException {
         if (startButtonPressed && allCollectiblesObtained) {
             goalPlayer.play();
@@ -280,6 +293,9 @@ public class MapTemplate extends GridPane {
             generateNextLevel.generateNewMaze();
         }
     }
+    /**
+     * Startar spelrundan och timern.
+     */
     public void startLevel() {
 
 
@@ -288,6 +304,10 @@ public class MapTemplate extends GridPane {
 
         startButtonPressed = true;
     }
+    /**
+     * När muspekaren lämnar en label slutar den att highlightas.
+     * @param e Används för att hitta rätt label.
+     */
     private void exitedLabel(MouseEvent e) {
         Label label = (Label)e.getSource();
         FadeTransition fade = new FadeTransition();
@@ -297,7 +317,9 @@ public class MapTemplate extends GridPane {
         fade.setToValue(10);
         fade.play();
     }
-
+    /**
+     * En listener som körs när spelaren plockar upp en collectible.
+     */
     private class MouseListener implements EventHandler<MouseEvent> {
 
         @Override
