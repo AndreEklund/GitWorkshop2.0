@@ -8,6 +8,7 @@ import java.util.Stack;
 public class MazeGenerator {
 
     /**
+     * @Author https://github.com/oppenheimj/maze-generator/blob/master/MazeGenerator.java
      * Edit Sebastian Helin, André Eklund
      */
     
@@ -17,6 +18,10 @@ public class MazeGenerator {
     private int dimension;
     private boolean generateGoalAndStart;
 
+    /**
+     * @param dim Tar in en dimension för hur stor labyrinten ska vara
+     * @param setGoalAndStart Sätter start & mål
+     */
     public MazeGenerator(int dim, boolean setGoalAndStart) {
         this.generateGoalAndStart = setGoalAndStart;
         maze = new int[dim][dim];
@@ -46,6 +51,10 @@ public class MazeGenerator {
         return sb.toString();
     }
 
+    /**
+     * @edit av Andre Eklund & Sebastian Helin
+     * @return
+     */
     public String getSymbolicMaze() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < dimension; i++) {
@@ -89,6 +98,10 @@ public class MazeGenerator {
         }
         return neighbors;
     }
+
+    /**
+     * Edit av Sebastian Helin & Andre Eklund
+     */
     public void createStartAndGoal() {
         if (generateGoalAndStart) {
             maze[randomIndex()][0] = 2;
@@ -98,10 +111,6 @@ public class MazeGenerator {
 
     public int randomIndex() {
         return new Random().nextBoolean() ? 0 : maze.length - 1;
-    }
-
-    public int getDimension() {
-        return dimension;
     }
 
     public int[][] getMaze() {
