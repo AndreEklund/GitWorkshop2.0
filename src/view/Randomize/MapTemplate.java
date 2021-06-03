@@ -66,8 +66,9 @@ public class MapTemplate extends GridPane {
     private MediaPlayer goalPlayer = new MediaPlayer(goalMedia);
 
 
-
-    //Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
+    /**
+     * Konstruktorn ska kunna ta emot int-arrayer och representera dem i GUIt
+     */
     public MapTemplate(int[][] level, MainProgram mainProgram, GenerateNextLevel generateNextLevel) throws FileNotFoundException {
         this.mainProgram = mainProgram;
         this.level = level;
