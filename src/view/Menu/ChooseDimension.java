@@ -10,7 +10,7 @@ import view.AudioPlayer;
 import java.io.FileNotFoundException;
 
 /**
- * Author: Viktor Näslund
+ * @author: Viktor Näslund
  */
 
 public class ChooseDimension extends Pane {
@@ -29,6 +29,12 @@ public class ChooseDimension extends Pane {
     private AudioPlayer audioPlayer;
 
 
+    /**
+     * Konstruktor som tar emot mainProgram och audioPlayer och kör några metoder för att
+     * sätta bilder och knappar
+     * @param mainProgram tas emot och instansvariabeln sätts
+     * @param audioPlayer tas emot och instansvariabeln sätts
+     */
     public ChooseDimension(MainProgram mainProgram, AudioPlayer audioPlayer){
         this.mainProgram = mainProgram;
         this.audioPlayer = audioPlayer;
@@ -37,6 +43,9 @@ public class ChooseDimension extends Pane {
         addButtons();
     }
 
+    /**
+     * Metod som länkar Image-objekten till png-filer
+     */
     public void setupImages(){
         chooseDimension = new Image("file:files/texts/ChooseDimension.png", 800, 600, false,false);
         tenByTen = new Image("file:files/texts/10x10.png", 250, 30, false, false);
@@ -51,6 +60,9 @@ public class ChooseDimension extends Pane {
         returnResize = new Image("file:files/texts/return.png", 255,33,false,false);
     }
 
+    /**
+     * Metod som sätter bakgrundsbilden
+     */
     public void setBackground(){
         BackgroundImage menuBackground = new BackgroundImage(new Image("file:files/MenuBackground.jpg",800,600,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -58,6 +70,10 @@ public class ChooseDimension extends Pane {
         this.setBackground(new Background(menuBackground));
     }
 
+    /**
+     * Metod som placerar bilderna som klickbara ImageViews i scenen med events för knapptryck och hovering.
+     * Bilderna förstoras när man hovrar över dem och scenen byts när man trycker.
+     */
     public void addButtons(){
         ImageView dimensionView = new ImageView(chooseDimension);
         dimensionView.setStyle("fx-background-color: transparent;");
