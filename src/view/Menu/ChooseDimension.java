@@ -72,7 +72,7 @@ public class ChooseDimension extends Pane {
 
     /**
      * Metod som placerar bilderna som klickbara ImageViews i scenen med events för knapptryck och hovering.
-     * Bilderna förstoras när man hovrar över dem och scenen byts när man trycker.
+     * Bilderna förstoras när man hovrar över dem och scenen byts när man trycker på dem.
      */
     public void addButtons(){
         ImageView dimensionView = new ImageView(chooseDimension);
