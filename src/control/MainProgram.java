@@ -24,12 +24,13 @@ import view.WorldIntroAnimation;
 
 import java.io.FileNotFoundException;
 
+/**
+ * @author André Eklund
+ * @edit Filip Örnling, Viktor Näslund, Sebastian Helin
+ */
+
 public class MainProgram extends Application {
 
-    /**
-     * @author André Eklund
-     * @edit Filip Örnling, Viktor Näslund, Sebastian Helin
-     */
     private Stage mainWindow;
     private BorderPane mainPaneRandomMaze;
     private BorderPane mainPaneCampaign;

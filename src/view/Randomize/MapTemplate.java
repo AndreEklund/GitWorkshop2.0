@@ -23,27 +23,31 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author André Eklund
+ * edit Viktor Näslund
+ */
+
 public class MapTemplate extends GridPane {
 
-
-    /**
-     * @author André Eklund
-     */
     private MainProgram mainProgram;
     private GenerateNextLevel generateNextLevel;
     private int[][] level;
     private ArrayList<Label> collectibles = new ArrayList<>();
     private MouseListener mouseListener = new MouseListener();
+
+    private boolean startButtonPressed;
+    private boolean allCollectiblesObtained;
+    private int collectiblesObtained = 0;
+    private int squareSize;;
+
     private Image wall;
     private Image path;
     private Image border;
     private Image goal;
     private Image diamond;
     private Image start;
-    private boolean startButtonPressed;
-    private boolean allCollectiblesObtained;
-    private int collectiblesObtained = 0;
-    private int squareSize;;
+
     private File diamondSound = new File("files/sounds/Diamond1.mp3");
     private Media diamondMedia = new Media(diamondSound.toURI().toString());
     private MediaPlayer diamondPlayer = new MediaPlayer(diamondMedia);
@@ -176,7 +180,6 @@ public class MapTemplate extends GridPane {
         wallView.setFitHeight(squareSize);
         wallView.setFitWidth(squareSize);
         label.setGraphic(wallView);
-        //label.setStyle("-fx-border-color: grey; ");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
@@ -191,7 +194,6 @@ public class MapTemplate extends GridPane {
         pathView.setFitHeight(squareSize);
         pathView.setFitWidth(squareSize);
         label.setGraphic(pathView);
-        //label.setStyle("-fx-border-color: grey;");
         return label;
     }
     /**
@@ -204,7 +206,6 @@ public class MapTemplate extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> enteredWall(e));
         label.setOnMouseExited(e -> exitedLabel(e));
         return label;
@@ -219,7 +220,6 @@ public class MapTemplate extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseEntered(e -> {
             try {
                 enteredGoal();
@@ -239,7 +239,6 @@ public class MapTemplate extends GridPane {
         borderView.setFitHeight(squareSize);
         borderView.setFitWidth(squareSize);
         label.setGraphic(borderView);
-        //label.setStyle("-fx-border-color: grey;");
         label.setOnMouseClicked(e -> startLevel());
         return label;
     }
@@ -297,11 +296,8 @@ public class MapTemplate extends GridPane {
      * Startar spelrundan och timern.
      */
     public void startLevel() {
-
-
         startPlayer.play();
         startPlayer.seek(Duration.ZERO);
-
         startButtonPressed = true;
     }
     /**
@@ -325,12 +321,8 @@ public class MapTemplate extends GridPane {
         @Override
         public void handle(MouseEvent e) {
             if (startButtonPressed) {
-
                 diamondPlayer.play();
                 diamondPlayer.seek(Duration.ZERO);
-
-
-
                 for (Label label: collectibles) {
                     if (e.getSource() == label) {
                         label.setVisible(false);

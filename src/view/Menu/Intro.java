@@ -12,7 +12,7 @@ import javafx.util.Duration;
 import view.AudioPlayer;
 
 /**
- * @author: Viktor Näslund
+ * @author Viktor Näslund
  */
 
 public class Intro extends Pane {
