@@ -17,25 +17,3 @@ textrad. Byt ut det sista stycket "--add-modules javafx.controls,javafx.fxml" mo
 Detta är för att få ljudet i programmet att fungera. 
 
 4. Kör sedan programmet från Main-klassen. 
-
-Instruktioner i spelet.
-
-Finns två spellägen, Randomly Generated Maze och Mapcreator.
-
-Randomly Generated Maze: 
-
-1. För att aktivera spelrundan klickar man på rutan med stegen i ett hål, då aktiveras all kollision.
-
-2. För att kunna gå till målet, som representeras av en stege, måste man plocka upp alla diamanter. 
-
-3. Om man vidrör en vägg avaktiveras all kollision och man måste åter igen klicka på den första stegen. 
-
-4. Efter att man går i mål genereras en ny maze med slumpvis vald grafik och layout. 
-
-Mapcreator:
-
-1. Rita din egen labyrint genom att klicka på rutorna.
-
-2. Klicka på en ruta två gånger för att placera ett mål.
-
-Spelläget är ofärdigt och kommer eventuellt tas bort...
