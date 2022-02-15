@@ -1,4 +1,4 @@
-# GitWorkshop2.0
+# Mazegen
 Grupp 22
 
 Länk till arbetet: 
